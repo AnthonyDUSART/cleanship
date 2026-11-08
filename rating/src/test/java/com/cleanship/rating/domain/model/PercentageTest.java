@@ -2,6 +2,7 @@ package com.cleanship.rating.domain.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,5 +18,14 @@ final class PercentageTest {
   void should_throw_exception_when_percentage_is_invalid() {
     assertThrows(
         InvalidPercentageException.class, () -> Percentage.of(-1));
+  }
+
+  @Test
+  void should_apply_to_money_amount_successfully() {
+    Money amount = Money.of(50_00, Currency.of("EUR"));
+
+    Money expected = Money.of(25_00, Currency.of("EUR"));
+
+    assertTrue(expected.equals(Percentage.of(50_000).applyTo(amount)));
   }
 }

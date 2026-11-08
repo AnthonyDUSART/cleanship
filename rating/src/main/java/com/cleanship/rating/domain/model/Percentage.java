@@ -12,4 +12,10 @@ public record Percentage(int valueInMilliPercent) {
   public static Percentage of(int valueInMilliPercent) {
     return new Percentage(valueInMilliPercent);
   }
+
+  public Money applyTo(Money amount) {
+    long newCents = (amount.cents() * ((long) valueInMilliPercent) / 100_000L);
+
+    return Money.of(newCents, amount.currency());
+  }
 }
