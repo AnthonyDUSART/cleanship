@@ -9,7 +9,6 @@ public record Money(long cents, Currency currency) implements Comparable<Money> 
    * @throws InvalidMoneyException
    */
   public Money {
-    Objects.requireNonNull(cents);
     Objects.requireNonNull(currency);
 
     if (cents < 0) {

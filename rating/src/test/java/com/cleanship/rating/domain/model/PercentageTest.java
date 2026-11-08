@@ -26,7 +26,7 @@ final class PercentageTest {
 
     Money expected = Money.of(25_00, Currency.of("EUR"));
 
-    assertTrue(expected.equals(Percentage.of(50_000).applyTo(amount)));
+    assertEquals(expected, Percentage.of(50_000).applyTo(amount));
   }
 
   @Test
