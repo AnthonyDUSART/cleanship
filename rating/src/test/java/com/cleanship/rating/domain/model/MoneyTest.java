@@ -25,4 +25,12 @@ public class MoneyTest {
   public void should_have_zero_cents() {
     assertEquals(0, Money.zero(Currency.of("EUR")).cents());
   }
+
+  @Test
+  public void should_add_successfully() {
+    Money result = Money.of(50_25, Currency.of("EUR"))
+        .add(Money.of(10_00, Currency.of("EUR")));
+
+    assertEquals(60_25, result.cents());
+  }
 }
