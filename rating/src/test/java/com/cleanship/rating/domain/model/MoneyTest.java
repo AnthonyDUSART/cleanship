@@ -3,8 +3,9 @@ package com.cleanship.rating.domain.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import com.cleanship.rating.domain.exception.CurrencyMismatchException;
 import org.junit.jupiter.api.Test;
+
+import com.cleanship.rating.domain.exception.CurrencyMismatchException;
 
 final class MoneyTest {
   @Test
