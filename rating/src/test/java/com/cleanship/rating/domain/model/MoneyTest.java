@@ -3,15 +3,13 @@ package com.cleanship.rating.domain.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.cleanship.rating.domain.exception.CurrencyMismatchException;
+import com.cleanship.rating.domain.exception.InvalidMoneyException;
 import java.util.stream.Stream;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import com.cleanship.rating.domain.exception.CurrencyMismatchException;
-import com.cleanship.rating.domain.exception.InvalidMoneyException;
 
 final class MoneyTest {
   @Test
@@ -31,8 +29,7 @@ final class MoneyTest {
 
   @Test
   void should_throw_exception_when_cents_is_negative() {
-    assertThrows(
-        InvalidMoneyException.class, () -> Money.of(-2, Currency.of("EUR")));
+    assertThrows(InvalidMoneyException.class, () -> Money.of(-2, Currency.of("EUR")));
   }
 
   @Test
@@ -49,8 +46,7 @@ final class MoneyTest {
 
   @Test
   void should_throw_exception_when_add_with_null() {
-    assertThrows(
-        NullPointerException.class, () -> Money.zero(Currency.of("EUR")).add(null));
+    assertThrows(NullPointerException.class, () -> Money.zero(Currency.of("EUR")).add(null));
   }
 
   @Test
@@ -64,15 +60,15 @@ final class MoneyTest {
 
   @Test
   void should_subtract_successfully() {
-    Money result = Money.of(50_00, Currency.of("EUR")).subtract(Money.of(10_00, Currency.of("EUR")));
+    Money result =
+        Money.of(50_00, Currency.of("EUR")).subtract(Money.of(10_00, Currency.of("EUR")));
 
     assertEquals(40_00, result.cents());
   }
 
   @Test
   void should_throw_exception_when_subtract_with_null() {
-    assertThrows(
-        NullPointerException.class, () -> Money.zero(Currency.of("EUR")).subtract(null));
+    assertThrows(NullPointerException.class, () -> Money.zero(Currency.of("EUR")).subtract(null));
   }
 
   @Test
@@ -101,8 +97,7 @@ final class MoneyTest {
 
   @Test
   void should_throw_exception_when_compare_to_null() {
-    assertThrows(
-        NullPointerException.class, () -> Money.zero(Currency.of("EUR")).compareTo(null));
+    assertThrows(NullPointerException.class, () -> Money.zero(Currency.of("EUR")).compareTo(null));
   }
 
   @Test
@@ -111,7 +106,6 @@ final class MoneyTest {
 
     Money dollarAmount = Money.zero(Currency.of("USD"));
 
-    assertThrows(
-        CurrencyMismatchException.class, () -> euroAmount.compareTo(dollarAmount));
+    assertThrows(CurrencyMismatchException.class, () -> euroAmount.compareTo(dollarAmount));
   }
 }

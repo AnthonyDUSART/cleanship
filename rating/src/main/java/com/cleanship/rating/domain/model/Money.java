@@ -1,8 +1,8 @@
 package com.cleanship.rating.domain.model;
 
-import java.util.Objects;
 import com.cleanship.rating.domain.exception.CurrencyMismatchException;
 import com.cleanship.rating.domain.exception.InvalidMoneyException;
+import java.util.Objects;
 
 public record Money(long cents, Currency currency) implements Comparable<Money> {
   /**
