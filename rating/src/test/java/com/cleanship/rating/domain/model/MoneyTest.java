@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import com.cleanship.rating.domain.exception.CurrencyMismatchException;
+import com.cleanship.rating.domain.exception.InvalidMoneyException;
 
 final class MoneyTest {
   @Test
@@ -21,6 +22,12 @@ final class MoneyTest {
   @Test
   void should_throw_exception_when_currency_is_null() {
     assertThrows(NullPointerException.class, () -> Money.of(2_00, null));
+  }
+
+  @Test
+  void should_throw_exception_when_cents_is_negative() {
+    assertThrows(
+        InvalidMoneyException.class, () -> Money.of(-2, Currency.of("EUR")));
   }
 
   @Test

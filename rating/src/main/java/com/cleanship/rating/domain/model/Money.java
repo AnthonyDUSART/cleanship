@@ -2,11 +2,16 @@ package com.cleanship.rating.domain.model;
 
 import java.util.Objects;
 import com.cleanship.rating.domain.exception.CurrencyMismatchException;
+import com.cleanship.rating.domain.exception.InvalidMoneyException;
 
 public record Money(long cents, Currency currency) {
   public Money {
     Objects.requireNonNull(cents);
     Objects.requireNonNull(currency);
+
+    if (cents < 0) {
+      throw InvalidMoneyException.of(cents);
+    }
   }
 
   public static Money of(long cents, Currency currency) {
