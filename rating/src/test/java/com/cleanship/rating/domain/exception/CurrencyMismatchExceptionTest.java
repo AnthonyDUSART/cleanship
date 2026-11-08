@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import com.cleanship.rating.domain.model.Currency;
 
-public class CurrencyMismatchExceptionTest {
+final class CurrencyMismatchExceptionTest {
   @Test
   void should_have_valid_message() {
     CurrencyMismatchException exception = CurrencyMismatchException.of(
