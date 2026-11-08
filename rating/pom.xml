@@ -74,7 +74,7 @@
 				<executions>
 					<execution>
 						<goals>
-							<goal>apply</goal>
+							<goal>check</goal>
 						</goals>
 						<phase>verify</phase>
 					</execution>
