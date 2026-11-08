@@ -72,4 +72,10 @@ public record Money(long cents, Currency currency) implements Comparable<Money> 
 
     return Long.compare(cents, o.cents);
   }
+
+  public Money applyPercentage(Percentage percentage) {
+    Objects.requireNonNull(percentage);
+
+    return percentage.applyTo(this);
+  }
 }

@@ -60,8 +60,7 @@ final class MoneyTest {
 
   @Test
   void should_subtract_successfully() {
-    Money result =
-        Money.of(50_00, Currency.of("EUR")).subtract(Money.of(10_00, Currency.of("EUR")));
+    Money result = Money.of(50_00, Currency.of("EUR")).subtract(Money.of(10_00, Currency.of("EUR")));
 
     assertEquals(40_00, result.cents());
   }
@@ -78,6 +77,20 @@ final class MoneyTest {
     Money dollarAmount = Money.of(20_00, Currency.of("USD"));
 
     assertThrows(CurrencyMismatchException.class, () -> euroAmount.subtract(dollarAmount));
+  }
+
+  @Test
+  void should_apply_percentage_successfully() {
+    Money amount = Money.of(50_00, Currency.of("EUR"));
+
+    assertEquals(25_00, amount.applyPercentage(Percentage.of(50_000)).cents());
+  }
+
+  @Test
+  void should_throw_exception_when_apply_null_percentage() {
+    assertThrows(
+        NullPointerException.class,
+        () -> Money.of(50_000, Currency.of("EUR")).applyPercentage(null));
   }
 
   @ParameterizedTest

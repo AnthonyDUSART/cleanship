@@ -28,4 +28,11 @@ final class PercentageTest {
 
     assertTrue(expected.equals(Percentage.of(50_000).applyTo(amount)));
   }
+
+  @Test
+  void should_throw_exception_when_apply_to_null_money_amount() {
+    assertThrows(
+        NullPointerException.class,
+        () -> Percentage.of(50_000).applyTo(null));
+  }
 }
