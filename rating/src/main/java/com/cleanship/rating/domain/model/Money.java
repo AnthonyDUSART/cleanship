@@ -22,11 +22,18 @@ public record Money(long cents, Currency currency) {
     return new Money(0, currency);
   }
 
+  /**
+   * @throws CurrencyMismatchException
+   */
   public Money add(Money other) {
     if (!currency.equals(other.currency)) {
       throw CurrencyMismatchException.of(currency, other.currency);
     }
 
     return new Money(cents + other.cents, currency);
+  }
+
+  public Money subtract(Money other) {
+    return new Money(cents - other.cents, currency);
   }
 }
