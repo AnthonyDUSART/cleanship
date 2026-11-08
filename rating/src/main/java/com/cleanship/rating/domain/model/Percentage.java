@@ -1,8 +1,7 @@
 package com.cleanship.rating.domain.model;
 
-import java.util.Objects;
-
 import com.cleanship.rating.domain.exception.InvalidPercentageException;
+import java.util.Objects;
 
 public record Percentage(int valueInMilliPercent) {
   public Percentage {
