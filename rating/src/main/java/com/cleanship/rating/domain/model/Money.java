@@ -4,7 +4,7 @@ import java.util.Objects;
 import com.cleanship.rating.domain.exception.CurrencyMismatchException;
 import com.cleanship.rating.domain.exception.InvalidMoneyException;
 
-public record Money(long cents, Currency currency) {
+public record Money(long cents, Currency currency) implements Comparable<Money> {
   /**
    * @throws InvalidMoneyException
    */
@@ -55,5 +55,16 @@ public record Money(long cents, Currency currency) {
     }
 
     throw CurrencyMismatchException.of(currency, other.currency);
+  }
+
+  @Override
+  public int compareTo(Money o) {
+    if (cents < o.cents) {
+      return -1;
+    } else if (cents == o.cents) {
+      return 0;
+    } else {
+      return 1;
+    }
   }
 }

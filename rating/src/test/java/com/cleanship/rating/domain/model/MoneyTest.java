@@ -3,7 +3,12 @@ package com.cleanship.rating.domain.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import com.cleanship.rating.domain.exception.CurrencyMismatchException;
 import com.cleanship.rating.domain.exception.InvalidMoneyException;
@@ -65,5 +70,20 @@ final class MoneyTest {
     Money dollarAmount = Money.of(20_00, Currency.of("USD"));
 
     assertThrows(CurrencyMismatchException.class, () -> euroAmount.subtract(dollarAmount));
+  }
+
+  @ParameterizedTest
+  @MethodSource("provideComparisons")
+  void should_compare_to_successfully(Money a, Money b, int comparisonResult) {
+    assertEquals(a.compareTo(b), comparisonResult);
+  }
+
+  private static Stream<Arguments> provideComparisons() {
+    Currency euroCurrency = Currency.of("EUR");
+
+    return Stream.of(
+        Arguments.of(Money.zero(euroCurrency), Money.of(1, euroCurrency), -1),
+        Arguments.of(Money.zero(euroCurrency), Money.zero(euroCurrency), 0),
+        Arguments.of(Money.of(1, euroCurrency), Money.zero(euroCurrency), 1));
   }
 }
