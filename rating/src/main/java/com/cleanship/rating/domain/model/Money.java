@@ -1,8 +1,7 @@
 package com.cleanship.rating.domain.model;
 
-import java.util.Objects;
-
 import com.cleanship.rating.domain.exception.CurrencyMismatchException;
+import java.util.Objects;
 
 public record Money(long cents, Currency currency) {
   public Money {

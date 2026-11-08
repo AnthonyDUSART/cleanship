@@ -3,9 +3,8 @@ package com.cleanship.rating.domain.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.jupiter.api.Test;
-
 import com.cleanship.rating.domain.exception.CurrencyMismatchException;
+import org.junit.jupiter.api.Test;
 
 final class MoneyTest {
   @Test
@@ -30,8 +29,7 @@ final class MoneyTest {
 
   @Test
   void should_add_successfully() {
-    Money result = Money.of(50_25, Currency.of("EUR"))
-        .add(Money.of(10_00, Currency.of("EUR")));
+    Money result = Money.of(50_25, Currency.of("EUR")).add(Money.of(10_00, Currency.of("EUR")));
 
     assertEquals(60_25, result.cents());
   }
@@ -42,7 +40,6 @@ final class MoneyTest {
 
     Money dollarMoney = Money.of(10_00, Currency.of("USD"));
 
-    assertThrows(
-        CurrencyMismatchException.class, () -> euroMoney.add(dollarMoney));
+    assertThrows(CurrencyMismatchException.class, () -> euroMoney.add(dollarMoney));
   }
 }
