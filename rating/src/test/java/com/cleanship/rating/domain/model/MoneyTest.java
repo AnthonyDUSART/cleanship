@@ -64,7 +64,7 @@ final class MoneyTest {
 
   @Test
   void should_subtract_successfully() {
-    Money result = Money.of(50_00, Currency.of("EUR")).subtract(Money.of(10_00, Currency.of("USD")));
+    Money result = Money.of(50_00, Currency.of("EUR")).subtract(Money.of(10_00, Currency.of("EUR")));
 
     assertEquals(40_00, result.cents());
   }
