@@ -11,6 +11,7 @@ final class CurrencyTest {
         assertEquals("EUR", Currency.of("EUR").code());
     }
 
+    @Test 
     void should_throw_exception_when_code_is_null() {
         assertThrows(
             NullPointerException.class,
