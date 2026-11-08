@@ -5,6 +5,9 @@ import com.cleanship.rating.domain.exception.CurrencyMismatchException;
 import com.cleanship.rating.domain.exception.InvalidMoneyException;
 
 public record Money(long cents, Currency currency) {
+  /**
+   * @throws InvalidMoneyException
+   */
   public Money {
     Objects.requireNonNull(cents);
     Objects.requireNonNull(currency);
@@ -14,6 +17,9 @@ public record Money(long cents, Currency currency) {
     }
   }
 
+  /**
+   * @throws InvalidMoneyException
+   */
   public static Money of(long cents, Currency currency) {
     return new Money(cents, currency);
   }
@@ -26,14 +32,28 @@ public record Money(long cents, Currency currency) {
    * @throws CurrencyMismatchException
    */
   public Money add(Money other) {
-    if (!currency.equals(other.currency)) {
-      throw CurrencyMismatchException.of(currency, other.currency);
-    }
+    ensureCurrencyNotMismatch(other);
 
     return new Money(cents + other.cents, currency);
   }
 
+  /**
+   * @throws CurrencyMismatchException
+   */
   public Money subtract(Money other) {
+    ensureCurrencyNotMismatch(other);
+
     return new Money(cents - other.cents, currency);
+  }
+
+  /**
+   * @throws CurrencyMismatchException
+   */
+  private void ensureCurrencyNotMismatch(Money other) {
+    if (currency.equals(other.currency)) {
+      return;
+    }
+
+    throw CurrencyMismatchException.of(currency, other.currency);
   }
 }

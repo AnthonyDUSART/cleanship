@@ -44,11 +44,11 @@ final class MoneyTest {
 
   @Test
   void should_throw_exception_when_add_with_currency_mismatch() {
-    Money euroMoney = Money.of(30_00, Currency.of("EUR"));
+    Money euroAmount = Money.of(30_00, Currency.of("EUR"));
 
-    Money dollarMoney = Money.of(10_00, Currency.of("USD"));
+    Money dollarAmount = Money.of(10_00, Currency.of("USD"));
 
-    assertThrows(CurrencyMismatchException.class, () -> euroMoney.add(dollarMoney));
+    assertThrows(CurrencyMismatchException.class, () -> euroAmount.add(dollarAmount));
   }
 
   @Test
@@ -56,5 +56,14 @@ final class MoneyTest {
     Money result = Money.of(50_00, Currency.of("EUR")).subtract(Money.of(10_00, Currency.of("USD")));
 
     assertEquals(40_00, result.cents());
+  }
+
+  @Test
+  void should_throw_exception_when_subtract_with_currency_mismatch() {
+    Money euroAmount = Money.of(30_00, Currency.of("EUR"));
+
+    Money dollarAmount = Money.of(20_00, Currency.of("USD"));
+
+    assertThrows(CurrencyMismatchException.class, () -> euroAmount.subtract(dollarAmount));
   }
 }
