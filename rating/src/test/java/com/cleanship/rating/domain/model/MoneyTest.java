@@ -88,6 +88,12 @@ final class MoneyTest {
   }
 
   @Test
+  void should_throw_exception_when_compare_to_null() {
+    assertThrows(
+        NullPointerException.class, () -> Money.zero(Currency.of("EUR")).compareTo(null));
+  }
+
+  @Test
   void should_throw_exception_when_compare_to_with_currency_mismatch() {
     Money euroAmount = Money.zero(Currency.of("EUR"));
 
