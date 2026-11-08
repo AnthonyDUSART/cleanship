@@ -2,6 +2,8 @@ package com.cleanship.rating.domain.model;
 
 import java.util.Objects;
 
+import com.cleanship.rating.domain.exception.CurrencyMismatchException;
+
 public record Money(long cents, Currency currency) {
   public Money {
     Objects.requireNonNull(cents);
@@ -17,6 +19,10 @@ public record Money(long cents, Currency currency) {
   }
 
   public Money add(Money other) {
+    if (!currency.equals(other.currency)) {
+      throw CurrencyMismatchException.of(currency, other.currency);
+    }
+
     return new Money(cents + other.cents, currency);
   }
 }

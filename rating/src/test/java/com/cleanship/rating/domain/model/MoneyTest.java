@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import com.cleanship.rating.domain.exception.CurrencyMismatchException;
+
 final class MoneyTest {
   @Test
   void should_store_cents() {
@@ -32,5 +34,15 @@ final class MoneyTest {
         .add(Money.of(10_00, Currency.of("EUR")));
 
     assertEquals(60_25, result.cents());
+  }
+
+  @Test
+  void should_throw_exception_when_add_with_currency_mismatch() {
+    Money euroMoney = Money.of(30_00, Currency.of("EUR"));
+
+    Money dollarMoney = Money.of(10_00, Currency.of("USD"));
+
+    assertThrows(
+        CurrencyMismatchException.class, () -> euroMoney.add(dollarMoney));
   }
 }
