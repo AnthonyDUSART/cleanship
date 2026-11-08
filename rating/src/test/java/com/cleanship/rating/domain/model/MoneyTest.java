@@ -48,6 +48,12 @@ final class MoneyTest {
   }
 
   @Test
+  void should_throw_exception_when_add_with_null() {
+    assertThrows(
+        NullPointerException.class, () -> Money.zero(Currency.of("EUR")).add(null));
+  }
+
+  @Test
   void should_throw_exception_when_add_with_currency_mismatch() {
     Money euroAmount = Money.of(30_00, Currency.of("EUR"));
 
@@ -61,6 +67,12 @@ final class MoneyTest {
     Money result = Money.of(50_00, Currency.of("EUR")).subtract(Money.of(10_00, Currency.of("USD")));
 
     assertEquals(40_00, result.cents());
+  }
+
+  @Test
+  void should_throw_exception_when_subtract_with_null() {
+    assertThrows(
+        NullPointerException.class, () -> Money.zero(Currency.of("EUR")).subtract(null));
   }
 
   @Test
