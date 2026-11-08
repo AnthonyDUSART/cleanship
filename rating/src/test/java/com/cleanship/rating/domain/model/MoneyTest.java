@@ -86,4 +86,14 @@ final class MoneyTest {
         Arguments.of(Money.zero(euroCurrency), Money.zero(euroCurrency), 0),
         Arguments.of(Money.of(1, euroCurrency), Money.zero(euroCurrency), 1));
   }
+
+  @Test
+  void should_throw_exception_when_compare_to_with_currency_mismatch() {
+    Money euroAmount = Money.zero(Currency.of("EUR"));
+
+    Money dollarAmount = Money.zero(Currency.of("USD"));
+
+    assertThrows(
+        CurrencyMismatchException.class, () -> euroAmount.compareTo(dollarAmount));
+  }
 }

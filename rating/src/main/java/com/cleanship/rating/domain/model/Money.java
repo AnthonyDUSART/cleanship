@@ -59,6 +59,8 @@ public record Money(long cents, Currency currency) implements Comparable<Money> 
 
   @Override
   public int compareTo(Money o) {
+    ensureCurrencyNotMismatch(o);
+
     if (cents < o.cents) {
       return -1;
     } else if (cents == o.cents) {
