@@ -1,6 +1,6 @@
 package com.cleanship.rating.domain.model;
 
-public interface Dimension {
+public sealed interface Dimension permits DefinedDimension, NoDimension {
   public static Dimension of(Side length, Side width, Side height) {
     return DefinedDimension.of(length, width, height);
   }
