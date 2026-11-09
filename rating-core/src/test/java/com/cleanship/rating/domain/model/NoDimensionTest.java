@@ -1,5 +1,6 @@
 package com.cleanship.rating.domain.model;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 import org.junit.jupiter.api.Test;
@@ -11,5 +12,13 @@ final class NoDimensionTest {
     NoDimension b = NoDimension.of();
 
     assertSame(a, b);
+  }
+
+  @Test
+  void should_not_be_within() {
+    Side side = Side.of(20);
+    DefinedDimension dimension = DefinedDimension.of(side, side, side);
+
+    assertFalse(NoDimension.of().isWithin(dimension, dimension));
   }
 }

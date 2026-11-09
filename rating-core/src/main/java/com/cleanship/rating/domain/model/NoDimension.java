@@ -6,4 +6,9 @@ public enum NoDimension implements Dimension {
   public static NoDimension of() {
     return INSTANCE;
   }
+
+  @Override
+  public boolean isWithin(DefinedDimension minInclusive, DefinedDimension maxInclusive) {
+    return false;
+  }
 }

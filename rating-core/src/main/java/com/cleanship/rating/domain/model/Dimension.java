@@ -8,4 +8,6 @@ public sealed interface Dimension permits DefinedDimension, NoDimension {
   public static Dimension none() {
     return NoDimension.of();
   }
+
+  public boolean isWithin(DefinedDimension minInclusive, DefinedDimension maxInclusive);
 }
