@@ -2,6 +2,7 @@ package com.cleanship.rating.domain.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.stream.Stream;
 
@@ -41,5 +42,13 @@ final class WeightTest {
   void should_throw_exception_when_compare_to_null() {
     assertThrows(
         NullPointerException.class, () -> Weight.of(1).compareTo(null));
+  }
+
+  @Test
+  void should_be_within_successfully() {
+    Weight minInclusive = Weight.of(1);
+    Weight maxInclusive = Weight.of(3);
+
+    assertTrue(Weight.of(2).isWithin(minInclusive, maxInclusive));
   }
 }
