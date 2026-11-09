@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model;
 
 import com.cleanship.rating.domain.exception.InvalidSideException;
+import java.util.Objects;
 
 public record Side(int millimeters) implements Comparable<Side> {
   /**
@@ -21,6 +22,8 @@ public record Side(int millimeters) implements Comparable<Side> {
 
   @Override
   public int compareTo(Side o) {
+    Objects.requireNonNull(o);
+
     return Integer.compare(millimeters, o.millimeters);
   }
 }

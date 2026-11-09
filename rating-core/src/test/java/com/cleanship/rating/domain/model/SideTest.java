@@ -35,4 +35,9 @@ final class SideTest {
         Arguments.of(Side.of(1), Side.of(1), 0),
         Arguments.of(Side.of(2), Side.of(1), 1));
   }
+
+  @Test
+  void should_throw_exception_when_compare_to_null() {
+    assertThrows(NullPointerException.class, () -> Side.of(1).compareTo(null));
+  }
 }
