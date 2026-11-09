@@ -11,4 +11,11 @@ final class DimensionTest {
 
     assertEquals(expected, Dimension.of(Side.of(30), Side.of(20), Side.of(10)));
   }
+
+  @Test
+  void should_create_no_dimension() {
+    NoDimension expected = NoDimension.of();
+
+    assertEquals(expected, Dimension.none());
+  }
 }
