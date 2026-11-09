@@ -1,12 +1,12 @@
 package com.cleanship.rating.domain.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.stream.Stream;
-
 import com.cleanship.rating.domain.exception.InvalidWeightException;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -20,7 +20,7 @@ final class WeightTest {
   }
 
   @ParameterizedTest
-  @ValueSource(ints = { 0, -1, -1000 })
+  @ValueSource(ints = {0, -1, -1000})
   void should_throw_exception_when_grams_is_invalid(int grams) {
     assertThrows(InvalidWeightException.class, () -> Weight.of(grams));
   }
@@ -40,15 +40,36 @@ final class WeightTest {
 
   @Test
   void should_throw_exception_when_compare_to_null() {
-    assertThrows(
-        NullPointerException.class, () -> Weight.of(1).compareTo(null));
+    assertThrows(NullPointerException.class, () -> Weight.of(1).compareTo(null));
+  }
+
+  @ParameterizedTest
+  @MethodSource("provideWithin")
+  void should_be_within_successfully(Weight weight, Weight minInclusive, Weight maxInclusive) {
+    assertTrue(weight.isWithin(minInclusive, maxInclusive));
+  }
+
+  private static Stream<Arguments> provideWithin() {
+    return Stream.of(
+        Arguments.of(Weight.of(2), Weight.of(1), Weight.of(3)),
+        Arguments.of(Weight.of(2), Weight.of(2), Weight.of(2)));
+  }
+
+  @ParameterizedTest
+  @MethodSource("provideNotWithin")
+  void should_not_be_within_successfully(Weight weight, Weight minInclusive, Weight maxInclusive) {
+    assertFalse(weight.isWithin(minInclusive, maxInclusive));
+  }
+
+  private static Stream<Arguments> provideNotWithin() {
+    return Stream.of(
+        Arguments.of(Weight.of(1), Weight.of(2), Weight.of(3)),
+        Arguments.of(Weight.of(3), Weight.of(1), Weight.of(2)));
   }
 
   @Test
-  void should_be_within_successfully() {
-    Weight minInclusive = Weight.of(1);
-    Weight maxInclusive = Weight.of(3);
-
-    assertTrue(Weight.of(2).isWithin(minInclusive, maxInclusive));
+  void should_throw_exception_when_within_range_is_invalid() {
+    assertThrows(
+        IllegalArgumentException.class, () -> Weight.of(1).isWithin(Weight.of(3), Weight.of(2)));
   }
 }

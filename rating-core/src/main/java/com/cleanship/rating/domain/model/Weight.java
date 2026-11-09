@@ -1,8 +1,7 @@
 package com.cleanship.rating.domain.model;
 
-import java.util.Objects;
-
 import com.cleanship.rating.domain.exception.InvalidWeightException;
+import java.util.Objects;
 
 public record Weight(int grams) implements Comparable<Weight> {
   /**
@@ -26,6 +25,12 @@ public record Weight(int grams) implements Comparable<Weight> {
   }
 
   public boolean isWithin(Weight minInclusive, Weight maxInclusive) {
-    return true;
+    if (minInclusive.compareTo(maxInclusive) > 0) {
+      throw new IllegalArgumentException(
+          String.format(
+              "minInclusive \"%d\" cannot be greater than maxInclusive \"%d\"",
+              minInclusive.grams, maxInclusive.grams));
+    }
+    return compareTo(minInclusive) >= 0 && compareTo(maxInclusive) <= 0;
   }
 }
