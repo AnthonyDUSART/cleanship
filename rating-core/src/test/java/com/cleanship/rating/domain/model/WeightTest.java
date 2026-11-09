@@ -3,8 +3,9 @@ package com.cleanship.rating.domain.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import com.cleanship.rating.domain.exception.InvalidWeightException;
 import java.util.stream.Stream;
+
+import com.cleanship.rating.domain.exception.InvalidWeightException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -18,7 +19,7 @@ final class WeightTest {
   }
 
   @ParameterizedTest
-  @ValueSource(ints = {0, -1, -1000})
+  @ValueSource(ints = { 0, -1, -1000 })
   void should_throw_exception_when_grams_is_invalid(int grams) {
     assertThrows(InvalidWeightException.class, () -> Weight.of(grams));
   }
@@ -34,5 +35,11 @@ final class WeightTest {
         Arguments.of(Weight.of(1), Weight.of(2), -1),
         Arguments.of(Weight.of(1), Weight.of(1), 0),
         Arguments.of(Weight.of(2), Weight.of(1), 1));
+  }
+
+  @Test
+  void should_throw_exception_when_compare_to_null() {
+    assertThrows(
+        NullPointerException.class, () -> Weight.of(1).compareTo(null));
   }
 }

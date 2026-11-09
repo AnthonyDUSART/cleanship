@@ -1,5 +1,7 @@
 package com.cleanship.rating.domain.model;
 
+import java.util.Objects;
+
 import com.cleanship.rating.domain.exception.InvalidWeightException;
 
 public record Weight(int grams) implements Comparable<Weight> {
@@ -18,6 +20,8 @@ public record Weight(int grams) implements Comparable<Weight> {
 
   @Override
   public int compareTo(Weight o) {
+    Objects.requireNonNull(o);
+
     return Integer.compare(grams, o.grams);
   }
 }
