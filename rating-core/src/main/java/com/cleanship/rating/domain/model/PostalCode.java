@@ -8,4 +8,6 @@ public sealed interface PostalCode permits DefinedPostalCode, NoPostalCode {
   public static PostalCode none() {
     return NoPostalCode.of();
   }
+
+  public boolean startsWith(String value);
 }
