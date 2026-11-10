@@ -2,6 +2,7 @@ package com.cleanship.rating.domain.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.cleanship.rating.domain.exception.InvalidPostalCodeException;
 import org.junit.jupiter.api.Test;
@@ -25,5 +26,10 @@ final class DefinedPostalCodeTest {
   @Test
   void should_throw_exception_when_value_length_is_exceeded() {
     assertThrows(InvalidPostalCodeException.class, () -> DefinedPostalCode.of("75000000000000000"));
+  }
+
+  @Test
+  void should_starts_with_successfully() {
+    assertTrue(DefinedPostalCode.of("75000").startsWith("75"));
   }
 }

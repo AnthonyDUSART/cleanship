@@ -22,6 +22,6 @@ public record DefinedPostalCode(String value) implements PostalCode {
 
   @Override
   public boolean startsWith(String value) {
-    return false;
+    return this.value.startsWith(value);
   }
 }
