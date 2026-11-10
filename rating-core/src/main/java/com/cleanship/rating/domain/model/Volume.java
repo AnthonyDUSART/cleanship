@@ -16,7 +16,7 @@ public record Volume(long cubicMillimeters) implements Comparable<Volume> {
 
   public static Volume of(DefinedDimension dimension) {
     return new Volume(
-        dimension.length().millimeters()
+        (long) dimension.length().millimeters()
             * dimension.width().millimeters()
             * dimension.height().millimeters());
   }
