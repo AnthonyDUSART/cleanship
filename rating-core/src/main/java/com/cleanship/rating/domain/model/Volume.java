@@ -44,4 +44,10 @@ public record Volume(long cubicMillimeters) implements Comparable<Volume> {
 
     return compareTo(minInclusive) >= 0 && compareTo(maxInclusive) <= 0;
   }
+
+  public boolean fitsIn(Volume maxInclusive) {
+    Objects.requireNonNull(maxInclusive);
+
+    return compareTo(maxInclusive) <= 0;
+  }
 }
