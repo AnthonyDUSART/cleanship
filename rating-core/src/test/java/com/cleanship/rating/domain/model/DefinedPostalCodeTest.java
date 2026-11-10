@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -31,5 +32,10 @@ final class DefinedPostalCodeTest {
   @Test
   void should_starts_with_successfully() {
     assertTrue(DefinedPostalCode.of("75000").startsWith("75"));
+  }
+
+  @Test
+  void should_not_starts_with() {
+    assertFalse(DefinedPostalCode.of("75000").startsWith("000"));
   }
 }
