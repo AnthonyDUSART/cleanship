@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model;
 
 import com.cleanship.rating.domain.exception.InvalidVolumeException;
+import java.util.Objects;
 
 public record Volume(long cubicMillimeters) implements Comparable<Volume> {
   public Volume {
@@ -26,6 +27,9 @@ public record Volume(long cubicMillimeters) implements Comparable<Volume> {
   }
 
   public boolean isWithin(Volume minInclusive, Volume maxInclusive) {
+    Objects.requireNonNull(minInclusive);
+    Objects.requireNonNull(maxInclusive);
+
     return compareTo(minInclusive) >= 0 && compareTo(maxInclusive) <= 0;
   }
 }

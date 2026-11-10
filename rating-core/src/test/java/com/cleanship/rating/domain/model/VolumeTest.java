@@ -56,4 +56,14 @@ final class VolumeTest {
         Arguments.of(Volume.of(2), Volume.of(1), Volume.of(3)),
         Arguments.of(Volume.of(2), Volume.of(1), Volume.of(2)));
   }
+
+  @Test
+  void should_throw_exception_when_within_with_null_min_inclusive() {
+    assertThrows(NullPointerException.class, () -> Volume.of(2).isWithin(null, Volume.of(2)));
+  }
+
+  @Test
+  void should_throw_exception_when_within_with_null_max_inclusive() {
+    assertThrows(NullPointerException.class, () -> Volume.of(1).isWithin(Volume.of(1), null));
+  }
 }
