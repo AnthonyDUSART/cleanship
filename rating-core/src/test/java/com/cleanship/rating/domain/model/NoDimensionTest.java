@@ -15,7 +15,7 @@ final class NoDimensionTest {
   }
 
   @Test
-  void should_not_be_within() {
+  void should_not_be_within_successfully() {
     Side side = Side.of(20);
     DefinedDimension dimension = DefinedDimension.of(side, side, side);
 
@@ -23,13 +23,11 @@ final class NoDimensionTest {
   }
 
   @Test
-  void should_not_fits_in() {
-    Side minSide = Side.of(1);
+  void should_not_fits_in_successfully() {
     Side maxSide = Side.of(4);
 
-    DefinedDimension dimension = DefinedDimension.of(minSide, minSide, minSide);
     DefinedDimension maxInclusive = DefinedDimension.of(maxSide, maxSide, maxSide);
 
-    assertFalse(dimension.fitsIn(maxInclusive));
+    assertFalse(NoDimension.of().fitsIn(maxInclusive));
   }
 }
