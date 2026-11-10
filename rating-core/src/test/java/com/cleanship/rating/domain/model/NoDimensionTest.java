@@ -21,4 +21,15 @@ final class NoDimensionTest {
 
     assertFalse(NoDimension.of().isWithin(dimension, dimension));
   }
+
+  @Test
+  void should_not_fits_in() {
+    Side minSide = Side.of(1);
+    Side maxSide = Side.of(4);
+
+    DefinedDimension dimension = DefinedDimension.of(minSide, minSide, minSide);
+    DefinedDimension maxInclusive = DefinedDimension.of(maxSide, maxSide, maxSide);
+
+    assertFalse(dimension.fitsIn(maxInclusive));
+  }
 }

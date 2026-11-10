@@ -11,4 +11,9 @@ public enum NoDimension implements Dimension {
   public boolean isWithin(DefinedDimension minInclusive, DefinedDimension maxInclusive) {
     return false;
   }
+
+  @Override
+  public boolean fitsIn(DefinedDimension maxInclusive) {
+    return false;
+  }
 }

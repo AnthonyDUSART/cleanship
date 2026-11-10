@@ -45,4 +45,10 @@ public record DefinedDimension(Side length, Side width, Side height) implements 
     }
     return true;
   }
+
+  @Override
+  public boolean fitsIn(DefinedDimension maxInclusive) {
+    // TODO Auto-generated method stub
+    return false;
+  }
 }

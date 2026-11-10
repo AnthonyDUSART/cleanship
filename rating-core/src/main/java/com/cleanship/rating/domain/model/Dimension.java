@@ -10,4 +10,6 @@ public sealed interface Dimension permits DefinedDimension, NoDimension {
   }
 
   public boolean isWithin(DefinedDimension minInclusive, DefinedDimension maxInclusive);
+
+  public boolean fitsIn(DefinedDimension maxInclusive);
 }
