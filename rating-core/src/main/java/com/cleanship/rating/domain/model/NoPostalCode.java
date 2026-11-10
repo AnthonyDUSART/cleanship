@@ -18,6 +18,8 @@ public enum NoPostalCode implements PostalCode {
 
   @Override
   public boolean endsWith(String value) {
+    Objects.requireNonNull(value);
+
     return false;
   }
 }
