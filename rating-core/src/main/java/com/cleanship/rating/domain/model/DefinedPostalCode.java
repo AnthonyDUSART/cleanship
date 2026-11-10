@@ -36,7 +36,6 @@ public record DefinedPostalCode(String value) implements PostalCode {
 
   @Override
   public boolean contains(String sequence) {
-    // TODO Auto-generated method stub
-    return false;
+    return value.contains(sequence);
   }
 }
