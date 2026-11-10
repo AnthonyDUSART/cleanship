@@ -36,6 +36,8 @@ public record DefinedPostalCode(String value) implements PostalCode {
 
   @Override
   public boolean contains(String sequence) {
+    Objects.requireNonNull(sequence);
+
     return value.contains(sequence);
   }
 }
