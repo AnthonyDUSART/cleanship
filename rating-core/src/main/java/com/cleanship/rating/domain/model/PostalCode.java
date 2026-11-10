@@ -10,4 +10,6 @@ public sealed interface PostalCode permits DefinedPostalCode, NoPostalCode {
   }
 
   public boolean startsWith(String value);
+
+  public boolean endsWith(String value);
 }
