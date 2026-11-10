@@ -29,4 +29,9 @@ public enum NoPostalCode implements PostalCode {
 
     return false;
   }
+
+  @Override
+  public boolean isEqualTo(String value) {
+    return false;
+  }
 }

@@ -41,4 +41,9 @@ public class NoPostalCodeTest {
   void should_throw_exception_when_contains_null() {
     assertThrows(NullPointerException.class, () -> NoPostalCode.of().contains(null));
   }
+
+  @Test
+  void should_be_not_equal_to() {
+    assertFalse(NoPostalCode.of().isEqualTo("75000"));
+  }
 }
