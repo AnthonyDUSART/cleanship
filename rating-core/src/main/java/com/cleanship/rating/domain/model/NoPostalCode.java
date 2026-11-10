@@ -25,6 +25,8 @@ public enum NoPostalCode implements PostalCode {
 
   @Override
   public boolean contains(String sequence) {
+    Objects.requireNonNull(sequence);
+
     return false;
   }
 }
