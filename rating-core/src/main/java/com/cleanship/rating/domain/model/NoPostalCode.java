@@ -22,4 +22,9 @@ public enum NoPostalCode implements PostalCode {
 
     return false;
   }
+
+  @Override
+  public boolean contains(String sequence) {
+    return false;
+  }
 }

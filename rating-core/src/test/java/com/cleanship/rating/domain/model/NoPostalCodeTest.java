@@ -31,4 +31,9 @@ public class NoPostalCodeTest {
   void should_throw_exception_when_ends_with_null() {
     assertThrows(NullPointerException.class, () -> NoPostalCode.of().endsWith(null));
   }
+
+  @Test
+  void should_not_contains() {
+    assertFalse(NoPostalCode.of().contains("50"));
+  }
 }
