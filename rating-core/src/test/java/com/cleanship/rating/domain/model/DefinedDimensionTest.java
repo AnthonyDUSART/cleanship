@@ -5,7 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 final class DefinedDimensionTest {
   @Test
@@ -90,5 +94,29 @@ final class DefinedDimensionTest {
     DefinedDimension dimension = DefinedDimension.of(Side.of(1), Side.of(1), Side.of(1));
 
     assertThrows(IllegalArgumentException.class, () -> dimension.isWithin(min, max));
+  }
+
+  @ParameterizedTest
+  @MethodSource("provideFitsIn")
+  void should_fits_in_successfully(DefinedDimension dimension, DefinedDimension maxInclusive) {
+    assertTrue(dimension.fitsIn(maxInclusive));
+  }
+
+  private static Stream<Arguments> provideFitsIn() {
+    return Stream.of(
+        Arguments.of(
+            DefinedDimension.of(Side.of(3), Side.of(2), Side.of(1)),
+            DefinedDimension.of(Side.of(3), Side.of(4), Side.of(1))),
+        Arguments.of(
+            DefinedDimension.of(Side.of(2), Side.of(2), Side.of(3)),
+            DefinedDimension.of(Side.of(2), Side.of(2), Side.of(3))));
+  }
+
+  @Test
+  void should_not_fits_in_successfully() {
+    DefinedDimension dimension = DefinedDimension.of(Side.of(2), Side.of(1), Side.of(2));
+    DefinedDimension maxInclusive = DefinedDimension.of(Side.of(2), Side.of(1), Side.of(1));
+
+    assertFalse(dimension.fitsIn(maxInclusive));
   }
 }
