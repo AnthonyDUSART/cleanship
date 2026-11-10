@@ -40,4 +40,10 @@ public record DefinedPostalCode(String value) implements PostalCode {
 
     return value.contains(sequence);
   }
+
+  @Override
+  public boolean isEqualTo(String value) {
+    // TODO Auto-generated method stub
+    return false;
+  }
 }
