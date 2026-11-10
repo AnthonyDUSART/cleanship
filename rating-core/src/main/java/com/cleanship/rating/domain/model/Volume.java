@@ -23,6 +23,8 @@ public record Volume(long cubicMillimeters) implements Comparable<Volume> {
 
   @Override
   public int compareTo(Volume o) {
+    Objects.requireNonNull(o);
+
     return Long.compare(cubicMillimeters, o.cubicMillimeters);
   }
 

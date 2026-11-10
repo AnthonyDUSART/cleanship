@@ -19,7 +19,7 @@ final class VolumeTest {
   }
 
   @ParameterizedTest
-  @ValueSource(ints = {-1000, -1, 0})
+  @ValueSource(ints = { -1000, -1, 0 })
   void should_throw_exception_when_volume_is_invalid(int cubicMillimeters) {
     assertThrows(InvalidVolumeException.class, () -> Volume.of(cubicMillimeters));
   }
@@ -55,6 +55,12 @@ final class VolumeTest {
         Arguments.of(Volume.of(1), Volume.of(1), Volume.of(2)),
         Arguments.of(Volume.of(2), Volume.of(1), Volume.of(3)),
         Arguments.of(Volume.of(2), Volume.of(1), Volume.of(2)));
+  }
+
+  @Test
+  void should_throw_exception_when_compare_to_null() {
+    assertThrows(
+        NullPointerException.class, () -> Volume.of(1).compareTo(null));
   }
 
   @Test
