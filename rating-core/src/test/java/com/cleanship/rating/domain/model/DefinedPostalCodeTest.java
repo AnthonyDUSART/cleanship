@@ -38,4 +38,9 @@ final class DefinedPostalCodeTest {
   void should_not_starts_with() {
     assertFalse(DefinedPostalCode.of("75000").startsWith("000"));
   }
+
+  @Test
+  void should_throw_exception_when_starts_with_null() {
+    assertThrows(NullPointerException.class, () -> DefinedPostalCode.of("75000").startsWith(null));
+  }
 }
