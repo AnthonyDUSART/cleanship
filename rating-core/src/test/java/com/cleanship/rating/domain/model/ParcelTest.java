@@ -11,4 +11,19 @@ final class ParcelTest {
 
     assertEquals(Weight.of(1), parcel.weight());
   }
+
+  @Test
+  void should_store_no_dimension() {
+    Parcel parcel = Parcel.of(Weight.of(1));
+
+    assertEquals(NoDimension.of(), parcel.dimension());
+  }
+
+  @Test
+  void should_store_defined_dimension() {
+    Side side = Side.of(1);
+    Parcel parcel = Parcel.of(Weight.of(1), DefinedDimension.of(side, side, side));
+
+    assertEquals(DefinedDimension.of(side, side, side), parcel.dimension());
+  }
 }
