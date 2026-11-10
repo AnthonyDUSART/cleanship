@@ -1,5 +1,7 @@
 package com.cleanship.rating.domain.model;
 
+import java.util.Objects;
+
 public enum NoPostalCode implements PostalCode {
   INSTANCE;
 
@@ -9,6 +11,8 @@ public enum NoPostalCode implements PostalCode {
 
   @Override
   public boolean startsWith(String value) {
+    Objects.requireNonNull(value);
+
     return false;
   }
 }
