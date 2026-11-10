@@ -63,4 +63,9 @@ final class DefinedPostalCodeTest {
   void should_contains_successfully() {
     assertTrue(DefinedPostalCode.of("75000").contains("50"));
   }
+
+  @Test
+  void should_not_contains() {
+    assertFalse(DefinedPostalCode.of("75000").contains("505"));
+  }
 }
