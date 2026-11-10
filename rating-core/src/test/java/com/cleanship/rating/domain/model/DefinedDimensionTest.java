@@ -119,4 +119,13 @@ final class DefinedDimensionTest {
 
     assertFalse(dimension.fitsIn(maxInclusive));
   }
+
+  @Test
+  void should_get_volume() {
+    DefinedDimension dimension = DefinedDimension.of(Side.of(2), Side.of(5), Side.of(4));
+
+    Volume expected = Volume.of(dimension);
+
+    assertEquals(expected, dimension.volume());
+  }
 }

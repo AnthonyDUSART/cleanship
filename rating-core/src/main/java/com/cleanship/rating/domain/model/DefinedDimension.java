@@ -51,4 +51,8 @@ public record DefinedDimension(Side length, Side width, Side height) implements 
   public boolean fitsIn(DefinedDimension maxInclusive) {
     return isWithin(MIN_POSSIBLE, maxInclusive);
   }
+
+  public Volume volume() {
+    return Volume.of(this);
+  }
 }
