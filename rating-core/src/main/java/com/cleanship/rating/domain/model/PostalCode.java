@@ -14,4 +14,6 @@ public sealed interface PostalCode permits DefinedPostalCode, NoPostalCode {
   public boolean endsWith(String suffix);
 
   public boolean contains(String sequence);
+
+  public boolean isEqualTo(String value);
 }
