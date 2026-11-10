@@ -15,4 +15,9 @@ public enum NoPostalCode implements PostalCode {
 
     return false;
   }
+
+  @Override
+  public boolean endsWith(String value) {
+    return false;
+  }
 }

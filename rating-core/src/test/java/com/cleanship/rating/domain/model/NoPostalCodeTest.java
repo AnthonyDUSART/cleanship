@@ -21,4 +21,9 @@ public class NoPostalCodeTest {
   void should_throw_exception_when_start_with_null() {
     assertThrows(NullPointerException.class, () -> NoPostalCode.of().startsWith(null));
   }
+
+  @Test
+  void should_not_ends_with() {
+    assertFalse(NoPostalCode.of().endsWith("000"));
+  }
 }

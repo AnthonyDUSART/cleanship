@@ -26,4 +26,10 @@ public record DefinedPostalCode(String value) implements PostalCode {
 
     return this.value.startsWith(value);
   }
+
+  @Override
+  public boolean endsWith(String value) {
+    // TODO Auto-generated method stub
+    return false;
+  }
 }
