@@ -21,4 +21,9 @@ final class PostalCodeTest {
   void should_throw_exception_when_value_is_blank() {
     assertThrows(InvalidPostalCodeException.class, () -> PostalCode.of("  "));
   }
+
+  @Test
+  void should_throw_exception_when_value_length_is_exceeded() {
+    assertThrows(InvalidPostalCodeException.class, () -> PostalCode.of("75000000000000000"));
+  }
 }
