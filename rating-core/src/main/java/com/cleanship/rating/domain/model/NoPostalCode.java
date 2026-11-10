@@ -6,4 +6,9 @@ public enum NoPostalCode implements PostalCode {
   public static NoPostalCode of() {
     return INSTANCE;
   }
+
+  @Override
+  public boolean startsWith(String value) {
+    return false;
+  }
 }

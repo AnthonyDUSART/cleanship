@@ -19,4 +19,9 @@ public record DefinedPostalCode(String value) implements PostalCode {
   public static DefinedPostalCode of(String value) {
     return new DefinedPostalCode(value);
   }
+
+  @Override
+  public boolean startsWith(String value) {
+    return false;
+  }
 }
