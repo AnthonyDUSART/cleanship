@@ -5,6 +5,7 @@ import java.util.Objects;
 public record Parcel(Weight weight, Dimension dimension) {
   public Parcel {
     Objects.requireNonNull(weight);
+    Objects.requireNonNull(dimension);
   }
 
   public static Parcel of(Weight weight) {

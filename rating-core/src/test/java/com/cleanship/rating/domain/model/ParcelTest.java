@@ -32,4 +32,9 @@ final class ParcelTest {
   void should_throw_exception_when_weight_is_null() {
     assertThrows(NullPointerException.class, () -> Parcel.of(null));
   }
+
+  @Test
+  void should_throw_exception_when_dimension_is_null() {
+    assertThrows(NullPointerException.class, () -> Parcel.of(Weight.of(1), null));
+  }
 }
