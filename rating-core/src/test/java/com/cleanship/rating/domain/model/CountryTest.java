@@ -20,7 +20,7 @@ final class CountryTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"F", "FRA", "F2"})
+  @ValueSource(strings = {"F", "FRA", "F2", "fr"})
   void should_throw_exception_when_country_is_invalid(String code) {
     assertThrows(InvalidCountryException.class, () -> Country.of(code));
   }
