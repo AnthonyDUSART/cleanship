@@ -4,8 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.cleanship.rating.domain.exception.InvalidVolumeException;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 final class VolumeTest {
@@ -25,5 +28,18 @@ final class VolumeTest {
     DefinedDimension dimension = DefinedDimension.of(Side.of(5), Side.of(2), Side.of(2));
 
     assertEquals(20, Volume.of(dimension).cubicMillimeters());
+  }
+
+  @ParameterizedTest
+  @MethodSource("provideComparisons")
+  void should_compare_to_successfully(Volume a, Volume b, int comparisonResult) {
+    assertEquals(a.compareTo(b), comparisonResult);
+  }
+
+  private static Stream<Arguments> provideComparisons() {
+    return Stream.of(
+        Arguments.of(Volume.of(1), Volume.of(2), -1),
+        Arguments.of(Volume.of(1), Volume.of(1), 0),
+        Arguments.of(Volume.of(2), Volume.of(1), 1));
   }
 }
