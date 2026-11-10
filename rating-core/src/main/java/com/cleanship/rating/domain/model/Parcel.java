@@ -12,7 +12,7 @@ public record Parcel(Weight weight, Dimension dimension) {
     return new Parcel(weight, NoDimension.of());
   }
 
-  public static Parcel of(Weight weight, DefinedDimension dimension) {
+  public static Parcel of(Weight weight, Dimension dimension) {
     return new Parcel(weight, dimension);
   }
 }
