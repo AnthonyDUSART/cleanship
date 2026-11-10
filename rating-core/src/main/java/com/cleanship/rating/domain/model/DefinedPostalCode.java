@@ -21,10 +21,10 @@ public record DefinedPostalCode(String value) implements PostalCode {
   }
 
   @Override
-  public boolean startsWith(String suffix) {
-    Objects.requireNonNull(suffix);
+  public boolean startsWith(String prefix) {
+    Objects.requireNonNull(prefix);
 
-    return value.startsWith(suffix);
+    return value.startsWith(prefix);
   }
 
   @Override
