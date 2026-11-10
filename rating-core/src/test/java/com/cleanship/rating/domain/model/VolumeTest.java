@@ -19,4 +19,11 @@ final class VolumeTest {
   void should_throw_exception_when_volume_is_invalid(int cubicMillimeters) {
     assertThrows(InvalidVolumeException.class, () -> Volume.of(cubicMillimeters));
   }
+
+  @Test
+  void should_create_volume_from_defined_dimension() {
+    DefinedDimension dimension = DefinedDimension.of(Side.of(5), Side.of(2), Side.of(2));
+
+    assertEquals(20, Volume.of(dimension).cubicMillimeters());
+  }
 }
