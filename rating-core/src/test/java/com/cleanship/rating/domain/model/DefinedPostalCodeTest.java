@@ -78,4 +78,9 @@ final class DefinedPostalCodeTest {
   void should_be_equal_to_successfully() {
     assertTrue(DefinedPostalCode.of("75000").isEqualTo("75000"));
   }
+
+  @Test
+  void should_not_be_equal_to() {
+    assertFalse(DefinedPostalCode.of("75000").isEqualTo("26000"));
+  }
 }
