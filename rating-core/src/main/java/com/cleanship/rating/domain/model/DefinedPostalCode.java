@@ -33,4 +33,10 @@ public record DefinedPostalCode(String value) implements PostalCode {
 
     return value.endsWith(suffix);
   }
+
+  @Override
+  public boolean contains(String sequence) {
+    // TODO Auto-generated method stub
+    return false;
+  }
 }
