@@ -6,6 +6,8 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 public record DefinedDimension(Side length, Side width, Side height) implements Dimension {
+  private static final DefinedDimension MIN_POSSIBLE = DefinedDimension.of(Side.of(1), Side.of(1), Side.of(1));
+
   public DefinedDimension {
     Objects.requireNonNull(length);
     Objects.requireNonNull(width);
