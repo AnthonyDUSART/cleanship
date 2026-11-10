@@ -21,7 +21,7 @@ final class ParcelTest {
   }
 
   @Test
-  void should_store_defined_dimension() {
+  void should_store_dimension() {
     Side side = Side.of(1);
     Parcel parcel = Parcel.of(Weight.of(1), DefinedDimension.of(side, side, side));
 
