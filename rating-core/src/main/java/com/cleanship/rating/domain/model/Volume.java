@@ -24,4 +24,8 @@ public record Volume(long cubicMillimeters) implements Comparable<Volume> {
   public int compareTo(Volume o) {
     return Long.compare(cubicMillimeters, o.cubicMillimeters);
   }
+
+  public boolean isWithin(Volume minInclusive, Volume maxInclusive) {
+    return compareTo(minInclusive) >= 0 && compareTo(maxInclusive) <= 0;
+  }
 }

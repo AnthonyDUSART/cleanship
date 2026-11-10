@@ -2,6 +2,7 @@ package com.cleanship.rating.domain.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.cleanship.rating.domain.exception.InvalidVolumeException;
 import java.util.stream.Stream;
@@ -41,5 +42,18 @@ final class VolumeTest {
         Arguments.of(Volume.of(1), Volume.of(2), -1),
         Arguments.of(Volume.of(1), Volume.of(1), 0),
         Arguments.of(Volume.of(2), Volume.of(1), 1));
+  }
+
+  @ParameterizedTest
+  @MethodSource("provideWithin")
+  void should_be_within_successfully(Volume volume, Volume minInclusive, Volume maxInclusive) {
+    assertTrue(volume.isWithin(minInclusive, maxInclusive));
+  }
+
+  private static Stream<Arguments> provideWithin() {
+    return Stream.of(
+        Arguments.of(Volume.of(1), Volume.of(1), Volume.of(2)),
+        Arguments.of(Volume.of(2), Volume.of(1), Volume.of(3)),
+        Arguments.of(Volume.of(2), Volume.of(1), Volume.of(2)));
   }
 }
