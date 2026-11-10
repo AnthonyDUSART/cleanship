@@ -66,4 +66,10 @@ final class VolumeTest {
   void should_throw_exception_when_within_with_null_max_inclusive() {
     assertThrows(NullPointerException.class, () -> Volume.of(1).isWithin(Volume.of(1), null));
   }
+
+  @Test
+  void should_throw_exception_when_within_min_inclusive_is_greater_than_max_inclusive() {
+    assertThrows(
+        IllegalArgumentException.class, () -> Volume.of(2).isWithin(Volume.of(4), Volume.of(1)));
+  }
 }

@@ -30,6 +30,10 @@ public record Volume(long cubicMillimeters) implements Comparable<Volume> {
     Objects.requireNonNull(minInclusive);
     Objects.requireNonNull(maxInclusive);
 
+    if (minInclusive.compareTo(maxInclusive) > 0) {
+      throw new IllegalArgumentException("minInclusive cannot be greater than maxInclusive");
+    }
+
     return compareTo(minInclusive) >= 0 && compareTo(maxInclusive) <= 0;
   }
 }
