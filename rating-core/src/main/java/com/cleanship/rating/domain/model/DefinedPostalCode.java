@@ -21,15 +21,14 @@ public record DefinedPostalCode(String value) implements PostalCode {
   }
 
   @Override
-  public boolean startsWith(String value) {
-    Objects.requireNonNull(value);
+  public boolean startsWith(String suffix) {
+    Objects.requireNonNull(suffix);
 
-    return this.value.startsWith(value);
+    return value.startsWith(suffix);
   }
 
   @Override
-  public boolean endsWith(String value) {
-    // TODO Auto-generated method stub
-    return false;
+  public boolean endsWith(String suffix) {
+    return value.endsWith(suffix);
   }
 }

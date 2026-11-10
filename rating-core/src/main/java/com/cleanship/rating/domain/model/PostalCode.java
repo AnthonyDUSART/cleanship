@@ -9,7 +9,7 @@ public sealed interface PostalCode permits DefinedPostalCode, NoPostalCode {
     return NoPostalCode.of();
   }
 
-  public boolean startsWith(String value);
+  public boolean startsWith(String suffix);
 
-  public boolean endsWith(String value);
+  public boolean endsWith(String suffix);
 }

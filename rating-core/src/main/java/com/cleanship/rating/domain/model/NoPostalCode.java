@@ -10,15 +10,15 @@ public enum NoPostalCode implements PostalCode {
   }
 
   @Override
-  public boolean startsWith(String value) {
-    Objects.requireNonNull(value);
+  public boolean startsWith(String suffix) {
+    Objects.requireNonNull(suffix);
 
     return false;
   }
 
   @Override
-  public boolean endsWith(String value) {
-    Objects.requireNonNull(value);
+  public boolean endsWith(String suffix) {
+    Objects.requireNonNull(suffix);
 
     return false;
   }
