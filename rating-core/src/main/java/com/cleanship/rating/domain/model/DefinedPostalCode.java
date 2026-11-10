@@ -43,6 +43,8 @@ public record DefinedPostalCode(String value) implements PostalCode {
 
   @Override
   public boolean isEqualTo(String value) {
+    Objects.requireNonNull(value);
+
     return this.value.equals(value);
   }
 }

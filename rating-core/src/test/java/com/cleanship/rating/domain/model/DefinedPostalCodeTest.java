@@ -83,4 +83,9 @@ final class DefinedPostalCodeTest {
   void should_not_be_equal_to() {
     assertFalse(DefinedPostalCode.of("75000").isEqualTo("26000"));
   }
+
+  @Test
+  void should_throw_exception_when_is_equal_to_null() {
+    assertThrows(NullPointerException.class, () -> DefinedPostalCode.of("75000").isEqualTo(null));
+  }
 }
