@@ -48,4 +48,9 @@ final class DefinedPostalCodeTest {
   void should_ends_with_successfully() {
     assertTrue(DefinedPostalCode.of("75000").endsWith("000"));
   }
+
+  @Test
+  void should_throw_exception_when_ends_with_null() {
+    assertThrows(NullPointerException.class, () -> DefinedPostalCode.of("75000").endsWith(null));
+  }
 }

@@ -29,6 +29,8 @@ public record DefinedPostalCode(String value) implements PostalCode {
 
   @Override
   public boolean endsWith(String suffix) {
+    Objects.requireNonNull(suffix);
+
     return value.endsWith(suffix);
   }
 }
