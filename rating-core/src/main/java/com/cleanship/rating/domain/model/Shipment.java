@@ -6,6 +6,7 @@ public record Shipment(Location origin, Location destination, Parcel parcel) {
   public Shipment {
     Objects.requireNonNull(origin);
     Objects.requireNonNull(destination);
+    Objects.requireNonNull(parcel);
   }
 
   public static Shipment of(Location origin, Location destination, Parcel parcel) {
