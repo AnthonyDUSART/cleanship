@@ -9,7 +9,7 @@ public record Location(Country country, PostalCode postalCode) {
   }
 
   public static Location of(Country country) {
-    return new Location(country, NoPostalCode.of());
+    return new Location(country, PostalCode.none());
   }
 
   public static Location of(Country country, PostalCode postalCode) {
