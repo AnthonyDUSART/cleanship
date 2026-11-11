@@ -180,4 +180,14 @@ final class MoneyTest {
     assertThrows(
         NullPointerException.class, () -> Money.zero(EURO).isWithin(Money.zero(EURO), null));
   }
+
+  @Test
+  void should_throw_exception_when_is_within_with_greater_min_inclusive_than_max_inclusive() {
+    Money minInclusive = Money.of(1, EURO);
+    Money maxInclusive = Money.zero(EURO);
+
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> Money.zero(EURO).isWithin(minInclusive, maxInclusive));
+  }
 }
