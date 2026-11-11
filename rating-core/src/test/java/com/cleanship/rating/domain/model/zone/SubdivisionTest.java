@@ -20,4 +20,11 @@ final class SubdivisionTest {
 
     assertEquals(NAME, subdivision.name());
   }
+
+  @Test
+  void should_store_country() {
+    Subdivision subdivision = Subdivision.of(NAME, COUNTRY, SPECIFICATION);
+
+    assertEquals(COUNTRY, subdivision.country());
+  }
 }
