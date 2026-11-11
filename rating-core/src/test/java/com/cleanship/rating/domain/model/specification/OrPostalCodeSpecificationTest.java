@@ -67,4 +67,11 @@ final class OrPostalCodeSpecificationTest {
 
     assertFalse(spec.isSatisfiedBy(postalCode));
   }
+
+  @Test
+  void should_throw_exception_when_is_satisfied_by_null() {
+    OrPostalCodeSpecification spec = OrPostalCodeSpecification.of(STARTS_WITH_26, ANY);
+
+    assertThrows(NullPointerException.class, () -> spec.isSatisfiedBy(null));
+  }
 }

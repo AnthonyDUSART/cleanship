@@ -18,6 +18,8 @@ public record OrPostalCodeSpecification(PostalCodeSpecification left, PostalCode
 
   @Override
   public boolean isSatisfiedBy(PostalCode postalCode) {
+    Objects.requireNonNull(postalCode);
+
     return left.isSatisfiedBy(postalCode) || right.isSatisfiedBy(postalCode);
   }
 }
