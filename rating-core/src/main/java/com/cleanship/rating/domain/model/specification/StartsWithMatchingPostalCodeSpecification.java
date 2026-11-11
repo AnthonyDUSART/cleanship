@@ -15,7 +15,6 @@ public record StartsWithMatchingPostalCodeSpecification(String prefix)
 
   @Override
   public boolean isSatisfiedBy(PostalCode postalCode) {
-    // TODO Auto-generated method stub
-    return false;
+    return postalCode.startsWith(prefix);
   }
 }
