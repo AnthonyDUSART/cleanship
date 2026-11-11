@@ -15,4 +15,12 @@ final class AndPostalCodeSpecificationTest {
 
     assertEquals(ANY_POSTAL_CODE_SPECIFICATION, spec.left());
   }
+
+  @Test
+  void should_store_right() {
+    AndPostalCodeSpecification spec =
+        AndPostalCodeSpecification.of(ANY_POSTAL_CODE_SPECIFICATION, ANY_POSTAL_CODE_SPECIFICATION);
+
+    assertEquals(ANY_POSTAL_CODE_SPECIFICATION, spec.right());
+  }
 }
