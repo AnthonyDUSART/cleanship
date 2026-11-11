@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.zone;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -15,11 +16,12 @@ import org.junit.jupiter.api.Test;
 final class ZoneTest {
   private static final ZoneName NAME = ZoneName.of("France");
 
-  private static final Set<Subdivision> SUBDIVISIONS = Set.of(
-      Subdivision.of(
-          SubdivisionName.of("Paris"),
-          Country.of("FR"),
-          PostalCodeSpecification.isEqualTo("75000")));
+  private static final Set<Subdivision> SUBDIVISIONS =
+      Set.of(
+          Subdivision.of(
+              SubdivisionName.of("Paris"),
+              Country.of("FR"),
+              PostalCodeSpecification.isEqualTo("75000")));
 
   @Test
   void should_store_name() {
@@ -57,5 +59,14 @@ final class ZoneTest {
     Zone zone = Zone.of(NAME, SUBDIVISIONS);
 
     assertTrue(zone.isSatisfiedBy(paris));
+  }
+
+  @Test
+  void should_not_be_satisfied() {
+    Location valence = Location.of(Country.of("FR"), PostalCode.of("26000"));
+
+    Zone zone = Zone.of(NAME, SUBDIVISIONS);
+
+    assertFalse(zone.isSatisfiedBy(valence));
   }
 }
