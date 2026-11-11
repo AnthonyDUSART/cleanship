@@ -65,4 +65,9 @@ final class PostalCodeSpecificationTest {
 
     assertEquals(expected, PostalCodeSpecification.endsWith("000"));
   }
+
+  @Test
+  void should_throw_exception_when_ends_with_null() {
+    assertThrows(NullPointerException.class, () -> PostalCodeSpecification.endsWith(null));
+  }
 }

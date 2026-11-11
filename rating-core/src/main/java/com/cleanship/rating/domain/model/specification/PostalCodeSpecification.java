@@ -37,6 +37,8 @@ public sealed interface PostalCodeSpecification
   }
 
   public static PostalCodeSpecification endsWith(String suffix) {
+    Objects.requireNonNull(suffix);
+
     return EndsWithMatchingPostalCodeSpecification.of(suffix);
   }
 }
