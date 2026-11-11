@@ -53,4 +53,12 @@ final class EndsWithMatchingPostalCodeSpecificationTest {
 
     assertFalse(spec.isSatisfiedBy(PostalCode.none()));
   }
+
+  @Test
+  void should_throw_exception_when_is_satisfied_by_null() {
+    EndsWithMatchingPostalCodeSpecification spec =
+        EndsWithMatchingPostalCodeSpecification.of("000");
+
+    assertThrows(NullPointerException.class, () -> spec.isSatisfiedBy(null));
+  }
 }

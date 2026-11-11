@@ -15,6 +15,8 @@ public record EndsWithMatchingPostalCodeSpecification(String suffix)
 
   @Override
   public boolean isSatisfiedBy(PostalCode postalCode) {
+    Objects.requireNonNull(postalCode);
+
     return postalCode.endsWith(suffix);
   }
 }
