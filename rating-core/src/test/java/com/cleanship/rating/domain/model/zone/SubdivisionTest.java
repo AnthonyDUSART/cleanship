@@ -45,4 +45,9 @@ final class SubdivisionTest {
   void should_throw_exception_when_country_is_null() {
     assertThrows(NullPointerException.class, () -> Subdivision.of(NAME, null, SPECIFICATION));
   }
+
+  @Test
+  void should_throw_exception_when_specification_is_null() {
+    assertThrows(NullPointerException.class, () -> Subdivision.of(NAME, COUNTRY, null));
+  }
 }
