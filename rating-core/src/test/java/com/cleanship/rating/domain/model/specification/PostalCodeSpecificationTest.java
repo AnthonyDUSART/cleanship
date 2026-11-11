@@ -52,4 +52,9 @@ final class PostalCodeSpecificationTest {
 
     assertEquals(expected, PostalCodeSpecification.startsWith("75"));
   }
+
+  @Test
+  void should_throw_exception_when_starts_with_null() {
+    assertThrows(NullPointerException.class, () -> PostalCodeSpecification.startsWith(null));
+  }
 }

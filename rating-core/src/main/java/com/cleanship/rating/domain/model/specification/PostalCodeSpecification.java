@@ -31,6 +31,8 @@ public sealed interface PostalCodeSpecification
   }
 
   public static PostalCodeSpecification startsWith(String prefix) {
+    Objects.requireNonNull(prefix);
+
     return StartsWithMatchingPostalCodeSpecification.of(prefix);
   }
 }
