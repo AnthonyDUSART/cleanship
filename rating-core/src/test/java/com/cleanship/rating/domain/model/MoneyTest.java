@@ -159,4 +159,13 @@ final class MoneyTest {
 
     assertTrue(Money.of(cents, EURO).isWithin(minInclusive, maxInclusive));
   }
+
+  @ParameterizedTest
+  @CsvSource({"1, 2, 2", "1, 2, 3", "3, 1, 2"})
+  void should_not_be_within(int cents, int minInclusiveInCents, int maxInclusiveInCents) {
+    Money minInclusive = Money.of(minInclusiveInCents, EURO);
+    Money maxInclusive = Money.of(maxInclusiveInCents, EURO);
+
+    assertFalse(Money.of(cents, EURO).isWithin(minInclusive, maxInclusive));
+  }
 }
