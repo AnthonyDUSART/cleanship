@@ -5,9 +5,7 @@ import com.cleanship.rating.domain.exception.InvalidMoneyException;
 import java.util.Objects;
 
 public record Money(long cents, Currency currency) implements Comparable<Money> {
-  /**
-   * @throws InvalidMoneyException
-   */
+
   public Money {
     Objects.requireNonNull(currency);
 
@@ -16,9 +14,6 @@ public record Money(long cents, Currency currency) implements Comparable<Money> 
     }
   }
 
-  /**
-   * @throws InvalidMoneyException
-   */
   public static Money of(long cents, Currency currency) {
     return new Money(cents, currency);
   }
@@ -76,5 +71,27 @@ public record Money(long cents, Currency currency) implements Comparable<Money> 
     Objects.requireNonNull(percentage);
 
     return percentage.applyTo(this);
+  }
+
+  public boolean isGreaterThanOrEqualTo(Money other) {
+    Objects.requireNonNull(other);
+
+    ensureSameCurrency(other);
+
+    return compareTo(other) >= 0;
+  }
+
+  public boolean isWithin(Money minInclusive, Money maxInclusive) {
+    Objects.requireNonNull(minInclusive);
+    Objects.requireNonNull(maxInclusive);
+
+    ensureSameCurrency(minInclusive);
+    ensureSameCurrency(maxInclusive);
+
+    if (minInclusive.compareTo(maxInclusive) > 0) {
+      throw new IllegalArgumentException("minInclusive cannot be greater than maxInclusive");
+    }
+
+    return compareTo(minInclusive) >= 0 && compareTo(maxInclusive) <= 0;
   }
 }
