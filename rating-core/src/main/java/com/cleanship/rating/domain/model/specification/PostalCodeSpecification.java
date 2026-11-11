@@ -49,6 +49,8 @@ public sealed interface PostalCodeSpecification
   }
 
   public static PostalCodeSpecification isEqualTo(String value) {
+    Objects.requireNonNull(value);
+
     return EqualsMatchingPostalCodeSpecification.of(value);
   }
 }

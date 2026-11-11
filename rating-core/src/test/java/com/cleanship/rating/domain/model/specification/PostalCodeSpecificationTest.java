@@ -91,4 +91,9 @@ final class PostalCodeSpecificationTest {
 
     assertEquals(expected, PostalCodeSpecification.isEqualTo("75000"));
   }
+
+  @Test
+  void should_throw_exception_when_is_equal_to_null() {
+    assertThrows(NullPointerException.class, () -> PostalCodeSpecification.isEqualTo(null));
+  }
 }
