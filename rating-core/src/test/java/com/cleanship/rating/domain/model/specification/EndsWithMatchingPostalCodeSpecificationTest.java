@@ -45,4 +45,12 @@ final class EndsWithMatchingPostalCodeSpecificationTest {
 
     assertFalse(spec.isSatisfiedBy(postalCode));
   }
+
+  @Test
+  void should_not_be_satisfied_when_no_postal_code() {
+    EndsWithMatchingPostalCodeSpecification spec =
+        EndsWithMatchingPostalCodeSpecification.of("000");
+
+    assertFalse(spec.isSatisfiedBy(PostalCode.none()));
+  }
 }
