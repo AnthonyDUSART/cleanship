@@ -10,7 +10,8 @@ public sealed interface PostalCodeSpecification
         ContainsMatchingPostalCodeSpecification,
         EqualsMatchingPostalCodeSpecification,
         AndPostalCodeSpecification,
-        OrPostalCodeSpecification {
+        OrPostalCodeSpecification,
+        NotPostalCodeSpecification {
   public boolean isSatisfiedBy(PostalCode postalCode);
 
   public default PostalCodeSpecification and(PostalCodeSpecification postalCodeSpecification) {
