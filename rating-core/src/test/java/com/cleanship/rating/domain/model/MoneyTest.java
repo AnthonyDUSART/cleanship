@@ -17,6 +17,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 final class MoneyTest {
   private static final Currency EURO = Currency.of("EUR");
 
+  private static final Currency DOLLAR = Currency.of("USD");
+
   @Test
   void should_store_cents() {
     assertEquals(40_00, Money.of(40_00, EURO).cents());
@@ -58,7 +60,7 @@ final class MoneyTest {
   void should_throw_exception_when_add_with_currency_mismatch() {
     Money euroAmount = Money.of(30_00, EURO);
 
-    Money dollarAmount = Money.of(10_00, Currency.of("USD"));
+    Money dollarAmount = Money.of(10_00, DOLLAR);
 
     assertThrows(CurrencyMismatchException.class, () -> euroAmount.add(dollarAmount));
   }
@@ -79,7 +81,7 @@ final class MoneyTest {
   void should_throw_exception_when_subtract_with_currency_mismatch() {
     Money euroAmount = Money.of(30_00, EURO);
 
-    Money dollarAmount = Money.of(20_00, Currency.of("USD"));
+    Money dollarAmount = Money.of(20_00, DOLLAR);
 
     assertThrows(CurrencyMismatchException.class, () -> euroAmount.subtract(dollarAmount));
   }
@@ -120,7 +122,7 @@ final class MoneyTest {
   void should_throw_exception_when_compare_to_with_currency_mismatch() {
     Money euroAmount = Money.zero(EURO);
 
-    Money dollarAmount = Money.zero(Currency.of("USD"));
+    Money dollarAmount = Money.zero(DOLLAR);
 
     assertThrows(CurrencyMismatchException.class, () -> euroAmount.compareTo(dollarAmount));
   }
@@ -139,5 +141,12 @@ final class MoneyTest {
   @Test
   void should_throw_exception_when_is_greater_than_or_equal_to_null() {
     assertThrows(NullPointerException.class, () -> Money.zero(EURO).isGreaterThanOrEqualTo(null));
+  }
+
+  @Test
+  void should_throw_exception_when_is_greater_than_or_equal_to_with_currency_mismatch() {
+    assertThrows(
+        CurrencyMismatchException.class,
+        () -> Money.zero(EURO).isGreaterThanOrEqualTo(Money.zero(DOLLAR)));
   }
 }
