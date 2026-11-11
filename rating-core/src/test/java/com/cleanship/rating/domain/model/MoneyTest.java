@@ -200,4 +200,14 @@ final class MoneyTest {
         CurrencyMismatchException.class,
         () -> Money.zero(EURO).isWithin(minInclusive, maxInclusive));
   }
+
+  @Test
+  void should_throw_exception_when_is_within_with_max_inclusive_currency_mismatch() {
+    Money minInclusive = Money.zero(EURO);
+    Money maxInclusive = Money.zero(DOLLAR);
+
+    assertThrows(
+        CurrencyMismatchException.class,
+        () -> Money.zero(EURO).isWithin(minInclusive, maxInclusive));
+  }
 }
