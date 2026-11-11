@@ -5,9 +5,7 @@ import com.cleanship.rating.domain.exception.InvalidMoneyException;
 import java.util.Objects;
 
 public record Money(long cents, Currency currency) implements Comparable<Money> {
-  /**
-   * @throws InvalidMoneyException
-   */
+
   public Money {
     Objects.requireNonNull(currency);
 
@@ -16,9 +14,6 @@ public record Money(long cents, Currency currency) implements Comparable<Money> 
     }
   }
 
-  /**
-   * @throws InvalidMoneyException
-   */
   public static Money of(long cents, Currency currency) {
     return new Money(cents, currency);
   }
