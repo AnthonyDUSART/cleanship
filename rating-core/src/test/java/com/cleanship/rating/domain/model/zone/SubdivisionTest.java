@@ -50,4 +50,11 @@ final class SubdivisionTest {
   void should_throw_exception_when_specification_is_null() {
     assertThrows(NullPointerException.class, () -> Subdivision.of(NAME, COUNTRY, null));
   }
+
+  @Test
+  void should_store_any_specification_when_is_created_without_specification() {
+    Subdivision subdivision = Subdivision.of(NAME, COUNTRY);
+
+    assertEquals(PostalCodeSpecification.any(), subdivision.postalCodeSpecification());
+  }
 }

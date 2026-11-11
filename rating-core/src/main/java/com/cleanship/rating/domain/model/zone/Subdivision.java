@@ -16,4 +16,8 @@ public record Subdivision(
       SubdivisionName name, Country country, PostalCodeSpecification postalCodeSpecification) {
     return new Subdivision(name, country, postalCodeSpecification);
   }
+
+  public static Subdivision of(SubdivisionName name, Country country) {
+    return new Subdivision(name, country, PostalCodeSpecification.any());
+  }
 }
