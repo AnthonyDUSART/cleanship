@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.specification;
 
 import com.cleanship.rating.domain.model.PostalCode;
+import java.util.Objects;
 
 public sealed interface PostalCodeSpecification
     permits AnyPostalCodeSpecification,
@@ -12,6 +13,8 @@ public sealed interface PostalCodeSpecification
   public boolean isSatisfiedBy(PostalCode postalCode);
 
   public default PostalCodeSpecification and(PostalCodeSpecification postalCodeSpecification) {
+    Objects.requireNonNull(postalCodeSpecification);
+
     return AndPostalCodeSpecification.of(this, postalCodeSpecification);
   }
 }
