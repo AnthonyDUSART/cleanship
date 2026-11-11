@@ -48,4 +48,11 @@ final class ContainsPostalCodeSpecificationTest {
 
     assertThrows(NullPointerException.class, () -> spec.isSatisfiedBy(null));
   }
+
+  @Test
+  void should_not_be_satisfied_when_no_postal_code() {
+    ContainsPostalCodeSpecification spec = ContainsPostalCodeSpecification.of("50");
+
+    assertFalse(spec.isSatisfiedBy(PostalCode.none()));
+  }
 }
