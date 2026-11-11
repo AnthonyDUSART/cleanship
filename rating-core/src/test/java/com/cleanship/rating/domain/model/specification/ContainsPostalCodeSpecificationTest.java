@@ -41,4 +41,11 @@ final class ContainsPostalCodeSpecificationTest {
 
     assertFalse(spec.isSatisfiedBy(postalCode));
   }
+
+  @Test
+  void should_throw_exception_when_is_satisfied_by_null() {
+    ContainsPostalCodeSpecification spec = ContainsPostalCodeSpecification.of("50");
+
+    assertThrows(NullPointerException.class, () -> spec.isSatisfiedBy(null));
+  }
 }
