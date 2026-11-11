@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.specification;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -10,5 +11,10 @@ final class EqualsMatchingPostalCodeSpecificationTest {
     EqualsMatchingPostalCodeSpecification spec = EqualsMatchingPostalCodeSpecification.of("75000");
 
     assertEquals("75000", spec.value());
+  }
+
+  @Test
+  void should_throw_exception_when_value_is_null() {
+    assertThrows(NullPointerException.class, () -> EqualsMatchingPostalCodeSpecification.of(null));
   }
 }
