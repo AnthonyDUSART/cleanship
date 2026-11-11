@@ -190,4 +190,14 @@ final class MoneyTest {
         IllegalArgumentException.class,
         () -> Money.zero(EURO).isWithin(minInclusive, maxInclusive));
   }
+
+  @Test
+  void should_throw_exception_when_is_within_with_min_inclusive_currency_mismatch() {
+    Money minInclusive = Money.zero(DOLLAR);
+    Money maxInclusive = Money.zero(EURO);
+
+    assertThrows(
+        CurrencyMismatchException.class,
+        () -> Money.zero(EURO).isWithin(minInclusive, maxInclusive));
+  }
 }

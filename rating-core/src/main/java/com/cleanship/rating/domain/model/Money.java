@@ -90,6 +90,8 @@ public record Money(long cents, Currency currency) implements Comparable<Money> 
     Objects.requireNonNull(minInclusive);
     Objects.requireNonNull(maxInclusive);
 
+    ensureSameCurrency(minInclusive);
+
     if (minInclusive.compareTo(maxInclusive) > 0) {
       throw new IllegalArgumentException("minInclusive cannot be greater than maxInclusive");
     }
