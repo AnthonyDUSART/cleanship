@@ -29,4 +29,8 @@ public sealed interface PostalCodeSpecification
   public default PostalCodeSpecification not() {
     return NotPostalCodeSpecification.of(this);
   }
+
+  public static PostalCodeSpecification startsWith(String prefix) {
+    return StartsWithMatchingPostalCodeSpecification.of(prefix);
+  }
 }

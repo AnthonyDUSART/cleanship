@@ -44,4 +44,12 @@ final class PostalCodeSpecificationTest {
 
     assertEquals(expected, notSpec);
   }
+
+  @Test
+  void should_create_starts_with_specification() {
+    StartsWithMatchingPostalCodeSpecification expected =
+        StartsWithMatchingPostalCodeSpecification.of("75");
+
+    assertEquals(expected, PostalCodeSpecification.startsWith("75"));
+  }
 }
