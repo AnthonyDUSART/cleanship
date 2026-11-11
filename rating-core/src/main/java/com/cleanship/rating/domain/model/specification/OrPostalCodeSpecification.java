@@ -3,7 +3,7 @@ package com.cleanship.rating.domain.model.specification;
 import com.cleanship.rating.domain.model.PostalCode;
 import java.util.Objects;
 
-public record OrPostalCodeSpecification(PostalCodeSpecification left, PostalCodeSpecification right)
+record OrPostalCodeSpecification(PostalCodeSpecification left, PostalCodeSpecification right)
     implements PostalCodeSpecification {
 
   public OrPostalCodeSpecification {
