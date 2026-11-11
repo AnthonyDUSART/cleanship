@@ -42,4 +42,12 @@ final class StartsWithMatchingPostalCodeSpecificationTest {
 
     assertFalse(spec.isSatisfiedBy(postalCode));
   }
+
+  @Test
+  void should_not_be_satisfied_when_no_postal_code() {
+    StartsWithMatchingPostalCodeSpecification spec =
+        StartsWithMatchingPostalCodeSpecification.of("75");
+
+    assertFalse(spec.isSatisfiedBy(PostalCode.none()));
+  }
 }
