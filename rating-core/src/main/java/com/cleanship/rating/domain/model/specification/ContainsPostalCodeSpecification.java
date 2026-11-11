@@ -14,7 +14,6 @@ public record ContainsPostalCodeSpecification(String sequence) implements Postal
 
   @Override
   public boolean isSatisfiedBy(PostalCode postalCode) {
-    // TODO Auto-generated method stub
-    return false;
+    return postalCode.contains(sequence);
   }
 }
