@@ -41,4 +41,11 @@ final class EqualsMatchingPostalCodeSpecificationTest {
 
     assertFalse(spec.isSatisfiedBy(postalCode));
   }
+
+  @Test
+  void should_not_be_satisfied_when_no_postal_code() {
+    EqualsMatchingPostalCodeSpecification spec = EqualsMatchingPostalCodeSpecification.of("75000");
+
+    assertFalse(spec.isSatisfiedBy(PostalCode.none()));
+  }
 }
