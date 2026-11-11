@@ -174,4 +174,10 @@ final class MoneyTest {
     assertThrows(
         NullPointerException.class, () -> Money.zero(EURO).isWithin(null, Money.zero(EURO)));
   }
+
+  @Test
+  void should_throw_exception_when_is_within_null_max_inclusive() {
+    assertThrows(
+        NullPointerException.class, () -> Money.zero(EURO).isWithin(Money.zero(EURO), null));
+  }
 }
