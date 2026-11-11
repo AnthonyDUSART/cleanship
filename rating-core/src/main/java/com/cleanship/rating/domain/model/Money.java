@@ -77,4 +77,8 @@ public record Money(long cents, Currency currency) implements Comparable<Money> 
 
     return percentage.applyTo(this);
   }
+
+  public boolean isGreaterThanOrEqualTo(Money other) {
+    return compareTo(other) >= 0;
+  }
 }
