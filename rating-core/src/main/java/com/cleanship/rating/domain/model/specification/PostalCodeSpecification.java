@@ -4,10 +4,4 @@ import com.cleanship.rating.domain.model.PostalCode;
 
 public interface PostalCodeSpecification {
   public boolean isSatisfiedBy(PostalCode postalCode);
-
-  public PostalCodeSpecification and(PostalCodeSpecification postalCodeSpecification);
-
-  public PostalCodeSpecification or(PostalCodeSpecification postalCodeSpecification);
-
-  public PostalCodeSpecification not();
 }
