@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -128,5 +129,10 @@ final class MoneyTest {
   @ValueSource(ints = {0, 49, 50})
   void should_be_greater_than_or_equal_to(int cents) {
     assertTrue(Money.of(50, EURO).isGreaterThanOrEqualTo(Money.of(cents, EURO)));
+  }
+
+  @Test
+  void should_not_be_greater_than_or_equal_to() {
+    assertFalse(Money.zero(EURO).isGreaterThanOrEqualTo(Money.of(1, EURO)));
   }
 }
