@@ -61,7 +61,7 @@ final class ShipmentTest {
   }
 
   @Test
-  void should_throw_exception_when_delcared_value_is_null() {
+  void should_throw_exception_when_declared_value_is_null() {
     assertThrows(NullPointerException.class, () -> Shipment.of(ORIGIN, DESTINATION, PARCEL, null));
   }
 }
