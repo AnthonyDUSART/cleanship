@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.zone;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -68,5 +69,14 @@ final class SubdivisionTest {
     Subdivision subdivision = Subdivision.of(NAME, COUNTRY, SPECIFICATION);
 
     assertTrue(subdivision.isSatisfiedBy(paris));
+  }
+
+  @Test
+  void should_not_be_satisfied() {
+    Location france = Location.of(COUNTRY);
+
+    Subdivision subdivision = Subdivision.of(NAME, COUNTRY, SPECIFICATION);
+
+    assertFalse(subdivision.isSatisfiedBy(france));
   }
 }
