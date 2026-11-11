@@ -1,8 +1,10 @@
 package com.cleanship.rating.domain.model.specification;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.cleanship.rating.domain.model.PostalCode;
 import org.junit.jupiter.api.Test;
 
 final class NotPostalCodeSpecificationTest {
@@ -18,5 +20,14 @@ final class NotPostalCodeSpecificationTest {
   @Test
   void should_throw_exception_when_postal_code_specification_is_null() {
     assertThrows(NullPointerException.class, () -> NotPostalCodeSpecification.of(null));
+  }
+
+  @Test
+  void should_not_be_satisfied() {
+    NotPostalCodeSpecification spec = NotPostalCodeSpecification.of(ANY);
+
+    PostalCode postalCode = PostalCode.none();
+
+    assertFalse(spec.isSatisfiedBy(postalCode));
   }
 }

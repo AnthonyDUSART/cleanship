@@ -15,7 +15,6 @@ public record NotPostalCodeSpecification(PostalCodeSpecification postalCodeSpeci
 
   @Override
   public boolean isSatisfiedBy(PostalCode postalCode) {
-    // TODO Auto-generated method stub
-    return false;
+    return !postalCodeSpecification.isSatisfiedBy(postalCode);
   }
 }
