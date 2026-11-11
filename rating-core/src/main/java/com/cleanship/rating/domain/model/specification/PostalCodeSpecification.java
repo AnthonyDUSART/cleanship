@@ -53,4 +53,8 @@ public sealed interface PostalCodeSpecification
 
     return EqualsMatchingPostalCodeSpecification.of(value);
   }
+
+  public static PostalCodeSpecification any() {
+    return AnyPostalCodeSpecification.of();
+  }
 }

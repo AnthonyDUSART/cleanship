@@ -96,4 +96,11 @@ final class PostalCodeSpecificationTest {
   void should_throw_exception_when_is_equal_to_null() {
     assertThrows(NullPointerException.class, () -> PostalCodeSpecification.isEqualTo(null));
   }
+
+  @Test
+  void should_create_any_specification() {
+    AnyPostalCodeSpecification expected = AnyPostalCodeSpecification.of();
+
+    assertEquals(expected, PostalCodeSpecification.any());
+  }
 }
