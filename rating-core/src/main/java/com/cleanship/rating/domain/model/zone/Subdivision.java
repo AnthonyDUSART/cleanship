@@ -8,6 +8,7 @@ public record Subdivision(
     SubdivisionName name, Country country, PostalCodeSpecification postalCodeSpecification) {
   public Subdivision {
     Objects.requireNonNull(name);
+    Objects.requireNonNull(country);
   }
 
   public static Subdivision of(
