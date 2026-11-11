@@ -79,4 +79,11 @@ final class SubdivisionTest {
 
     assertFalse(subdivision.isSatisfiedBy(france));
   }
+
+  @Test
+  void should_throw_exception_when_is_satisfied_by_null() {
+    Subdivision subdivision = Subdivision.of(NAME, COUNTRY);
+
+    assertThrows(NullPointerException.class, () -> subdivision.isSatisfiedBy(null));
+  }
 }

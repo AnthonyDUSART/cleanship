@@ -23,6 +23,8 @@ public record Subdivision(
   }
 
   public boolean isSatisfiedBy(Location location) {
+    Objects.requireNonNull(location);
+
     return country.equals(location.country())
         && postalCodeSpecification.isSatisfiedBy(location.postalCode());
   }
