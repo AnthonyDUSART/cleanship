@@ -69,4 +69,11 @@ final class ZoneTest {
 
     assertFalse(zone.isSatisfiedBy(valence));
   }
+
+  @Test
+  void should_throw_exception_when_is_satisfied_by_null() {
+    Zone zone = Zone.of(NAME, SUBDIVISIONS);
+
+    assertThrows(NullPointerException.class, () -> zone.isSatisfiedBy(null));
+  }
 }

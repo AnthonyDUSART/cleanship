@@ -22,6 +22,8 @@ public record Zone(ZoneName name, Set<Subdivision> subdivisions) {
   }
 
   public boolean isSatisfiedBy(Location location) {
+    Objects.requireNonNull(location);
+
     return subdivisions.stream().anyMatch(subdivision -> subdivision.isSatisfiedBy(location));
   }
 }
