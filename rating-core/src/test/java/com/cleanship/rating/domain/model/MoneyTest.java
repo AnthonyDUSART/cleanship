@@ -135,4 +135,9 @@ final class MoneyTest {
   void should_not_be_greater_than_or_equal_to() {
     assertFalse(Money.zero(EURO).isGreaterThanOrEqualTo(Money.of(1, EURO)));
   }
+
+  @Test
+  void should_throw_exception_when_is_greater_than_or_equal_to_null() {
+    assertThrows(NullPointerException.class, () -> Money.zero(EURO).isGreaterThanOrEqualTo(null));
+  }
 }

@@ -79,6 +79,8 @@ public record Money(long cents, Currency currency) implements Comparable<Money> 
   }
 
   public boolean isGreaterThanOrEqualTo(Money other) {
+    Objects.requireNonNull(other);
+
     return compareTo(other) >= 0;
   }
 }
