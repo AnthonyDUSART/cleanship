@@ -6,6 +6,7 @@ import java.util.Set;
 public record Zone(ZoneName name, Set<Subdivision> subdivisions) {
   public Zone {
     Objects.requireNonNull(name);
+    Objects.requireNonNull(subdivisions);
   }
 
   public static Zone of(ZoneName name, Set<Subdivision> subdivisions) {

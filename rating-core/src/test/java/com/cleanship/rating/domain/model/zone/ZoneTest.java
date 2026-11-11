@@ -36,4 +36,9 @@ final class ZoneTest {
   void should_throw_exception_when_name_is_null() {
     assertThrows(NullPointerException.class, () -> Zone.of(null, SUBDIVISIONS));
   }
+
+  @Test
+  void should_throw_exception_when_subdivisions_is_null() {
+    assertThrows(NullPointerException.class, () -> Zone.of(NAME, null));
+  }
 }
