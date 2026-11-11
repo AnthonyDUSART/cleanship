@@ -31,4 +31,11 @@ final class AndPostalCodeSpecificationTest {
         NullPointerException.class,
         () -> AndPostalCodeSpecification.of(null, ANY_POSTAL_CODE_SPECIFICATION));
   }
+
+  @Test
+  void should_throw_exception_when_right_is_null() {
+    assertThrows(
+        NullPointerException.class,
+        () -> AndPostalCodeSpecification.of(ANY_POSTAL_CODE_SPECIFICATION, null));
+  }
 }

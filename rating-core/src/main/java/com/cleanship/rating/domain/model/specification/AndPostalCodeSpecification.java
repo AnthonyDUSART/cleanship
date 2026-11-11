@@ -6,6 +6,7 @@ public record AndPostalCodeSpecification(
     PostalCodeSpecification left, PostalCodeSpecification right) {
   public AndPostalCodeSpecification {
     Objects.requireNonNull(left);
+    Objects.requireNonNull(right);
   }
 
   public static AndPostalCodeSpecification of(
