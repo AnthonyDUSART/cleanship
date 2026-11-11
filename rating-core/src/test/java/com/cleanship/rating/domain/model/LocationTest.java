@@ -14,4 +14,11 @@ final class LocationTest {
   void should_store_no_postal_code() {
     assertEquals(NoPostalCode.of(), Location.of(Country.of("FR")).postalCode());
   }
+
+  @Test
+  void should_store_postal_code() {
+    assertEquals(
+        DefinedPostalCode.of("75000"),
+        Location.of(Country.of("FR"), DefinedPostalCode.of("75000")).postalCode());
+  }
 }
