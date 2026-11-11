@@ -14,6 +14,11 @@ final class SubdivisionNameTest {
     assertEquals("Paris", SubdivisionName.of("  Paris ").value());
   }
 
+  @Test
+  void should_throw_exception_when_value_is_null() {
+    assertThrows(NullPointerException.class, () -> SubdivisionName.of(null));
+  }
+
   @ParameterizedTest
   @ValueSource(
       strings = {
