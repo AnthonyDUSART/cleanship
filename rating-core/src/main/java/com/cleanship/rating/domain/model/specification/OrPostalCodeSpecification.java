@@ -1,9 +1,10 @@
 package com.cleanship.rating.domain.model.specification;
 
+import com.cleanship.rating.domain.model.PostalCode;
 import java.util.Objects;
 
-public record OrPostalCodeSpecification(
-    PostalCodeSpecification left, PostalCodeSpecification right) {
+public record OrPostalCodeSpecification(PostalCodeSpecification left, PostalCodeSpecification right)
+    implements PostalCodeSpecification {
 
   public OrPostalCodeSpecification {
     Objects.requireNonNull(left);
@@ -13,5 +14,11 @@ public record OrPostalCodeSpecification(
   public static OrPostalCodeSpecification of(
       PostalCodeSpecification left, PostalCodeSpecification right) {
     return new OrPostalCodeSpecification(left, right);
+  }
+
+  @Override
+  public boolean isSatisfiedBy(PostalCode postalCode) {
+    // TODO Auto-generated method stub
+    return false;
   }
 }
