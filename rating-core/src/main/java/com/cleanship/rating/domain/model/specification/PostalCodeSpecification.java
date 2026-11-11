@@ -29,4 +29,32 @@ public sealed interface PostalCodeSpecification
   public default PostalCodeSpecification not() {
     return NotPostalCodeSpecification.of(this);
   }
+
+  public static PostalCodeSpecification startsWith(String prefix) {
+    Objects.requireNonNull(prefix);
+
+    return StartsWithMatchingPostalCodeSpecification.of(prefix);
+  }
+
+  public static PostalCodeSpecification endsWith(String suffix) {
+    Objects.requireNonNull(suffix);
+
+    return EndsWithMatchingPostalCodeSpecification.of(suffix);
+  }
+
+  public static PostalCodeSpecification contains(String sequence) {
+    Objects.requireNonNull(sequence);
+
+    return ContainsMatchingPostalCodeSpecification.of(sequence);
+  }
+
+  public static PostalCodeSpecification isEqualTo(String value) {
+    Objects.requireNonNull(value);
+
+    return EqualsMatchingPostalCodeSpecification.of(value);
+  }
+
+  public static PostalCodeSpecification any() {
+    return AnyPostalCodeSpecification.of();
+  }
 }
