@@ -48,4 +48,13 @@ final class OrPostalCodeSpecificationTest {
 
     assertTrue(spec.isSatisfiedBy(postalCode));
   }
+
+  @Test
+  void should_be_satisfied_when_right_does_not_match() {
+    OrPostalCodeSpecification spec = OrPostalCodeSpecification.of(STARTS_WITH_26, STARTS_WITH_75);
+
+    PostalCode postalCode = PostalCode.of("26000");
+
+    assertTrue(spec.isSatisfiedBy(postalCode));
+  }
 }
