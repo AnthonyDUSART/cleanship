@@ -72,12 +72,21 @@ final class SubdivisionTest {
   }
 
   @Test
-  void should_not_be_satisfied() {
+  void should_not_be_satisfied_when_postal_code_does_not_match() {
     Location france = Location.of(COUNTRY);
 
     Subdivision subdivision = Subdivision.of(NAME, COUNTRY, SPECIFICATION);
 
     assertFalse(subdivision.isSatisfiedBy(france));
+  }
+
+  @Test
+  void should_not_be_satisfied_when_country_does_not_match() {
+    Location spain = Location.of(Country.of("ES"));
+
+    Subdivision subdivision = Subdivision.of(NAME, COUNTRY);
+
+    assertFalse(subdivision.isSatisfiedBy(spain));
   }
 
   @Test
