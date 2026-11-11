@@ -19,4 +19,11 @@ final class OrPostalCodeSpecificationTest {
 
     assertEquals(ANY, spec.left());
   }
+
+  @Test
+  void should_store_right() {
+    OrPostalCodeSpecification spec = OrPostalCodeSpecification.of(ANY, STARTS_WITH_26);
+
+    assertEquals(STARTS_WITH_26, spec.right());
+  }
 }
