@@ -18,7 +18,8 @@ public record AndPostalCodeSpecification(
 
   @Override
   public boolean isSatisfiedBy(PostalCode postalCode) {
-    // TODO Auto-generated method stub
-    return false;
+    Objects.requireNonNull(postalCode);
+
+    return left.isSatisfiedBy(postalCode) && right.isSatisfiedBy(postalCode);
   }
 }
