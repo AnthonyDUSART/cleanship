@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.specification;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -30,5 +31,14 @@ final class EqualsMatchingPostalCodeSpecificationTest {
     PostalCode postalCode = PostalCode.of(postalCodeValue);
 
     assertTrue(spec.isSatisfiedBy(postalCode));
+  }
+
+  @Test
+  void should_not_be_satisfied() {
+    EqualsMatchingPostalCodeSpecification spec = EqualsMatchingPostalCodeSpecification.of("75000");
+
+    PostalCode postalCode = PostalCode.of("26000");
+
+    assertFalse(spec.isSatisfiedBy(postalCode));
   }
 }
