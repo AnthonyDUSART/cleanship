@@ -6,6 +6,7 @@ public sealed interface PostalCodeSpecification
     permits AnyPostalCodeSpecification,
         StartsWithMatchingPostalCodeSpecification,
         EndsWithMatchingPostalCodeSpecification,
-        ContainsMatchingPostalCodeSpecification {
+        ContainsMatchingPostalCodeSpecification,
+        EqualsMatchingPostalCodeSpecification {
   public boolean isSatisfiedBy(PostalCode postalCode);
 }
