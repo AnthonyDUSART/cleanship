@@ -3,8 +3,7 @@ package com.cleanship.rating.domain.model.specification;
 import com.cleanship.rating.domain.model.PostalCode;
 import java.util.Objects;
 
-public record EndsWithMatchingPostalCodeSpecification(String suffix)
-    implements PostalCodeSpecification {
+record EndsWithMatchingPostalCodeSpecification(String suffix) implements PostalCodeSpecification {
   public EndsWithMatchingPostalCodeSpecification {
     Objects.requireNonNull(suffix);
   }
