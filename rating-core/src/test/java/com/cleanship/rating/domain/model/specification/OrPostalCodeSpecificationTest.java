@@ -2,7 +2,9 @@ package com.cleanship.rating.domain.model.specification;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.cleanship.rating.domain.model.PostalCode;
 import org.junit.jupiter.api.Test;
 
 final class OrPostalCodeSpecificationTest {
@@ -36,5 +38,14 @@ final class OrPostalCodeSpecificationTest {
   @Test
   void should_throw_exception_when_right_is_null() {
     assertThrows(NullPointerException.class, () -> OrPostalCodeSpecification.of(ANY, null));
+  }
+
+  @Test
+  void should_be_satisfied_when_left_does_not_match() {
+    OrPostalCodeSpecification spec = OrPostalCodeSpecification.of(STARTS_WITH_26, STARTS_WITH_75);
+
+    PostalCode postalCode = PostalCode.of("75000");
+
+    assertTrue(spec.isSatisfiedBy(postalCode));
   }
 }
