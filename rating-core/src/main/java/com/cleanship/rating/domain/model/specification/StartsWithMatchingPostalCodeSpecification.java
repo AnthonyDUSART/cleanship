@@ -15,6 +15,8 @@ public record StartsWithMatchingPostalCodeSpecification(String prefix)
 
   @Override
   public boolean isSatisfiedBy(PostalCode postalCode) {
+    Objects.requireNonNull(postalCode);
+
     return postalCode.startsWith(prefix);
   }
 }
