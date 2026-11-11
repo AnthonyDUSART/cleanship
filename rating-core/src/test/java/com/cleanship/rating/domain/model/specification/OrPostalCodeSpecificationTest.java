@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.specification;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,5 +26,10 @@ final class OrPostalCodeSpecificationTest {
     OrPostalCodeSpecification spec = OrPostalCodeSpecification.of(ANY, STARTS_WITH_26);
 
     assertEquals(STARTS_WITH_26, spec.right());
+  }
+
+  @Test
+  void should_throw_exception_when_left_is_null() {
+    assertThrows(NullPointerException.class, () -> OrPostalCodeSpecification.of(null, ANY));
   }
 }
