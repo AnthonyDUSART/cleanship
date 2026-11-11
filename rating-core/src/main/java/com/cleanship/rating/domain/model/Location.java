@@ -5,6 +5,7 @@ import java.util.Objects;
 public record Location(Country country, PostalCode postalCode) {
   public Location {
     Objects.requireNonNull(country);
+    Objects.requireNonNull(postalCode);
   }
 
   public static Location of(Country country) {

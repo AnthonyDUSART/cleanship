@@ -27,4 +27,9 @@ final class LocationTest {
   void should_throw_exception_when_country_is_null() {
     assertThrows(NullPointerException.class, () -> Location.of(null));
   }
+
+  @Test
+  void should_throw_exception_when_postal_code_is_null() {
+    assertThrows(NullPointerException.class, () -> Location.of(Country.of("FR"), null));
+  }
 }
