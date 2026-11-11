@@ -2,6 +2,7 @@ package com.cleanship.rating.domain.model.specification;
 
 import com.cleanship.rating.domain.model.PostalCode;
 
-public sealed interface PostalCodeSpecification permits AnyPostalCodeSpecification {
+public sealed interface PostalCodeSpecification
+    permits AnyPostalCodeSpecification, StartsWithMatchingPostalCodeSpecification {
   public boolean isSatisfiedBy(PostalCode postalCode);
 }
