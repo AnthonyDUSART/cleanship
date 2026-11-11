@@ -7,6 +7,7 @@ public record OrPostalCodeSpecification(
 
   public OrPostalCodeSpecification {
     Objects.requireNonNull(left);
+    Objects.requireNonNull(right);
   }
 
   public static OrPostalCodeSpecification of(

@@ -32,4 +32,9 @@ final class OrPostalCodeSpecificationTest {
   void should_throw_exception_when_left_is_null() {
     assertThrows(NullPointerException.class, () -> OrPostalCodeSpecification.of(null, ANY));
   }
+
+  @Test
+  void should_throw_exception_when_right_is_null() {
+    assertThrows(NullPointerException.class, () -> OrPostalCodeSpecification.of(ANY, null));
+  }
 }
