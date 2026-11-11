@@ -27,4 +27,11 @@ final class SubdivisionTest {
 
     assertEquals(COUNTRY, subdivision.country());
   }
+
+  @Test
+  void should_store_specification() {
+    Subdivision subdivision = Subdivision.of(NAME, COUNTRY, SPECIFICATION);
+
+    assertEquals(SPECIFICATION, subdivision.postalCodeSpecification());
+  }
 }
