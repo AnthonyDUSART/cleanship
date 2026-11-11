@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,5 +31,10 @@ final class ShipmentTest {
     Shipment shipment = Shipment.of(ORIGIN, DESTINATION, PARCEL);
 
     assertEquals(PARCEL, shipment.parcel());
+  }
+
+  @Test
+  void should_throw_exception_when_origin_is_null() {
+    assertThrows(NullPointerException.class, () -> Shipment.of(null, DESTINATION, PARCEL));
   }
 }
