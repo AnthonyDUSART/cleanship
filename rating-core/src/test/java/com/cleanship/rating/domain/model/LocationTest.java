@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,5 +21,10 @@ final class LocationTest {
     assertEquals(
         DefinedPostalCode.of("75000"),
         Location.of(Country.of("FR"), DefinedPostalCode.of("75000")).postalCode());
+  }
+
+  @Test
+  void should_throw_exception_when_country_is_null() {
+    assertThrows(NullPointerException.class, () -> Location.of(null));
   }
 }
