@@ -23,4 +23,11 @@ final class ZoneTest {
 
     assertEquals(NAME, zone.name());
   }
+
+  @Test
+  void should_store_subdivisions() {
+    Zone zone = Zone.of(NAME, SUBDIVISIONS);
+
+    assertEquals(SUBDIVISIONS, zone.subdivisions());
+  }
 }
