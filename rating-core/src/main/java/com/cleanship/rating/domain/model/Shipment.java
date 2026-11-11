@@ -5,6 +5,7 @@ import java.util.Objects;
 public record Shipment(Location origin, Location destination, Parcel parcel) {
   public Shipment {
     Objects.requireNonNull(origin);
+    Objects.requireNonNull(destination);
   }
 
   public static Shipment of(Location origin, Location destination, Parcel parcel) {

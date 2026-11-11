@@ -37,4 +37,9 @@ final class ShipmentTest {
   void should_throw_exception_when_origin_is_null() {
     assertThrows(NullPointerException.class, () -> Shipment.of(null, DESTINATION, PARCEL));
   }
+
+  @Test
+  void should_throw_exception_when_destination_is_null() {
+    assertThrows(NullPointerException.class, () -> Shipment.of(ORIGIN, null, PARCEL));
+  }
 }
