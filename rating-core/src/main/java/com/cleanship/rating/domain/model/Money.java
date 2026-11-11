@@ -87,6 +87,8 @@ public record Money(long cents, Currency currency) implements Comparable<Money> 
   }
 
   public boolean isWithin(Money minInclusive, Money maxInclusive) {
+    Objects.requireNonNull(minInclusive);
+
     return compareTo(minInclusive) >= 0 && compareTo(maxInclusive) <= 0;
   }
 }

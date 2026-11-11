@@ -168,4 +168,10 @@ final class MoneyTest {
 
     assertFalse(Money.of(cents, EURO).isWithin(minInclusive, maxInclusive));
   }
+
+  @Test
+  void should_throw_exception_when_is_within_null_min_inclusive() {
+    assertThrows(
+        NullPointerException.class, () -> Money.zero(EURO).isWithin(null, Money.zero(EURO)));
+  }
 }
