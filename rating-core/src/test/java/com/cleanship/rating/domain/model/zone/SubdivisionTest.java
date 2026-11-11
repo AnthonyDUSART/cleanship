@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.zone;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.cleanship.rating.domain.model.Country;
 import com.cleanship.rating.domain.model.specification.PostalCodeSpecification;
@@ -33,5 +34,10 @@ final class SubdivisionTest {
     Subdivision subdivision = Subdivision.of(NAME, COUNTRY, SPECIFICATION);
 
     assertEquals(SPECIFICATION, subdivision.postalCodeSpecification());
+  }
+
+  @Test
+  void should_throw_exception_when_name_is_null() {
+    assertThrows(NullPointerException.class, () -> Subdivision.of(null, COUNTRY, SPECIFICATION));
   }
 }
