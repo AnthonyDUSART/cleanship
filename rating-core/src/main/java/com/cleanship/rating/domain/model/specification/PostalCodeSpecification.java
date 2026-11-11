@@ -35,4 +35,8 @@ public sealed interface PostalCodeSpecification
 
     return StartsWithMatchingPostalCodeSpecification.of(prefix);
   }
+
+  public static PostalCodeSpecification endsWith(String suffix) {
+    return EndsWithMatchingPostalCodeSpecification.of(suffix);
+  }
 }
