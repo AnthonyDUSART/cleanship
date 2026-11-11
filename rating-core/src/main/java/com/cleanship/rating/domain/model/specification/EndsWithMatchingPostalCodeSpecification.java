@@ -15,7 +15,6 @@ public record EndsWithMatchingPostalCodeSpecification(String suffix)
 
   @Override
   public boolean isSatisfiedBy(PostalCode postalCode) {
-    // TODO Auto-generated method stub
-    return false;
+    return postalCode.endsWith(suffix);
   }
 }
