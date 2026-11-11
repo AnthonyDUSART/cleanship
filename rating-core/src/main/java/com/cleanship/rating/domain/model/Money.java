@@ -85,4 +85,8 @@ public record Money(long cents, Currency currency) implements Comparable<Money> 
 
     return compareTo(other) >= 0;
   }
+
+  public boolean isWithin(Money minInclusive, Money maxInclusive) {
+    return compareTo(minInclusive) >= 0 && compareTo(maxInclusive) <= 0;
+  }
 }

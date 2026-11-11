@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -148,5 +149,14 @@ final class MoneyTest {
     assertThrows(
         CurrencyMismatchException.class,
         () -> Money.zero(EURO).isGreaterThanOrEqualTo(Money.zero(DOLLAR)));
+  }
+
+  @ParameterizedTest
+  @CsvSource({"1, 1, 1", "1, 1, 2", "1, 0, 1"})
+  void should_be_within(int cents, int minInclusiveInCents, int maxInclusiveInCents) {
+    Money minInclusive = Money.of(minInclusiveInCents, EURO);
+    Money maxInclusive = Money.of(maxInclusiveInCents, EURO);
+
+    assertTrue(Money.of(cents, EURO).isWithin(minInclusive, maxInclusive));
   }
 }
