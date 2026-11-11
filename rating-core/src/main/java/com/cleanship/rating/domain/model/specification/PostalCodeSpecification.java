@@ -41,4 +41,8 @@ public sealed interface PostalCodeSpecification
 
     return EndsWithMatchingPostalCodeSpecification.of(suffix);
   }
+
+  public static PostalCodeSpecification contains(String sequence) {
+    return ContainsMatchingPostalCodeSpecification.of(sequence);
+  }
 }

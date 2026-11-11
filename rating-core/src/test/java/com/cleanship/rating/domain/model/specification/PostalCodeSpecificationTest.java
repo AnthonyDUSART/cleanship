@@ -70,4 +70,12 @@ final class PostalCodeSpecificationTest {
   void should_throw_exception_when_ends_with_null() {
     assertThrows(NullPointerException.class, () -> PostalCodeSpecification.endsWith(null));
   }
+
+  @Test
+  void should_create_contains_specification() {
+    ContainsMatchingPostalCodeSpecification expected =
+        ContainsMatchingPostalCodeSpecification.of("50");
+
+    assertEquals(expected, PostalCodeSpecification.contains("50"));
+  }
 }
