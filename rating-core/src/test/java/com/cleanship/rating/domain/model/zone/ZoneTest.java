@@ -3,6 +3,7 @@ package com.cleanship.rating.domain.model.zone;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.cleanship.rating.domain.exception.InvalidZoneException;
 import com.cleanship.rating.domain.model.Country;
 import com.cleanship.rating.domain.model.specification.PostalCodeSpecification;
 import java.util.Set;
@@ -40,5 +41,10 @@ final class ZoneTest {
   @Test
   void should_throw_exception_when_subdivisions_is_null() {
     assertThrows(NullPointerException.class, () -> Zone.of(NAME, null));
+  }
+
+  @Test
+  void should_throw_exception_when_subdivisions_is_empty() {
+    assertThrows(InvalidZoneException.class, () -> Zone.of(NAME, Set.of()));
   }
 }
