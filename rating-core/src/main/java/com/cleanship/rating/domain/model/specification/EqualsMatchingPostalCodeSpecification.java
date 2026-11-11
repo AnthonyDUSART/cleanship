@@ -15,6 +15,8 @@ public record EqualsMatchingPostalCodeSpecification(String value)
 
   @Override
   public boolean isSatisfiedBy(PostalCode postalCode) {
+    Objects.requireNonNull(value);
+
     return postalCode.isEqualTo(value);
   }
 }
