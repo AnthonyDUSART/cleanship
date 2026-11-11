@@ -43,6 +43,8 @@ public sealed interface PostalCodeSpecification
   }
 
   public static PostalCodeSpecification contains(String sequence) {
+    Objects.requireNonNull(sequence);
+
     return ContainsMatchingPostalCodeSpecification.of(sequence);
   }
 }
