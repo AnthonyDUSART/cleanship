@@ -25,4 +25,8 @@ public sealed interface PostalCodeSpecification
 
     return OrPostalCodeSpecification.of(this, postalCodeSpecification);
   }
+
+  public default PostalCodeSpecification not() {
+    return NotPostalCodeSpecification.of(this);
+  }
 }

@@ -35,4 +35,13 @@ final class PostalCodeSpecificationTest {
   void should_throw_exception_when_or_with_null() {
     assertThrows(NullPointerException.class, () -> ANY.or(null));
   }
+
+  @Test
+  void should_not_successfully() {
+    PostalCodeSpecification notSpec = ANY.not();
+
+    NotPostalCodeSpecification expected = NotPostalCodeSpecification.of(ANY);
+
+    assertEquals(expected, notSpec);
+  }
 }
