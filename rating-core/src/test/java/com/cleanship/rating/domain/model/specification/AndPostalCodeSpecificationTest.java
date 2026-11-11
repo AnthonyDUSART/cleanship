@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.specification;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,5 +23,12 @@ final class AndPostalCodeSpecificationTest {
         AndPostalCodeSpecification.of(ANY_POSTAL_CODE_SPECIFICATION, ANY_POSTAL_CODE_SPECIFICATION);
 
     assertEquals(ANY_POSTAL_CODE_SPECIFICATION, spec.right());
+  }
+
+  @Test
+  void should_throw_exception_when_left_is_null() {
+    assertThrows(
+        NullPointerException.class,
+        () -> AndPostalCodeSpecification.of(null, ANY_POSTAL_CODE_SPECIFICATION));
   }
 }
