@@ -21,4 +21,18 @@ final class PostalCodeSpecificationTest {
   void should_throw_exception_when_and_with_null() {
     assertThrows(NullPointerException.class, () -> ANY.and(null));
   }
+
+  @Test
+  void should_or_successfully() {
+    PostalCodeSpecification orSpec = ANY.or(ANY);
+
+    OrPostalCodeSpecification expected = OrPostalCodeSpecification.of(ANY, ANY);
+
+    assertEquals(expected, orSpec);
+  }
+
+  @Test
+  void should_throw_exception_when_or_with_null() {
+    assertThrows(NullPointerException.class, () -> ANY.or(null));
+  }
 }

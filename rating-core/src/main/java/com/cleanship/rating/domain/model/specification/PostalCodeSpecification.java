@@ -18,4 +18,10 @@ public sealed interface PostalCodeSpecification
 
     return AndPostalCodeSpecification.of(this, postalCodeSpecification);
   }
+
+  public default PostalCodeSpecification or(PostalCodeSpecification postalCodeSpecification) {
+    Objects.requireNonNull(postalCodeSpecification);
+
+    return OrPostalCodeSpecification.of(this, postalCodeSpecification);
+  }
 }
