@@ -11,7 +11,6 @@ public enum AnyPostalCodeSpecification implements PostalCodeSpecification {
 
   @Override
   public boolean isSatisfiedBy(PostalCode postalCode) {
-    // TODO Auto-generated method stub
-    return false;
+    return true;
   }
 }
