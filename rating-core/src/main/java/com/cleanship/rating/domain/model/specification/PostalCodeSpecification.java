@@ -5,6 +5,7 @@ import com.cleanship.rating.domain.model.PostalCode;
 public sealed interface PostalCodeSpecification
     permits AnyPostalCodeSpecification,
         StartsWithMatchingPostalCodeSpecification,
-        EndsWithMatchingPostalCodeSpecification {
+        EndsWithMatchingPostalCodeSpecification,
+        ContainsPostalCodeSpecification {
   public boolean isSatisfiedBy(PostalCode postalCode);
 }
