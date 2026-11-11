@@ -15,12 +15,11 @@ import org.junit.jupiter.api.Test;
 final class ZoneTest {
   private static final ZoneName NAME = ZoneName.of("France");
 
-  private static final Set<Subdivision> SUBDIVISIONS =
-      Set.of(
-          Subdivision.of(
-              SubdivisionName.of("Paris"),
-              Country.of("FR"),
-              PostalCodeSpecification.isEqualTo("75000")));
+  private static final Set<Subdivision> SUBDIVISIONS = Set.of(
+      Subdivision.of(
+          SubdivisionName.of("Paris"),
+          Country.of("FR"),
+          PostalCodeSpecification.isEqualTo("75000")));
 
   @Test
   void should_store_name() {
