@@ -15,6 +15,8 @@ public record NotPostalCodeSpecification(PostalCodeSpecification postalCodeSpeci
 
   @Override
   public boolean isSatisfiedBy(PostalCode postalCode) {
+    Objects.requireNonNull(postalCode);
+
     return !postalCodeSpecification.isSatisfiedBy(postalCode);
   }
 }
