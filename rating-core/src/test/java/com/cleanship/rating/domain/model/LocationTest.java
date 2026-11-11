@@ -9,4 +9,9 @@ final class LocationTest {
   void should_store_country() {
     assertEquals(Country.of("FR"), Location.of(Country.of("FR")).country());
   }
+
+  @Test
+  void should_store_no_postal_code() {
+    assertEquals(NoPostalCode.of(), Location.of(Country.of("FR")).postalCode());
+  }
 }
