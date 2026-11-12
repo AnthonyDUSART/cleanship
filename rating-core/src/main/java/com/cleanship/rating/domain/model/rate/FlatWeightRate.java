@@ -7,6 +7,7 @@ import java.util.Objects;
 public record FlatWeightRate(Weight minInclusive, Weight maxInclusive, Money price) {
   public FlatWeightRate {
     Objects.requireNonNull(minInclusive);
+    Objects.requireNonNull(maxInclusive);
   }
 
   public static FlatWeightRate of(Weight minInclusive, Weight maxInclusive, Money price) {

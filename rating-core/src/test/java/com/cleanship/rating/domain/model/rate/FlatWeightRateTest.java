@@ -40,4 +40,9 @@ final class FlatWeightRateTest {
   void should_throw_exception_when_min_inclusive_is_null() {
     assertThrows(NullPointerException.class, () -> FlatWeightRate.of(null, MAX_INCLUSIVE, PRICE));
   }
+
+  @Test
+  void should_throw_exception_when_max_inclusive_is_null() {
+    assertThrows(NullPointerException.class, () -> FlatWeightRate.of(MIN_INCLUSIVE, null, PRICE));
+  }
 }
