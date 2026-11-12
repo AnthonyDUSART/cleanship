@@ -55,8 +55,7 @@ public record DefinedDimension(Side length, Side width, Side height) implements 
 
   @Override
   public boolean isVolumeWithin(Volume minInclusive, Volume maxInclusive) {
-    // TODO Auto-generated method stub
-    return false;
+    return volume().isWithin(minInclusive, maxInclusive);
   }
 
   @Override
