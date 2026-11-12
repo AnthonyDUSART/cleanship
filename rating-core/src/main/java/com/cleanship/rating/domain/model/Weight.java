@@ -22,6 +22,8 @@ public record Weight(int grams) implements Comparable<Weight> {
   }
 
   public boolean isWithin(Weight minInclusive, Weight maxInclusive) {
+    Objects.requireNonNull(minInclusive);
+
     if (minInclusive.compareTo(maxInclusive) > 0) {
       throw new IllegalArgumentException(
           String.format(

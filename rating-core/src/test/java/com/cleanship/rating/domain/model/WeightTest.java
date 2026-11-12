@@ -68,6 +68,13 @@ final class WeightTest {
   }
 
   @Test
+  void should_throw_exception_when_is_within_null_min_inclusive() {
+    Weight maxInclusive = Weight.of(1);
+
+    assertThrows(NullPointerException.class, () -> Weight.of(1).isWithin(null, maxInclusive));
+  }
+
+  @Test
   void should_throw_exception_when_within_range_is_invalid() {
     assertThrows(
         IllegalArgumentException.class, () -> Weight.of(1).isWithin(Weight.of(3), Weight.of(2)));
