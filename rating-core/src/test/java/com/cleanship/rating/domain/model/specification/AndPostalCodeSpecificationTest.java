@@ -5,16 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
-
 import com.cleanship.rating.domain.model.location.PostalCode;
+import org.junit.jupiter.api.Test;
 
 final class AndPostalCodeSpecificationTest {
   private static final PostalCodeSpecification ANY = AnyPostalCodeSpecification.of();
 
-  private static final PostalCodeSpecification STARTS_WITH_75 = StartsWithMatchingPostalCodeSpecification.of("75");
+  private static final PostalCodeSpecification STARTS_WITH_75 =
+      StartsWithMatchingPostalCodeSpecification.of("75");
 
-  private static final PostalCodeSpecification ENDS_WITH_00 = EndsWithMatchingPostalCodeSpecification.of("00");
+  private static final PostalCodeSpecification ENDS_WITH_00 =
+      EndsWithMatchingPostalCodeSpecification.of("00");
 
   @Test
   void should_store_left() {

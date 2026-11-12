@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model;
 
 import com.cleanship.rating.domain.model.location.Location;
+import com.cleanship.rating.domain.model.money.Money;
 import java.util.Objects;
 
 public record Shipment(Location origin, Location destination, Parcel parcel, Money declaredValue) {

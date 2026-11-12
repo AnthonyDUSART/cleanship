@@ -1,6 +1,6 @@
 package com.cleanship.rating.domain.exception;
 
-import com.cleanship.rating.domain.model.Currency;
+import com.cleanship.rating.domain.model.money.Currency;
 import java.util.Objects;
 
 public final class CurrencyMismatchException extends DomainException {

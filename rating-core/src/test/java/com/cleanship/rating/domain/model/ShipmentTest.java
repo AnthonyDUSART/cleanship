@@ -3,11 +3,12 @@ package com.cleanship.rating.domain.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.jupiter.api.Test;
-
 import com.cleanship.rating.domain.model.location.Country;
 import com.cleanship.rating.domain.model.location.Location;
 import com.cleanship.rating.domain.model.location.PostalCode;
+import com.cleanship.rating.domain.model.money.Currency;
+import com.cleanship.rating.domain.model.money.Money;
+import org.junit.jupiter.api.Test;
 
 final class ShipmentTest {
   private static final Location ORIGIN = Location.of(Country.of("FR"));

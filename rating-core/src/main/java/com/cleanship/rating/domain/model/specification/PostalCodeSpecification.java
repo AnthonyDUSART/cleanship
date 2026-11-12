@@ -1,18 +1,17 @@
 package com.cleanship.rating.domain.model.specification;
 
-import java.util.Objects;
-
 import com.cleanship.rating.domain.model.location.PostalCode;
+import java.util.Objects;
 
 public sealed interface PostalCodeSpecification
     permits AnyPostalCodeSpecification,
-    StartsWithMatchingPostalCodeSpecification,
-    EndsWithMatchingPostalCodeSpecification,
-    ContainsMatchingPostalCodeSpecification,
-    EqualsMatchingPostalCodeSpecification,
-    AndPostalCodeSpecification,
-    OrPostalCodeSpecification,
-    NotPostalCodeSpecification {
+        StartsWithMatchingPostalCodeSpecification,
+        EndsWithMatchingPostalCodeSpecification,
+        ContainsMatchingPostalCodeSpecification,
+        EqualsMatchingPostalCodeSpecification,
+        AndPostalCodeSpecification,
+        OrPostalCodeSpecification,
+        NotPostalCodeSpecification {
   public boolean isSatisfiedBy(PostalCode postalCode);
 
   public default PostalCodeSpecification and(PostalCodeSpecification postalCodeSpecification) {

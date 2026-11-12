@@ -5,9 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
-
 import com.cleanship.rating.domain.model.location.PostalCode;
+import org.junit.jupiter.api.Test;
 
 final class NotPostalCodeSpecificationTest {
   private static final AnyPostalCodeSpecification ANY = AnyPostalCodeSpecification.of();
@@ -35,7 +34,8 @@ final class NotPostalCodeSpecificationTest {
 
   @Test
   void should_be_satisfied_when_specification_does_not_match() {
-    NotPostalCodeSpecification spec = NotPostalCodeSpecification.of(StartsWithMatchingPostalCodeSpecification.of("75"));
+    NotPostalCodeSpecification spec =
+        NotPostalCodeSpecification.of(StartsWithMatchingPostalCodeSpecification.of("75"));
 
     PostalCode postalCode = PostalCode.of("26000");
 

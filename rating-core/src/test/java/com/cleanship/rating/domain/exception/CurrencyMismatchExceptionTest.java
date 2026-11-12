@@ -3,7 +3,7 @@ package com.cleanship.rating.domain.exception;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import com.cleanship.rating.domain.model.Currency;
+import com.cleanship.rating.domain.model.money.Currency;
 import org.junit.jupiter.api.Test;
 
 final class CurrencyMismatchExceptionTest {

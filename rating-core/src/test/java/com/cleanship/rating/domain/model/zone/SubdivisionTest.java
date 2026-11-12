@@ -16,7 +16,8 @@ final class SubdivisionTest {
 
   private static final Country COUNTRY = Country.of("FR");
 
-  private static final PostalCodeSpecification SPECIFICATION = PostalCodeSpecification.isEqualTo("75000");
+  private static final PostalCodeSpecification SPECIFICATION =
+      PostalCodeSpecification.isEqualTo("75000");
 
   @Test
   void should_store_name() {

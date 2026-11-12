@@ -1,4 +1,4 @@
-package com.cleanship.rating.domain.model;
+package com.cleanship.rating.domain.model.money;
 
 import com.cleanship.rating.domain.exception.InvalidCurrencyException;
 import java.util.Objects;
