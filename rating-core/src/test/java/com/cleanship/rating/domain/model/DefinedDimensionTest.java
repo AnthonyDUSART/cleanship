@@ -16,14 +16,14 @@ final class DefinedDimensionTest {
   void should_store_length() {
     DefinedDimension dimension = DefinedDimension.of(Side.of(20), Side.of(30), Side.of(10));
 
-    assertEquals(Side.of(20), dimension.length());
+    assertEquals(Side.of(30), dimension.length());
   }
 
   @Test
   void should_store_width() {
     DefinedDimension dimension = DefinedDimension.of(Side.of(20), Side.of(30), Side.of(10));
 
-    assertEquals(Side.of(30), dimension.width());
+    assertEquals(Side.of(20), dimension.width());
   }
 
   @Test

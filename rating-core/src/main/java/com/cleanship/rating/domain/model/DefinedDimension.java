@@ -13,6 +13,24 @@ public record DefinedDimension(Side length, Side width, Side height) implements 
     Objects.requireNonNull(length);
     Objects.requireNonNull(width);
     Objects.requireNonNull(height);
+
+    if (length.compareTo(width) < 0) {
+      Side temp = length;
+      length = width;
+      width = temp;
+    }
+
+    if (width.compareTo(height) < 0) {
+      Side temp = width;
+      width = height;
+      height = temp;
+    }
+
+    if (length.compareTo(width) < 0) {
+      Side temp = length;
+      length = width;
+      width = temp;
+    }
   }
 
   public static DefinedDimension of(Side length, Side width, Side height) {
