@@ -3,7 +3,7 @@ package com.cleanship.rating.domain.model;
 import com.cleanship.rating.domain.exception.InvalidPostalCodeException;
 import java.util.Objects;
 
-public record DefinedPostalCode(String value) implements PostalCode {
+record DefinedPostalCode(String value) implements PostalCode {
   private static final int MAX_LENGTH = 16;
 
   public DefinedPostalCode {
