@@ -5,7 +5,7 @@ import java.util.Objects;
 enum NoPostalCode implements PostalCode {
   INSTANCE;
 
-  public static NoPostalCode of() {
+  static NoPostalCode of() {
     return INSTANCE;
   }
 
