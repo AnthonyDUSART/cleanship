@@ -6,7 +6,7 @@ import java.util.Objects;
 record DefinedPostalCode(String value) implements PostalCode {
   private static final int MAX_LENGTH = 16;
 
-  public DefinedPostalCode {
+  DefinedPostalCode {
     Objects.requireNonNull(value);
 
     value = value.strip();
