@@ -9,7 +9,7 @@ public record Parcel(Weight weight, Dimension dimension) {
   }
 
   public static Parcel of(Weight weight) {
-    return new Parcel(weight, NoDimension.of());
+    return new Parcel(weight, Dimension.none());
   }
 
   public static Parcel of(Weight weight, Dimension dimension) {
