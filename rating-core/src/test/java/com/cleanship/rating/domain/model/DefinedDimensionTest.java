@@ -105,6 +105,15 @@ final class DefinedDimensionTest {
     assertTrue(dimension.isVolumeWithin(minInclusive, maxInclusive));
   }
 
+  @Test
+  void should_not_be_volume_within() {
+    Volume minInclusive = Volume.of(10);
+    Volume maxInclusive = Volume.of(100);
+    DefinedDimension dimension = DefinedDimension.of(Side.of(2), Side.of(1), Side.of(1));
+
+    assertFalse(dimension.isVolumeWithin(minInclusive, maxInclusive));
+  }
+
   @ParameterizedTest
   @MethodSource("provideFitsIn")
   void should_fits_in_successfully(DefinedDimension dimension, DefinedDimension maxInclusive) {
