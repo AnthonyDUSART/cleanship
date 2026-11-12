@@ -32,6 +32,11 @@ final class VolumeTest {
     assertEquals(20, Volume.of(dimension).cubicMillimeters());
   }
 
+  @Test
+  void should_throw_exception_when_create_from_null_defined_dimension() {
+    assertThrows(NullPointerException.class, () -> Volume.of(null));
+  }
+
   @ParameterizedTest
   @MethodSource("provideComparisons")
   void should_compare_to_successfully(Volume a, Volume b, int comparisonResult) {

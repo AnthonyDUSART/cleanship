@@ -4,23 +4,19 @@ import com.cleanship.rating.domain.exception.InvalidVolumeException;
 import java.util.Objects;
 
 public record Volume(long cubicMillimeters) implements Comparable<Volume> {
-  /**
-   * @throws InvalidVolumeException
-   */
   public Volume {
     if (0 >= cubicMillimeters) {
       throw InvalidVolumeException.of(cubicMillimeters);
     }
   }
 
-  /**
-   * @throws InvalidVolumeException
-   */
   public static Volume of(long cubicMillimeters) {
     return new Volume(cubicMillimeters);
   }
 
   public static Volume of(DefinedDimension dimension) {
+    Objects.requireNonNull(dimension);
+
     return new Volume(
         (long) dimension.length().millimeters()
             * dimension.width().millimeters()

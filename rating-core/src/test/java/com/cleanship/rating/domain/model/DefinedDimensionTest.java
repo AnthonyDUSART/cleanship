@@ -16,14 +16,14 @@ final class DefinedDimensionTest {
   void should_store_length() {
     DefinedDimension dimension = DefinedDimension.of(Side.of(20), Side.of(30), Side.of(10));
 
-    assertEquals(Side.of(20), dimension.length());
+    assertEquals(Side.of(30), dimension.length());
   }
 
   @Test
   void should_store_width() {
     DefinedDimension dimension = DefinedDimension.of(Side.of(20), Side.of(30), Side.of(10));
 
-    assertEquals(Side.of(30), dimension.width());
+    assertEquals(Side.of(20), dimension.width());
   }
 
   @Test
@@ -96,6 +96,40 @@ final class DefinedDimensionTest {
     assertThrows(IllegalArgumentException.class, () -> dimension.isWithin(min, max));
   }
 
+  @Test
+  void should_be_volume_within() {
+    Volume minInclusive = Volume.of(1);
+    Volume maxInclusive = Volume.of(100);
+    DefinedDimension dimension = DefinedDimension.of(Side.of(2), Side.of(1), Side.of(1));
+
+    assertTrue(dimension.isVolumeWithin(minInclusive, maxInclusive));
+  }
+
+  @Test
+  void should_not_be_volume_within() {
+    Volume minInclusive = Volume.of(10);
+    Volume maxInclusive = Volume.of(100);
+    DefinedDimension dimension = DefinedDimension.of(Side.of(2), Side.of(1), Side.of(1));
+
+    assertFalse(dimension.isVolumeWithin(minInclusive, maxInclusive));
+  }
+
+  @Test
+  void should_throw_exception_when_volume_within_null_min_inclusive() {
+    Volume maxInclusive = Volume.of(2);
+    DefinedDimension dimension = DefinedDimension.of(Side.of(1), Side.of(1), Side.of(1));
+
+    assertThrows(NullPointerException.class, () -> dimension.isVolumeWithin(null, maxInclusive));
+  }
+
+  @Test
+  void should_throw_exception_when_volume_within_null_max_inclusive() {
+    Volume minInclusive = Volume.of(3);
+    DefinedDimension dimension = DefinedDimension.of(Side.of(1), Side.of(2), Side.of(3));
+
+    assertThrows(NullPointerException.class, () -> dimension.isVolumeWithin(minInclusive, null));
+  }
+
   @ParameterizedTest
   @MethodSource("provideFitsIn")
   void should_fits_in_successfully(DefinedDimension dimension, DefinedDimension maxInclusive) {
@@ -118,6 +152,13 @@ final class DefinedDimensionTest {
     DefinedDimension maxInclusive = DefinedDimension.of(Side.of(2), Side.of(1), Side.of(1));
 
     assertFalse(dimension.fitsIn(maxInclusive));
+  }
+
+  @Test
+  void should_throw_exception_when_fits_in_null() {
+    DefinedDimension dimension = DefinedDimension.of(Side.of(1), Side.of(1), Side.of(1));
+
+    assertThrows(NullPointerException.class, () -> dimension.fitsIn(null));
   }
 
   @Test

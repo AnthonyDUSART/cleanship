@@ -1,9 +1,6 @@
 package com.cleanship.rating.domain.model;
 
-import java.util.Comparator;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 public record DefinedDimension(Side length, Side width, Side height) implements Dimension {
   private static final DefinedDimension MIN_POSSIBLE =
@@ -13,14 +10,28 @@ public record DefinedDimension(Side length, Side width, Side height) implements 
     Objects.requireNonNull(length);
     Objects.requireNonNull(width);
     Objects.requireNonNull(height);
+
+    if (length.compareTo(width) < 0) {
+      Side temp = length;
+      length = width;
+      width = temp;
+    }
+
+    if (width.compareTo(height) < 0) {
+      Side temp = width;
+      width = height;
+      height = temp;
+    }
+
+    if (length.compareTo(width) < 0) {
+      Side temp = length;
+      length = width;
+      width = temp;
+    }
   }
 
   public static DefinedDimension of(Side length, Side width, Side height) {
     return new DefinedDimension(length, width, height);
-  }
-
-  private List<Side> sortedSides() {
-    return Stream.of(length, width, height).sorted(Comparator.reverseOrder()).toList();
   }
 
   @Override
@@ -28,27 +39,32 @@ public record DefinedDimension(Side length, Side width, Side height) implements 
     Objects.requireNonNull(minInclusive);
     Objects.requireNonNull(maxInclusive);
 
-    List<Side> currentSides = this.sortedSides();
-
-    List<Side> minSides = minInclusive.sortedSides();
-
-    List<Side> maxSides = maxInclusive.sortedSides();
-
-    for (int i = 0; i < 3; i++) {
-      if (minSides.get(i).compareTo(maxSides.get(i)) > 0) {
-        throw new IllegalArgumentException("minInclusive cannot be greater than maxInclusive");
-      }
-
-      if (currentSides.get(i).compareTo(minSides.get(i)) < 0
-          || currentSides.get(i).compareTo(maxSides.get(i)) > 0) {
-        return false;
-      }
+    if (minInclusive.length.compareTo(maxInclusive.length) > 0
+        || minInclusive.width.compareTo(maxInclusive.width) > 0
+        || minInclusive.height.compareTo(maxInclusive.height) > 0) {
+      throw new IllegalArgumentException("minInclusive cannot be greater than maxInclusive");
     }
-    return true;
+
+    return length.compareTo(minInclusive.length) >= 0
+        && length.compareTo(maxInclusive.length) <= 0
+        && width.compareTo(minInclusive.width) >= 0
+        && width.compareTo(maxInclusive.width) <= 0
+        && height.compareTo(minInclusive.height) >= 0
+        && height.compareTo(maxInclusive.height) <= 0;
+  }
+
+  @Override
+  public boolean isVolumeWithin(Volume minInclusive, Volume maxInclusive) {
+    Objects.requireNonNull(minInclusive);
+    Objects.requireNonNull(maxInclusive);
+
+    return volume().isWithin(minInclusive, maxInclusive);
   }
 
   @Override
   public boolean fitsIn(DefinedDimension maxInclusive) {
+    Objects.requireNonNull(maxInclusive);
+
     return isWithin(MIN_POSSIBLE, maxInclusive);
   }
 
