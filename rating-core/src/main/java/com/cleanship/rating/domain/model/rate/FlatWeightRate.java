@@ -8,6 +8,7 @@ public record FlatWeightRate(Weight minInclusive, Weight maxInclusive, Money pri
   public FlatWeightRate {
     Objects.requireNonNull(minInclusive);
     Objects.requireNonNull(maxInclusive);
+    Objects.requireNonNull(price);
   }
 
   public static FlatWeightRate of(Weight minInclusive, Weight maxInclusive, Money price) {
