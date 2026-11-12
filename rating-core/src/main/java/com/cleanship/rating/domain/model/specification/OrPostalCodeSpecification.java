@@ -1,6 +1,6 @@
 package com.cleanship.rating.domain.model.specification;
 
-import com.cleanship.rating.domain.model.PostalCode;
+import com.cleanship.rating.domain.model.location.PostalCode;
 import java.util.Objects;
 
 record OrPostalCodeSpecification(PostalCodeSpecification left, PostalCodeSpecification right)
