@@ -8,16 +8,23 @@ import com.cleanship.rating.domain.model.shipment.Weight;
 import org.junit.jupiter.api.Test;
 
 final class FlatWeightRateTest {
-  private static final Weight MIN_WEIGHT = Weight.of(1);
+  private static final Weight MIN_INCLUSIVE = Weight.of(1);
 
-  private static final Weight MAX_WEIGHT = Weight.of(249);
+  private static final Weight MAX_INCLUSIVE = Weight.of(249);
 
   private static final Money PRICE = Money.of(7_50, Currency.of("EUR"));
 
   @Test
   void should_store_min_inclusive() {
-    FlatWeightRate rate = FlatWeightRate.of(MIN_WEIGHT, MAX_WEIGHT, PRICE);
+    FlatWeightRate rate = FlatWeightRate.of(MIN_INCLUSIVE, MAX_INCLUSIVE, PRICE);
 
-    assertEquals(MIN_WEIGHT, rate.minInclusive());
+    assertEquals(MIN_INCLUSIVE, rate.minInclusive());
+  }
+
+  @Test
+  void should_store_max_inclusive() {
+    FlatWeightRate rate = FlatWeightRate.of(MIN_INCLUSIVE, MAX_INCLUSIVE, PRICE);
+
+    assertEquals(MAX_INCLUSIVE, rate.maxInclusive());
   }
 }
