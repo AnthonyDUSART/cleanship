@@ -25,7 +25,8 @@ public record FlatWeightRate(Weight minInclusive, Weight maxInclusive, Money pri
 
   @Override
   public Optional<Money> evaluatePrice(Shipment shipment) {
-    // TODO Auto-generated method stub
-    return Optional.empty();
+    return shipment.parcel().weight().isWithin(minInclusive, maxInclusive)
+        ? Optional.of(price)
+        : Optional.empty();
   }
 }

@@ -4,9 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.cleanship.rating.domain.exception.InvalidFlatWeightRateException;
+import com.cleanship.rating.domain.model.location.Country;
+import com.cleanship.rating.domain.model.location.Location;
 import com.cleanship.rating.domain.model.money.Currency;
 import com.cleanship.rating.domain.model.money.Money;
+import com.cleanship.rating.domain.model.shipment.Parcel;
+import com.cleanship.rating.domain.model.shipment.Shipment;
 import com.cleanship.rating.domain.model.shipment.Weight;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 final class FlatWeightRateTest {
@@ -15,6 +20,13 @@ final class FlatWeightRateTest {
   private static final Weight MAX_INCLUSIVE = Weight.of(249);
 
   private static final Money PRICE = Money.of(7_50, Currency.of("EUR"));
+
+  private static final Shipment SHIPMENT =
+      Shipment.of(
+          Location.of(Country.of("FR")),
+          Location.of(Country.of("FR")),
+          Parcel.of(Weight.of(200)),
+          Money.of(20_00, Currency.of("EUR")));
 
   @Test
   void should_store_min_inclusive() {
@@ -58,5 +70,12 @@ final class FlatWeightRateTest {
     assertThrows(
         InvalidFlatWeightRateException.class,
         () -> FlatWeightRate.of(MAX_INCLUSIVE, MIN_INCLUSIVE, PRICE));
+  }
+
+  @Test
+  void should_evaluate_price() {
+    FlatWeightRate rate = FlatWeightRate.of(MIN_INCLUSIVE, MAX_INCLUSIVE, PRICE);
+
+    assertEquals(Optional.of(PRICE), rate.evaluatePrice(SHIPMENT));
   }
 }
