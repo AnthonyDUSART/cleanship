@@ -55,6 +55,8 @@ public record DefinedDimension(Side length, Side width, Side height) implements 
 
   @Override
   public boolean fitsIn(DefinedDimension maxInclusive) {
+    Objects.requireNonNull(maxInclusive);
+
     return isWithin(MIN_POSSIBLE, maxInclusive);
   }
 

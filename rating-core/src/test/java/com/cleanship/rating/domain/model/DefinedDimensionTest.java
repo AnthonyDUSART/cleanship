@@ -121,6 +121,13 @@ final class DefinedDimensionTest {
   }
 
   @Test
+  void should_throw_exception_when_fits_in_null() {
+    DefinedDimension dimension = DefinedDimension.of(Side.of(1), Side.of(1), Side.of(1));
+
+    assertThrows(NullPointerException.class, () -> dimension.fitsIn(null));
+  }
+
+  @Test
   void should_get_volume() {
     DefinedDimension dimension = DefinedDimension.of(Side.of(2), Side.of(5), Side.of(4));
 
