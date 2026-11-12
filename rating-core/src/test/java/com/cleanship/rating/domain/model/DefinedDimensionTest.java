@@ -114,6 +114,14 @@ final class DefinedDimensionTest {
     assertFalse(dimension.isVolumeWithin(minInclusive, maxInclusive));
   }
 
+  @Test
+  void should_throw_exception_when_volume_within_null_min_inclusive() {
+    Volume maxInclusive = Volume.of(2);
+    DefinedDimension dimension = DefinedDimension.of(Side.of(1), Side.of(1), Side.of(1));
+
+    assertThrows(NullPointerException.class, () -> dimension.isVolumeWithin(null, maxInclusive));
+  }
+
   @ParameterizedTest
   @MethodSource("provideFitsIn")
   void should_fits_in_successfully(DefinedDimension dimension, DefinedDimension maxInclusive) {

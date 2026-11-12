@@ -55,6 +55,8 @@ public record DefinedDimension(Side length, Side width, Side height) implements 
 
   @Override
   public boolean isVolumeWithin(Volume minInclusive, Volume maxInclusive) {
+    Objects.requireNonNull(minInclusive);
+
     return volume().isWithin(minInclusive, maxInclusive);
   }
 
