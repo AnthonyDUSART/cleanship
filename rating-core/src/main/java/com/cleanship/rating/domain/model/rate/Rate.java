@@ -10,6 +10,7 @@ public sealed interface Rate permits FlatWeightRate {
   public static Rate flatWeight(Weight minInclusive, Weight maxInclusive, Money price) {
     Objects.requireNonNull(minInclusive);
     Objects.requireNonNull(maxInclusive);
+    Objects.requireNonNull(price);
 
     return FlatWeightRate.of(minInclusive, maxInclusive, price);
   }
