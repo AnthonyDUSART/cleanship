@@ -18,6 +18,12 @@ public enum NoDimension implements Dimension {
   }
 
   @Override
+  public boolean isVolumeWithin(Volume minInclusive, Volume maxInclusive) {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  @Override
   public boolean fitsIn(DefinedDimension maxInclusive) {
     Objects.requireNonNull(maxInclusive);
 

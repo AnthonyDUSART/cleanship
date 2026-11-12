@@ -54,6 +54,12 @@ public record DefinedDimension(Side length, Side width, Side height) implements 
   }
 
   @Override
+  public boolean isVolumeWithin(Volume minInclusive, Volume maxInclusive) {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  @Override
   public boolean fitsIn(DefinedDimension maxInclusive) {
     Objects.requireNonNull(maxInclusive);
 
