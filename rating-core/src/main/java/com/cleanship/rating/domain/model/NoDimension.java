@@ -1,5 +1,7 @@
 package com.cleanship.rating.domain.model;
 
+import java.util.Objects;
+
 public enum NoDimension implements Dimension {
   INSTANCE;
 
@@ -9,6 +11,8 @@ public enum NoDimension implements Dimension {
 
   @Override
   public boolean isWithin(DefinedDimension minInclusive, DefinedDimension maxInclusive) {
+    Objects.requireNonNull(minInclusive);
+
     return false;
   }
 
