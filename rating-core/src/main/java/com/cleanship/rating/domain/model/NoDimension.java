@@ -12,6 +12,7 @@ public enum NoDimension implements Dimension {
   @Override
   public boolean isWithin(DefinedDimension minInclusive, DefinedDimension maxInclusive) {
     Objects.requireNonNull(minInclusive);
+    Objects.requireNonNull(maxInclusive);
 
     return false;
   }

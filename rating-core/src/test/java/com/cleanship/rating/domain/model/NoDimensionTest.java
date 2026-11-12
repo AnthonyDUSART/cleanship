@@ -7,8 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 final class NoDimensionTest {
-  private static final DefinedDimension DEFINED_DIMENSION =
-      DefinedDimension.of(Side.of(20), Side.of(20), Side.of(20));
+  private static final DefinedDimension DEFINED_DIMENSION = DefinedDimension.of(Side.of(20), Side.of(20), Side.of(20));
 
   @Test
   void should_all_instances_are_same() {
@@ -27,6 +26,11 @@ final class NoDimensionTest {
   void should_throw_exception_when_is_within_with_null_min_inclusive() {
     assertThrows(
         NullPointerException.class, () -> NoDimension.of().isWithin(null, DEFINED_DIMENSION));
+  }
+
+  @Test
+  void should_throw_exception_when_is_within_with_null_max_inclusive() {
+    assertThrows(NullPointerException.class, () -> NoDimension.of().isWithin(DEFINED_DIMENSION, null));
   }
 
   @Test
