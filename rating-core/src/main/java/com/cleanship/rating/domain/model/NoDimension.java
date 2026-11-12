@@ -2,7 +2,7 @@ package com.cleanship.rating.domain.model;
 
 import java.util.Objects;
 
-public enum NoDimension implements Dimension {
+enum NoDimension implements Dimension {
   INSTANCE;
 
   public static NoDimension of() {
