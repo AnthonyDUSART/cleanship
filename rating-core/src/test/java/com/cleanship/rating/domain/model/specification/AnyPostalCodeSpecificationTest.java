@@ -4,8 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.cleanship.rating.domain.model.PostalCode;
 import org.junit.jupiter.api.Test;
+
+import com.cleanship.rating.domain.model.location.PostalCode;
 
 final class AnyPostalCodeSpecificationTest {
   @Test

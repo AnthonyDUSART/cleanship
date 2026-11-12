@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.cleanship.rating.domain.model.Country;
-import com.cleanship.rating.domain.model.Location;
-import com.cleanship.rating.domain.model.PostalCode;
+import com.cleanship.rating.domain.model.location.Country;
+import com.cleanship.rating.domain.model.location.Location;
+import com.cleanship.rating.domain.model.location.PostalCode;
 import com.cleanship.rating.domain.model.specification.PostalCodeSpecification;
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +16,7 @@ final class SubdivisionTest {
 
   private static final Country COUNTRY = Country.of("FR");
 
-  private static final PostalCodeSpecification SPECIFICATION =
-      PostalCodeSpecification.isEqualTo("75000");
+  private static final PostalCodeSpecification SPECIFICATION = PostalCodeSpecification.isEqualTo("75000");
 
   @Test
   void should_store_name() {

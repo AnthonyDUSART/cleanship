@@ -1,4 +1,4 @@
-package com.cleanship.rating.domain.model;
+package com.cleanship.rating.domain.model.location;
 
 import com.cleanship.rating.domain.exception.InvalidCountryException;
 import java.util.Objects;

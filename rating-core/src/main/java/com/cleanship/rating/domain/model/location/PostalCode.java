@@ -1,4 +1,4 @@
-package com.cleanship.rating.domain.model;
+package com.cleanship.rating.domain.model.location;
 
 public sealed interface PostalCode permits DefinedPostalCode, NoPostalCode {
   public static PostalCode of(String value) {

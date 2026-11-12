@@ -1,7 +1,7 @@
 package com.cleanship.rating.domain.model.zone;
 
-import com.cleanship.rating.domain.model.Country;
-import com.cleanship.rating.domain.model.Location;
+import com.cleanship.rating.domain.model.location.Country;
+import com.cleanship.rating.domain.model.location.Location;
 import com.cleanship.rating.domain.model.specification.PostalCodeSpecification;
 import java.util.Objects;
 

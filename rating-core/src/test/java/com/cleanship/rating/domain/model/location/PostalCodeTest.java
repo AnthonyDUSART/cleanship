@@ -1,4 +1,4 @@
-package com.cleanship.rating.domain.model;
+package com.cleanship.rating.domain.model.location;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

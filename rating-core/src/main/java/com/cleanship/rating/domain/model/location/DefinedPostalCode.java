@@ -1,6 +1,7 @@
-package com.cleanship.rating.domain.model;
+package com.cleanship.rating.domain.model.location;
 
 import com.cleanship.rating.domain.exception.InvalidPostalCodeException;
+
 import java.util.Objects;
 
 record DefinedPostalCode(String value) implements PostalCode {

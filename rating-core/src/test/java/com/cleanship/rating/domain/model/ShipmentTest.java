@@ -5,6 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import com.cleanship.rating.domain.model.location.Country;
+import com.cleanship.rating.domain.model.location.Location;
+import com.cleanship.rating.domain.model.location.PostalCode;
+
 final class ShipmentTest {
   private static final Location ORIGIN = Location.of(Country.of("FR"));
 

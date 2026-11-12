@@ -5,10 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.cleanship.rating.domain.model.PostalCode;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import com.cleanship.rating.domain.model.location.PostalCode;
 
 final class StartsWithMatchingPostalCodeSpecificationTest {
   @Test
@@ -23,10 +24,9 @@ final class StartsWithMatchingPostalCodeSpecificationTest {
   }
 
   @ParameterizedTest
-  @CsvSource({"75, 75001", "75, 75020", "20, 20000"})
+  @CsvSource({ "75, 75001", "75, 75020", "20, 20000" })
   void should_be_satisfied(String prefix, String postalCodeValue) {
-    StartsWithMatchingPostalCodeSpecification spec =
-        StartsWithMatchingPostalCodeSpecification.of(prefix);
+    StartsWithMatchingPostalCodeSpecification spec = StartsWithMatchingPostalCodeSpecification.of(prefix);
 
     PostalCode postalCode = PostalCode.of(postalCodeValue);
 
@@ -35,8 +35,7 @@ final class StartsWithMatchingPostalCodeSpecificationTest {
 
   @Test
   void should_not_be_satisfied() {
-    StartsWithMatchingPostalCodeSpecification spec =
-        StartsWithMatchingPostalCodeSpecification.of("75");
+    StartsWithMatchingPostalCodeSpecification spec = StartsWithMatchingPostalCodeSpecification.of("75");
 
     PostalCode postalCode = PostalCode.of("76000");
 
@@ -45,16 +44,14 @@ final class StartsWithMatchingPostalCodeSpecificationTest {
 
   @Test
   void should_not_be_satisfied_when_no_postal_code() {
-    StartsWithMatchingPostalCodeSpecification spec =
-        StartsWithMatchingPostalCodeSpecification.of("75");
+    StartsWithMatchingPostalCodeSpecification spec = StartsWithMatchingPostalCodeSpecification.of("75");
 
     assertFalse(spec.isSatisfiedBy(PostalCode.none()));
   }
 
   @Test
   void should_throw_exception_when_is_satisfied_by_null() {
-    StartsWithMatchingPostalCodeSpecification spec =
-        StartsWithMatchingPostalCodeSpecification.of("75");
+    StartsWithMatchingPostalCodeSpecification spec = StartsWithMatchingPostalCodeSpecification.of("75");
 
     assertThrows(NullPointerException.class, () -> spec.isSatisfiedBy(null));
   }

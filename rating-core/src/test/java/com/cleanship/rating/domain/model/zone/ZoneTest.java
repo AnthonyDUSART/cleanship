@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.cleanship.rating.domain.exception.InvalidZoneException;
-import com.cleanship.rating.domain.model.Country;
-import com.cleanship.rating.domain.model.Location;
-import com.cleanship.rating.domain.model.PostalCode;
+import com.cleanship.rating.domain.model.location.Country;
+import com.cleanship.rating.domain.model.location.Location;
+import com.cleanship.rating.domain.model.location.PostalCode;
 import com.cleanship.rating.domain.model.specification.PostalCodeSpecification;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
@@ -16,12 +16,11 @@ import org.junit.jupiter.api.Test;
 final class ZoneTest {
   private static final ZoneName NAME = ZoneName.of("France");
 
-  private static final Set<Subdivision> SUBDIVISIONS =
-      Set.of(
-          Subdivision.of(
-              SubdivisionName.of("Paris"),
-              Country.of("FR"),
-              PostalCodeSpecification.isEqualTo("75000")));
+  private static final Set<Subdivision> SUBDIVISIONS = Set.of(
+      Subdivision.of(
+          SubdivisionName.of("Paris"),
+          Country.of("FR"),
+          PostalCodeSpecification.isEqualTo("75000")));
 
   @Test
   void should_store_name() {

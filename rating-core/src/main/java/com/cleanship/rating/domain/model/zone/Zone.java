@@ -1,7 +1,7 @@
 package com.cleanship.rating.domain.model.zone;
 
 import com.cleanship.rating.domain.exception.InvalidZoneException;
-import com.cleanship.rating.domain.model.Location;
+import com.cleanship.rating.domain.model.location.Location;
 import java.util.Objects;
 import java.util.Set;
 

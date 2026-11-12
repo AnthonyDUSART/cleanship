@@ -5,10 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.cleanship.rating.domain.model.PostalCode;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import com.cleanship.rating.domain.model.location.PostalCode;
 
 final class EqualsMatchingPostalCodeSpecificationTest {
   @Test
@@ -24,7 +25,7 @@ final class EqualsMatchingPostalCodeSpecificationTest {
   }
 
   @ParameterizedTest
-  @CsvSource({"75000, 75000", "26000, 26000", "26760, 26760"})
+  @CsvSource({ "75000, 75000", "26000, 26000", "26760, 26760" })
   void should_be_satisfied(String value, String postalCodeValue) {
     EqualsMatchingPostalCodeSpecification spec = EqualsMatchingPostalCodeSpecification.of(value);
 

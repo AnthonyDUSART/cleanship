@@ -1,7 +1,8 @@
 package com.cleanship.rating.domain.model.specification;
 
-import com.cleanship.rating.domain.model.PostalCode;
 import java.util.Objects;
+
+import com.cleanship.rating.domain.model.location.PostalCode;
 
 record StartsWithMatchingPostalCodeSpecification(String prefix) implements PostalCodeSpecification {
   public StartsWithMatchingPostalCodeSpecification {
