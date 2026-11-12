@@ -19,7 +19,6 @@ public enum NoDimension implements Dimension {
 
   @Override
   public boolean isVolumeWithin(Volume minInclusive, Volume maxInclusive) {
-    // TODO Auto-generated method stub
     return false;
   }
 
