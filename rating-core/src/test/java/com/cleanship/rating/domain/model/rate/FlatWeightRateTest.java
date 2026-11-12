@@ -78,4 +78,11 @@ final class FlatWeightRateTest {
 
     assertEquals(Optional.of(PRICE), rate.evaluatePrice(SHIPMENT));
   }
+
+  @Test
+  void should_not_evaluate_price() {
+    FlatWeightRate rate = FlatWeightRate.of(Weight.of(1), Weight.of(2), PRICE);
+
+    assertEquals(Optional.empty(), rate.evaluatePrice(SHIPMENT));
+  }
 }
