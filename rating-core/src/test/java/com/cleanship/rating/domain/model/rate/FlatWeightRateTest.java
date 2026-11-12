@@ -85,4 +85,11 @@ final class FlatWeightRateTest {
 
     assertEquals(Optional.empty(), rate.evaluatePrice(SHIPMENT));
   }
+
+  @Test
+  void should_throw_exception_when_evaluate_price_with_null_shipment() {
+    FlatWeightRate rate = FlatWeightRate.of(MIN_INCLUSIVE, MAX_INCLUSIVE, PRICE);
+
+    assertThrows(NullPointerException.class, () -> rate.evaluatePrice(null));
+  }
 }
