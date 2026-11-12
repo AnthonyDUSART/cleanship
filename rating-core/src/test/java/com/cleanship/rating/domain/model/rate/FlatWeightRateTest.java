@@ -27,4 +27,11 @@ final class FlatWeightRateTest {
 
     assertEquals(MAX_INCLUSIVE, rate.maxInclusive());
   }
+
+  @Test
+  void should_store_price() {
+    FlatWeightRate rate = FlatWeightRate.of(MIN_INCLUSIVE, MAX_INCLUSIVE, PRICE);
+
+    assertEquals(PRICE, rate.price());
+  }
 }
