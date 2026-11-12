@@ -2,7 +2,7 @@ package com.cleanship.rating.domain.model;
 
 import java.util.Objects;
 
-public enum NoPostalCode implements PostalCode {
+enum NoPostalCode implements PostalCode {
   INSTANCE;
 
   public static NoPostalCode of() {
