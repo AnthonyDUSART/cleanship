@@ -2,10 +2,13 @@ package com.cleanship.rating.domain.model.rate;
 
 import com.cleanship.rating.domain.exception.InvalidFlatWeightRateException;
 import com.cleanship.rating.domain.model.money.Money;
+import com.cleanship.rating.domain.model.shipment.Shipment;
 import com.cleanship.rating.domain.model.shipment.Weight;
 import java.util.Objects;
+import java.util.Optional;
 
-public record FlatWeightRate(Weight minInclusive, Weight maxInclusive, Money price) {
+public record FlatWeightRate(Weight minInclusive, Weight maxInclusive, Money price)
+    implements Rate {
   public FlatWeightRate {
     Objects.requireNonNull(minInclusive);
     Objects.requireNonNull(maxInclusive);
@@ -18,5 +21,11 @@ public record FlatWeightRate(Weight minInclusive, Weight maxInclusive, Money pri
 
   public static FlatWeightRate of(Weight minInclusive, Weight maxInclusive, Money price) {
     return new FlatWeightRate(minInclusive, maxInclusive, price);
+  }
+
+  @Override
+  public Optional<Money> evaluatePrice(Shipment shipment) {
+    // TODO Auto-generated method stub
+    return Optional.empty();
   }
 }
