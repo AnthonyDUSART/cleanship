@@ -1,0 +1,23 @@
+package com.cleanship.rating.domain.model.rate;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import com.cleanship.rating.domain.model.money.Currency;
+import com.cleanship.rating.domain.model.money.Money;
+import com.cleanship.rating.domain.model.shipment.Weight;
+import org.junit.jupiter.api.Test;
+
+final class FlatWeightRateTest {
+  private static final Weight MIN_WEIGHT = Weight.of(1);
+
+  private static final Weight MAX_WEIGHT = Weight.of(249);
+
+  private static final Money PRICE = Money.of(7_50, Currency.of("EUR"));
+
+  @Test
+  void should_store_min_inclusive() {
+    FlatWeightRate rate = FlatWeightRate.of(MIN_WEIGHT, MAX_WEIGHT, PRICE);
+
+    assertEquals(MIN_WEIGHT, rate.minInclusive());
+  }
+}
