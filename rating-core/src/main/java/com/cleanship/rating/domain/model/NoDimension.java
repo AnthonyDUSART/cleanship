@@ -19,6 +19,8 @@ public enum NoDimension implements Dimension {
 
   @Override
   public boolean fitsIn(DefinedDimension maxInclusive) {
+    Objects.requireNonNull(maxInclusive);
+
     return false;
   }
 }
