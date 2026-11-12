@@ -4,9 +4,6 @@ import com.cleanship.rating.domain.exception.InvalidWeightException;
 import java.util.Objects;
 
 public record Weight(int grams) implements Comparable<Weight> {
-  /**
-   * @throws InvalidWeightException
-   */
   public Weight {
     if (0 >= grams) {
       throw InvalidWeightException.of(grams);
