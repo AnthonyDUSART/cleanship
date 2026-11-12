@@ -3,6 +3,7 @@ package com.cleanship.rating.domain.model.rate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.cleanship.rating.domain.exception.InvalidFlatWeightRateException;
 import com.cleanship.rating.domain.model.money.Currency;
 import com.cleanship.rating.domain.model.money.Money;
 import com.cleanship.rating.domain.model.shipment.Weight;
@@ -50,5 +51,12 @@ final class FlatWeightRateTest {
   void should_throw_exception_when_price_is_null() {
     assertThrows(
         NullPointerException.class, () -> FlatWeightRate.of(MIN_INCLUSIVE, MAX_INCLUSIVE, null));
+  }
+
+  @Test
+  void should_throw_exception_when_min_inclusive_is_greater_than_max_inclusive() {
+    assertThrows(
+        InvalidFlatWeightRateException.class,
+        () -> FlatWeightRate.of(MAX_INCLUSIVE, MIN_INCLUSIVE, PRICE));
   }
 }
