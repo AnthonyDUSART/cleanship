@@ -22,9 +22,6 @@ public record Money(long cents, Currency currency) implements Comparable<Money> 
     return new Money(0, currency);
   }
 
-  /**
-   * @throws CurrencyMismatchException
-   */
   public Money add(Money other) {
     Objects.requireNonNull(other);
 
@@ -33,9 +30,6 @@ public record Money(long cents, Currency currency) implements Comparable<Money> 
     return new Money(cents + other.cents, currency);
   }
 
-  /**
-   * @throws CurrencyMismatchException
-   */
   public Money subtract(Money other) {
     Objects.requireNonNull(other);
 
@@ -44,9 +38,6 @@ public record Money(long cents, Currency currency) implements Comparable<Money> 
     return new Money(cents - other.cents, currency);
   }
 
-  /**
-   * @throws CurrencyMismatchException
-   */
   private void ensureSameCurrency(Money other) {
     if (currency.equals(other.currency)) {
       return;
@@ -56,9 +47,6 @@ public record Money(long cents, Currency currency) implements Comparable<Money> 
   }
 
   @Override
-  /**
-   * @throws CurrencyMismatchException
-   */
   public int compareTo(Money o) {
     Objects.requireNonNull(o);
 
