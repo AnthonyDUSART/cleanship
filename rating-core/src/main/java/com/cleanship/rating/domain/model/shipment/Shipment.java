@@ -1,4 +1,4 @@
-package com.cleanship.rating.domain.model;
+package com.cleanship.rating.domain.model.shipment;
 
 import com.cleanship.rating.domain.model.location.Location;
 import com.cleanship.rating.domain.model.money.Money;

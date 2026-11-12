@@ -1,4 +1,4 @@
-package com.cleanship.rating.domain.model;
+package com.cleanship.rating.domain.model.shipment;
 
 public sealed interface Dimension permits DefinedDimension, NoDimension {
   public static Dimension of(Side length, Side width, Side height) {

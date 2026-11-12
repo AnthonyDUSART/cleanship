@@ -1,4 +1,4 @@
-package com.cleanship.rating.domain.model;
+package com.cleanship.rating.domain.model.shipment;
 
 import com.cleanship.rating.domain.exception.InvalidWeightException;
 import java.util.Objects;
