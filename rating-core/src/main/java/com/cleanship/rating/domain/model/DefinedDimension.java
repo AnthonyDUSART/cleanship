@@ -2,7 +2,7 @@ package com.cleanship.rating.domain.model;
 
 import java.util.Objects;
 
-public record DefinedDimension(Side length, Side width, Side height) implements Dimension {
+record DefinedDimension(Side length, Side width, Side height) implements Dimension {
   private static final DefinedDimension MIN_POSSIBLE =
       DefinedDimension.of(Side.of(1), Side.of(1), Side.of(1));
 
