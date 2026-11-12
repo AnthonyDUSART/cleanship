@@ -52,4 +52,12 @@ final class NoDimensionTest {
 
     assertFalse(NoDimension.of().isVolumeWithin(minInclusive, maxInclusive));
   }
+
+  @Test
+  void should_throw_exception_when_volume_within_null_min_inclusive() {
+    Volume maxInclusive = Volume.of(2);
+
+    assertThrows(
+        NullPointerException.class, () -> NoDimension.of().isVolumeWithin(null, maxInclusive));
+  }
 }

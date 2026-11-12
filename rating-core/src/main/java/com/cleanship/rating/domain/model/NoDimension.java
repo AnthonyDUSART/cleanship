@@ -19,6 +19,8 @@ public enum NoDimension implements Dimension {
 
   @Override
   public boolean isVolumeWithin(Volume minInclusive, Volume maxInclusive) {
+    Objects.requireNonNull(minInclusive);
+
     return false;
   }
 
