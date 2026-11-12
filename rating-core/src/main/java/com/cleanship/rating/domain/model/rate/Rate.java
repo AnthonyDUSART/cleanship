@@ -9,6 +9,7 @@ import java.util.Optional;
 public sealed interface Rate permits FlatWeightRate {
   public static Rate flatWeight(Weight minInclusive, Weight maxInclusive, Money price) {
     Objects.requireNonNull(minInclusive);
+    Objects.requireNonNull(maxInclusive);
 
     return FlatWeightRate.of(minInclusive, maxInclusive, price);
   }

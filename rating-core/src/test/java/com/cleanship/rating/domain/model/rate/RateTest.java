@@ -26,4 +26,12 @@ final class RateTest {
 
     assertThrows(NullPointerException.class, () -> Rate.flatWeight(null, maxInclusive, price));
   }
+
+  @Test
+  void should_throw_exception_when_create_flat_weight_rate_with_null_max_inclusive() {
+    Weight minInclusive = Weight.of(1);
+    Money price = Money.of(30_00, Currency.of("EUR"));
+
+    assertThrows(NullPointerException.class, () -> Rate.flatWeight(minInclusive, null, price));
+  }
 }
