@@ -5,7 +5,7 @@ import java.util.Objects;
 enum NoDimension implements Dimension {
   INSTANCE;
 
-  public static NoDimension of() {
+  static NoDimension of() {
     return INSTANCE;
   }
 
