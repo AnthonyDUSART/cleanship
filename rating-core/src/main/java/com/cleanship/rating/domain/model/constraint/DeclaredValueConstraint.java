@@ -22,6 +22,8 @@ public record DeclaredValueConstraint(Money minInclusive, Money maxInclusive)
 
   @Override
   public boolean isSatisfiedBy(Shipment shipment) {
+    Objects.requireNonNull(shipment);
+
     return shipment.declaredValue().isWithin(minInclusive, maxInclusive);
   }
 }
