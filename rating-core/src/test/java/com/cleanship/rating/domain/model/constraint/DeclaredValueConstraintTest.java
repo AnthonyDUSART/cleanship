@@ -30,4 +30,9 @@ final class DeclaredValueConstraintTest {
   void should_throw_exception_when_min_inclusive_is_null() {
     assertThrows(NullPointerException.class, () -> DeclaredValueConstraint.of(null, MAX_INCLUSIVE));
   }
+
+  @Test
+  void should_throw_exception_when_max_inclusive_is_null() {
+    assertThrows(NullPointerException.class, () -> DeclaredValueConstraint.of(MIN_INCLUSIVE, null));
+  }
 }
