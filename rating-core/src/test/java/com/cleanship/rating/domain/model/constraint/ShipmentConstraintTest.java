@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.cleanship.rating.domain.model.money.Currency;
 import com.cleanship.rating.domain.model.money.Money;
+import com.cleanship.rating.domain.model.shipment.DefinedDimension;
+import com.cleanship.rating.domain.model.shipment.Side;
 import com.cleanship.rating.domain.model.shipment.Volume;
 import org.junit.jupiter.api.Test;
 
@@ -55,5 +57,14 @@ final class ShipmentConstraintTest {
     Volume minInclusive = Volume.of(1);
 
     assertThrows(NullPointerException.class, () -> ShipmentConstraint.volume(minInclusive, null));
+  }
+
+  @Test
+  void should_create_dimension_constraint() {
+    DefinedDimension dimension = DefinedDimension.of(Side.of(1), Side.of(1), Side.of(1));
+
+    DimensionConstraint expected = DimensionConstraint.of(dimension, dimension);
+
+    assertEquals(expected, ShipmentConstraint.dimension(dimension, dimension));
   }
 }
