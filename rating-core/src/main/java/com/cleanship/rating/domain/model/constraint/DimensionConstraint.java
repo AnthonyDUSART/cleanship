@@ -23,7 +23,6 @@ public record DimensionConstraint(DefinedDimension minInclusive, DefinedDimensio
 
   @Override
   public boolean isSatisfiedBy(Shipment shipment) {
-    // TODO Auto-generated method stub
-    return false;
+    return shipment.parcel().dimension().isWithin(minInclusive, maxInclusive);
   }
 }
