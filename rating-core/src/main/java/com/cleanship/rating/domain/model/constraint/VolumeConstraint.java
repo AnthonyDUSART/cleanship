@@ -1,10 +1,12 @@
 package com.cleanship.rating.domain.model.constraint;
 
 import com.cleanship.rating.domain.exception.InvalidVolumeConstraintException;
+import com.cleanship.rating.domain.model.shipment.Shipment;
 import com.cleanship.rating.domain.model.shipment.Volume;
 import java.util.Objects;
 
-public record VolumeConstraint(Volume minInclusive, Volume maxInclusive) {
+public record VolumeConstraint(Volume minInclusive, Volume maxInclusive)
+    implements ShipmentConstraint {
   public VolumeConstraint {
     Objects.requireNonNull(minInclusive);
     Objects.requireNonNull(maxInclusive);
@@ -16,5 +18,11 @@ public record VolumeConstraint(Volume minInclusive, Volume maxInclusive) {
 
   public static VolumeConstraint of(Volume minInclusive, Volume maxInclusive) {
     return new VolumeConstraint(minInclusive, maxInclusive);
+  }
+
+  @Override
+  public boolean isSatisfiedBy(Shipment shipment) {
+    // TODO Auto-generated method stub
+    return false;
   }
 }
