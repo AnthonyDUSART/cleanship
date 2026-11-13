@@ -7,6 +7,8 @@ public final class InvalidDimensionConstraintException extends DomainException {
   private InvalidDimensionConstraintException(
       DefinedDimension minInclusive, DefinedDimension maxInclusive) {
     Objects.requireNonNull(minInclusive);
+    Objects.requireNonNull(maxInclusive);
+
     super(
         String.format(
             "Dimension constraint minInclusive \"%dx%dx%d\" cannot exceed maxInclusive"
