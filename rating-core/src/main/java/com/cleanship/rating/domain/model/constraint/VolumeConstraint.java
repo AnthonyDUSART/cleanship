@@ -22,7 +22,6 @@ public record VolumeConstraint(Volume minInclusive, Volume maxInclusive)
 
   @Override
   public boolean isSatisfiedBy(Shipment shipment) {
-    // TODO Auto-generated method stub
-    return false;
+    return shipment.parcel().dimension().isVolumeWithin(minInclusive, maxInclusive);
   }
 }
