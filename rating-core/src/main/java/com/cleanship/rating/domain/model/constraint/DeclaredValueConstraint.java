@@ -22,7 +22,6 @@ public record DeclaredValueConstraint(Money minInclusive, Money maxInclusive)
 
   @Override
   public boolean isSatisfiedBy(Shipment shipment) {
-    // TODO Auto-generated method stub
-    return false;
+    return shipment.declaredValue().isWithin(minInclusive, maxInclusive);
   }
 }

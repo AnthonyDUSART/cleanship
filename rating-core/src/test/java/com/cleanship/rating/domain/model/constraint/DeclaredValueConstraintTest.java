@@ -2,10 +2,16 @@ package com.cleanship.rating.domain.model.constraint;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.cleanship.rating.domain.exception.InvalidDeclaredValueConstraintException;
+import com.cleanship.rating.domain.model.location.Country;
+import com.cleanship.rating.domain.model.location.Location;
 import com.cleanship.rating.domain.model.money.Currency;
 import com.cleanship.rating.domain.model.money.Money;
+import com.cleanship.rating.domain.model.shipment.Parcel;
+import com.cleanship.rating.domain.model.shipment.Shipment;
+import com.cleanship.rating.domain.model.shipment.Weight;
 import org.junit.jupiter.api.Test;
 
 final class DeclaredValueConstraintTest {
@@ -42,5 +48,19 @@ final class DeclaredValueConstraintTest {
     assertThrows(
         InvalidDeclaredValueConstraintException.class,
         () -> DeclaredValueConstraint.of(MAX_INCLUSIVE, MIN_INCLUSIVE));
+  }
+
+  @Test
+  void should_be_satisfied() {
+    Shipment shipment =
+        Shipment.of(
+            Location.of(Country.of("FR")),
+            Location.of(Country.of("FR")),
+            Parcel.of(Weight.of(100)),
+            Money.of(100_00, Currency.of("EUR")));
+
+    DeclaredValueConstraint constraint = DeclaredValueConstraint.of(MIN_INCLUSIVE, MAX_INCLUSIVE);
+
+    assertTrue(constraint.isSatisfiedBy(shipment));
   }
 }
