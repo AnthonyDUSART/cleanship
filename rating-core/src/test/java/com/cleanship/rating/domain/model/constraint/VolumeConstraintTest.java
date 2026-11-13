@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.constraint;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -65,5 +66,12 @@ final class VolumeConstraintTest {
     VolumeConstraint constraint = VolumeConstraint.of(MIN_INCLUSIVE, MAX_INCLUSIVE);
 
     assertTrue(constraint.isSatisfiedBy(SHIPMENT));
+  }
+
+  @Test
+  void should_not_be_satisfied() {
+    VolumeConstraint constraint = VolumeConstraint.of(MAX_INCLUSIVE, MAX_INCLUSIVE);
+
+    assertFalse(constraint.isSatisfiedBy(SHIPMENT));
   }
 }
