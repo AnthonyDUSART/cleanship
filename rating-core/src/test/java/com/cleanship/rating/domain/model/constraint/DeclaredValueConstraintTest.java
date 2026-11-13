@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.constraint;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.cleanship.rating.domain.model.money.Currency;
 import com.cleanship.rating.domain.model.money.Money;
@@ -23,5 +24,10 @@ final class DeclaredValueConstraintTest {
     DeclaredValueConstraint constraint = DeclaredValueConstraint.of(MIN_INCLUSIVE, MAX_INCLUSIVE);
 
     assertEquals(MAX_INCLUSIVE, constraint.maxInclusive());
+  }
+
+  @Test
+  void should_throw_exception_when_min_inclusive_is_null() {
+    assertThrows(NullPointerException.class, () -> DeclaredValueConstraint.of(null, MAX_INCLUSIVE));
   }
 }
