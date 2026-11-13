@@ -22,6 +22,8 @@ public record VolumeConstraint(Volume minInclusive, Volume maxInclusive)
 
   @Override
   public boolean isSatisfiedBy(Shipment shipment) {
+    Objects.requireNonNull(shipment);
+
     return shipment.parcel().dimension().isVolumeWithin(minInclusive, maxInclusive);
   }
 }

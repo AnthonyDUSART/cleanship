@@ -74,4 +74,11 @@ final class VolumeConstraintTest {
 
     assertFalse(constraint.isSatisfiedBy(SHIPMENT));
   }
+
+  @Test
+  void should_throw_exception_when_is_satisfied_by_null_shipment() {
+    VolumeConstraint constraint = VolumeConstraint.of(MIN_INCLUSIVE, MAX_INCLUSIVE);
+
+    assertThrows(NullPointerException.class, () -> constraint.isSatisfiedBy(null));
+  }
 }
