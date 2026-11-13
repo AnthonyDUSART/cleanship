@@ -3,6 +3,7 @@ package com.cleanship.rating.domain.model.constraint;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.cleanship.rating.domain.exception.InvalidDimensionConstraintException;
 import com.cleanship.rating.domain.model.shipment.DefinedDimension;
 import com.cleanship.rating.domain.model.shipment.Side;
 import org.junit.jupiter.api.Test;
@@ -37,5 +38,12 @@ final class DimensionConstraintTest {
   @Test
   void should_throw_exception_when_max_inclusive_is_null() {
     assertThrows(NullPointerException.class, () -> DimensionConstraint.of(MIN_INCLUSIVE, null));
+  }
+
+  @Test
+  void should_throw_exception_when_min_inclusive_not_fits_in_max_inclusive() {
+    assertThrows(
+        InvalidDimensionConstraintException.class,
+        () -> DimensionConstraint.of(MAX_INCLUSIVE, MIN_INCLUSIVE));
   }
 }

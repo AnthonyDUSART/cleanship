@@ -1,5 +1,6 @@
 package com.cleanship.rating.domain.model.constraint;
 
+import com.cleanship.rating.domain.exception.InvalidDimensionConstraintException;
 import com.cleanship.rating.domain.model.shipment.DefinedDimension;
 import com.cleanship.rating.domain.model.shipment.Shipment;
 import java.util.Objects;
@@ -9,6 +10,10 @@ public record DimensionConstraint(DefinedDimension minInclusive, DefinedDimensio
   public DimensionConstraint {
     Objects.requireNonNull(minInclusive);
     Objects.requireNonNull(maxInclusive);
+
+    if (!minInclusive.fitsIn(maxInclusive)) {
+      throw InvalidDimensionConstraintException.of(minInclusive, maxInclusive);
+    }
   }
 
   public static DimensionConstraint of(
