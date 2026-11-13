@@ -77,4 +77,18 @@ final class DimensionConstraintTest {
 
     assertFalse(constraint.isSatisfiedBy(SHIPMENT));
   }
+
+  @Test
+  void should_not_be_satisfied_with_no_dimension() {
+    Shipment shipment =
+        Shipment.of(
+            SHIPMENT.origin(),
+            SHIPMENT.destination(),
+            Parcel.of(SHIPMENT.parcel().weight(), Dimension.none()),
+            SHIPMENT.declaredValue());
+
+    DimensionConstraint constraint = DimensionConstraint.of(MIN_INCLUSIVE, MAX_INCLUSIVE);
+
+    assertFalse(constraint.isSatisfiedBy(shipment));
+  }
 }
