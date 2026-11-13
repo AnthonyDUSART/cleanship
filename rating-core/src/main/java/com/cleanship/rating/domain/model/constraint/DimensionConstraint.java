@@ -23,6 +23,8 @@ public record DimensionConstraint(DefinedDimension minInclusive, DefinedDimensio
 
   @Override
   public boolean isSatisfiedBy(Shipment shipment) {
+    Objects.requireNonNull(shipment);
+
     return shipment.parcel().dimension().isWithin(minInclusive, maxInclusive);
   }
 }

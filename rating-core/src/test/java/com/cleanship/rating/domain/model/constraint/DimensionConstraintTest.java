@@ -91,4 +91,11 @@ final class DimensionConstraintTest {
 
     assertFalse(constraint.isSatisfiedBy(shipment));
   }
+
+  @Test
+  void should_throw_exception_when_is_satisfied_by_null_shipment() {
+    DimensionConstraint constraint = DimensionConstraint.of(MIN_INCLUSIVE, MAX_INCLUSIVE);
+
+    assertThrows(NullPointerException.class, () -> constraint.isSatisfiedBy(null));
+  }
 }
