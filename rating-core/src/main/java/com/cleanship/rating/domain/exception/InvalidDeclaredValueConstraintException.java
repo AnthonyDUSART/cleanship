@@ -6,6 +6,7 @@ import java.util.Objects;
 public final class InvalidDeclaredValueConstraintException extends DomainException {
   private InvalidDeclaredValueConstraintException(Money minInclusive, Money maxInclusive) {
     Objects.requireNonNull(minInclusive);
+    Objects.requireNonNull(maxInclusive);
 
     super(
         String.format(

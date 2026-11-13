@@ -26,4 +26,11 @@ final class InvalidDeclaredValueConstraintExceptionTest {
         NullPointerException.class,
         () -> InvalidDeclaredValueConstraintException.of(null, Money.zero(Currency.of("EUR"))));
   }
+
+  @Test
+  void should_throw_exception_when_max_inclusive_is_null() {
+    assertThrows(
+        NullPointerException.class,
+        () -> InvalidDeclaredValueConstraintException.of(Money.zero(Currency.of("EUR")), null));
+  }
 }
