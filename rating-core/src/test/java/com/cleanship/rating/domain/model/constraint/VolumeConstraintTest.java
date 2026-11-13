@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.constraint;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.cleanship.rating.domain.model.shipment.Volume;
 import org.junit.jupiter.api.Test;
@@ -22,5 +23,10 @@ final class VolumeConstraintTest {
     VolumeConstraint constraint = VolumeConstraint.of(MIN_INCLUSIVE, MAX_INCLUSIVE);
 
     assertEquals(MAX_INCLUSIVE, constraint.maxInclusive());
+  }
+
+  @Test
+  void should_throw_exception_when_min_inclusive_is_null() {
+    assertThrows(NullPointerException.class, () -> VolumeConstraint.of(null, MAX_INCLUSIVE));
   }
 }
