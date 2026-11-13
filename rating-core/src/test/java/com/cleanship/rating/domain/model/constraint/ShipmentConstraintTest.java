@@ -42,4 +42,11 @@ final class ShipmentConstraintTest {
 
     assertEquals(expected, ShipmentConstraint.volume(volume, volume));
   }
+
+  @Test
+  void should_throw_exception_when_create_volume_constraint_with_null_min_inclusive() {
+    Volume maxInclusive = Volume.of(1);
+
+    assertThrows(NullPointerException.class, () -> ShipmentConstraint.volume(null, maxInclusive));
+  }
 }
