@@ -17,4 +17,11 @@ final class DeclaredValueConstraintTest {
 
     assertEquals(MIN_INCLUSIVE, constraint.minInclusive());
   }
+
+  @Test
+  void should_store_max_inclusive() {
+    DeclaredValueConstraint constraint = DeclaredValueConstraint.of(MIN_INCLUSIVE, MAX_INCLUSIVE);
+
+    assertEquals(MAX_INCLUSIVE, constraint.maxInclusive());
+  }
 }
