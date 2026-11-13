@@ -20,4 +20,11 @@ final class DimensionConstraintTest {
 
     assertEquals(MIN_INCLUSIVE, constraint.minInclusive());
   }
+
+  @Test
+  void should_store_max_inclusive() {
+    DimensionConstraint constraint = DimensionConstraint.of(MIN_INCLUSIVE, MAX_INCLUSIVE);
+
+    assertEquals(MAX_INCLUSIVE, constraint.maxInclusive());
+  }
 }
