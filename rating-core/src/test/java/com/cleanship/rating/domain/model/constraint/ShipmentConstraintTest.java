@@ -24,4 +24,12 @@ final class ShipmentConstraintTest {
     assertThrows(
         NullPointerException.class, () -> ShipmentConstraint.declaredValue(null, maxInclusive));
   }
+
+  @Test
+  void should_throw_exception_when_create_declared_value_constraint_with_null_max_inclusive() {
+    Money minInclusive = Money.zero(Currency.of("EUR"));
+
+    assertThrows(
+        NullPointerException.class, () -> ShipmentConstraint.declaredValue(minInclusive, null));
+  }
 }
