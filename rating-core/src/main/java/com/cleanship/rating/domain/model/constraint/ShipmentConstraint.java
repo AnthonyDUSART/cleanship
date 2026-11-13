@@ -17,6 +17,7 @@ public sealed interface ShipmentConstraint
 
   public static ShipmentConstraint volume(Volume minInclusive, Volume maxInclusive) {
     Objects.requireNonNull(minInclusive);
+    Objects.requireNonNull(maxInclusive);
 
     return VolumeConstraint.of(minInclusive, maxInclusive);
   }
