@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.exception;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.cleanship.rating.domain.model.shipment.DefinedDimension;
 import com.cleanship.rating.domain.model.shipment.Side;
@@ -21,5 +22,12 @@ final class InvalidDimensionConstraintExceptionTest {
     assertEquals(
         "Dimension constraint minInclusive \"4x3x1\" cannot exceed maxInclusive \"1x1x1\"",
         exception.getMessage());
+  }
+
+  @Test
+  void should_throw_exception_when_min_inclusive_is_null() {
+    assertThrows(
+        NullPointerException.class,
+        () -> InvalidDimensionConstraintException.of(null, MAX_INCLUSIVE));
   }
 }

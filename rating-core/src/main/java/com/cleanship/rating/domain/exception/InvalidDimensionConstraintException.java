@@ -1,10 +1,12 @@
 package com.cleanship.rating.domain.exception;
 
 import com.cleanship.rating.domain.model.shipment.DefinedDimension;
+import java.util.Objects;
 
 public final class InvalidDimensionConstraintException extends DomainException {
   private InvalidDimensionConstraintException(
       DefinedDimension minInclusive, DefinedDimension maxInclusive) {
+    Objects.requireNonNull(minInclusive);
     super(
         String.format(
             "Dimension constraint minInclusive \"%dx%dx%d\" cannot exceed maxInclusive"
