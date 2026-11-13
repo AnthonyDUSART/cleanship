@@ -6,6 +6,7 @@ import java.util.Objects;
 public final class InvalidVolumeConstraintException extends DomainException {
   private InvalidVolumeConstraintException(Volume minInclusive, Volume maxInclusive) {
     Objects.requireNonNull(minInclusive);
+    Objects.requireNonNull(maxInclusive);
 
     super(
         String.format(

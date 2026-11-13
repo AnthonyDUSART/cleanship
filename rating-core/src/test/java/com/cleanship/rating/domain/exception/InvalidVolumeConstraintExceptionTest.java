@@ -26,4 +26,10 @@ final class InvalidVolumeConstraintExceptionTest {
     assertThrows(
         NullPointerException.class, () -> InvalidVolumeConstraintException.of(null, MAX_INCLUSIVE));
   }
+
+  @Test
+  void should_throw_exception_when_max_inclusive_is_null() {
+    assertThrows(
+        NullPointerException.class, () -> InvalidVolumeConstraintException.of(MIN_INCLUSIVE, null));
+  }
 }
