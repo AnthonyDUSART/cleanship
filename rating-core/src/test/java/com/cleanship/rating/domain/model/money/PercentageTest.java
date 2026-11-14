@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.cleanship.rating.domain.exception.InvalidPercentageException;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 final class PercentageTest {
   @Test
@@ -17,13 +19,15 @@ final class PercentageTest {
     assertThrows(InvalidPercentageException.class, () -> Percentage.of(-1));
   }
 
-  @Test
-  void should_apply_to_money_amount_successfully() {
-    Money amount = Money.of(50_00, Currency.of("EUR"));
+  @ParameterizedTest
+  @CsvSource({"5000, 50000, 2500", "2257, 50000, 1129", "1, 49999, 0"})
+  void should_apply_to_money_amount_successfully(
+      long cents, int milliPercent, long expectedInCents) {
+    Money amount = Money.of(cents, Currency.of("EUR"));
 
-    Money expected = Money.of(25_00, Currency.of("EUR"));
+    Money expected = Money.of(expectedInCents, Currency.of("EUR"));
 
-    assertEquals(expected, Percentage.of(50_000).applyTo(amount));
+    assertEquals(expected, Percentage.of(milliPercent).applyTo(amount));
   }
 
   @Test
