@@ -30,10 +30,14 @@ public record Money(long cents, Currency currency) implements Comparable<Money> 
     return new Money(Math.addExact(cents, other.cents), currency);
   }
 
-  public Money subtract(Money other) {
+  public Money subtractOrZero(Money other) {
     Objects.requireNonNull(other);
 
     ensureSameCurrency(other);
+
+    if (cents < other.cents) {
+      return Money.zero(currency);
+    }
 
     return new Money(cents - other.cents, currency);
   }

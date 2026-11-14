@@ -66,25 +66,27 @@ final class MoneyTest {
     assertThrows(CurrencyMismatchException.class, () -> euroAmount.add(dollarAmount));
   }
 
-  @Test
-  void should_subtract_successfully() {
-    Money result = Money.of(50_00, EURO).subtract(Money.of(10_00, EURO));
+  @ParameterizedTest
+  @CsvSource({"50, 25, 25", "10, 11, 0"})
+  void should_subtract_or_zero_successfully(
+      int currentInCents, int subtrahendInCents, int expectedInCents) {
+    Money result = Money.of(currentInCents, EURO).subtractOrZero(Money.of(subtrahendInCents, EURO));
 
-    assertEquals(40_00, result.cents());
+    assertEquals(expectedInCents, result.cents());
   }
 
   @Test
-  void should_throw_exception_when_subtract_with_null() {
-    assertThrows(NullPointerException.class, () -> Money.zero(EURO).subtract(null));
+  void should_throw_exception_when_subtract_or_zero_with_null() {
+    assertThrows(NullPointerException.class, () -> Money.zero(EURO).subtractOrZero(null));
   }
 
   @Test
-  void should_throw_exception_when_subtract_with_currency_mismatch() {
+  void should_throw_exception_when_subtract_or_zero_with_currency_mismatch() {
     Money euroAmount = Money.of(30_00, EURO);
 
     Money dollarAmount = Money.of(20_00, DOLLAR);
 
-    assertThrows(CurrencyMismatchException.class, () -> euroAmount.subtract(dollarAmount));
+    assertThrows(CurrencyMismatchException.class, () -> euroAmount.subtractOrZero(dollarAmount));
   }
 
   @Test
