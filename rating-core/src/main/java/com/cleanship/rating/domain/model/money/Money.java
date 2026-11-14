@@ -1,7 +1,6 @@
 package com.cleanship.rating.domain.model.money;
 
 import com.cleanship.rating.domain.exception.CurrencyMismatchException;
-import com.cleanship.rating.domain.exception.InsufficientMoneyException;
 import com.cleanship.rating.domain.exception.InvalidMoneyException;
 import java.util.Objects;
 
@@ -31,13 +30,13 @@ public record Money(long cents, Currency currency) implements Comparable<Money> 
     return new Money(Math.addExact(cents, other.cents), currency);
   }
 
-  public Money subtract(Money other) {
+  public Money subtractOrZero(Money other) {
     Objects.requireNonNull(other);
 
     ensureSameCurrency(other);
 
     if (cents < other.cents) {
-      throw InsufficientMoneyException.of(this, other);
+      return Money.zero(currency);
     }
 
     return new Money(cents - other.cents, currency);
