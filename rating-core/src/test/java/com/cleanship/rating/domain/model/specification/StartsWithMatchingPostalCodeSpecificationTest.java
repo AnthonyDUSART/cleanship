@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.cleanship.rating.domain.exception.InvalidStartsWithMatchingPostalCodeSpecificationException;
 import com.cleanship.rating.domain.model.location.PostalCode;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,6 +21,13 @@ final class StartsWithMatchingPostalCodeSpecificationTest {
   void should_throw_exception_when_prefix_is_null() {
     assertThrows(
         NullPointerException.class, () -> StartsWithMatchingPostalCodeSpecification.of(null));
+  }
+
+  @Test
+  void should_throw_exception_when_prefix_is_blank() {
+    assertThrows(
+        InvalidStartsWithMatchingPostalCodeSpecificationException.class,
+        () -> StartsWithMatchingPostalCodeSpecification.of(""));
   }
 
   @ParameterizedTest
