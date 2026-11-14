@@ -210,4 +210,10 @@ final class MoneyTest {
         CurrencyMismatchException.class,
         () -> Money.zero(EURO).isWithin(minInclusive, maxInclusive));
   }
+
+  @Test
+  void should_throw_exception_when_add_with_max_value() {
+    assertThrows(
+        ArithmeticException.class, () -> Money.of(Long.MAX_VALUE, EURO).add(Money.of(1, EURO)));
+  }
 }
