@@ -75,4 +75,12 @@ final class ShipmentConstraintTest {
     assertThrows(
         NullPointerException.class, () -> ShipmentConstraint.dimension(null, maxInclusive));
   }
+
+  @Test
+  void should_throw_exception_when_create_dimension_constraint_with_null_max_inclusive() {
+    DefinedDimension minInclusive = DefinedDimension.of(Side.of(1), Side.of(1), Side.of(1));
+
+    assertThrows(
+        NullPointerException.class, () -> ShipmentConstraint.dimension(minInclusive, null));
+  }
 }
