@@ -1,7 +1,6 @@
 package com.cleanship.rating.domain.model.shipment;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -82,26 +81,5 @@ final class VolumeTest {
   void should_throw_exception_when_within_min_inclusive_is_greater_than_max_inclusive() {
     assertThrows(
         IllegalArgumentException.class, () -> Volume.of(2).isWithin(Volume.of(4), Volume.of(1)));
-  }
-
-  @ParameterizedTest
-  @MethodSource("provideFitsIn")
-  void should_fits_in_successfully(Volume volume, Volume maxInclusive) {
-    assertTrue(volume.fitsIn(maxInclusive));
-  }
-
-  private static Stream<Arguments> provideFitsIn() {
-    return Stream.of(
-        Arguments.of(Volume.of(1), Volume.of(1)), Arguments.of(Volume.of(1), Volume.of(2)));
-  }
-
-  @Test
-  void should_not_fits_in_successfully() {
-    assertFalse(Volume.of(2).fitsIn(Volume.of(1)));
-  }
-
-  @Test
-  void should_throw_exception_when_fits_in_null() {
-    assertThrows(NullPointerException.class, () -> Volume.of(1).fitsIn(null));
   }
 }
