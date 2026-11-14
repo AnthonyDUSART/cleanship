@@ -25,6 +25,8 @@ public sealed interface ShipmentConstraint
 
   public static ShipmentConstraint dimension(
       DefinedDimension minInclusive, DefinedDimension maxInclusive) {
+    Objects.requireNonNull(minInclusive);
+
     return DimensionConstraint.of(minInclusive, maxInclusive);
   }
 
