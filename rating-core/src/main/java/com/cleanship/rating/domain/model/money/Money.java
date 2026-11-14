@@ -27,7 +27,7 @@ public record Money(long cents, Currency currency) implements Comparable<Money> 
 
     ensureSameCurrency(other);
 
-    return new Money(cents + other.cents, currency);
+    return new Money(Math.addExact(cents, other.cents), currency);
   }
 
   public Money subtract(Money other) {
