@@ -24,4 +24,11 @@ final class InsufficientMoneyExceptionTest {
 
     assertThrows(NullPointerException.class, () -> InsufficientMoneyException.of(null, subtrahend));
   }
+
+  @Test
+  void should_throw_exception_when_subtrahend_is_null() {
+    Money current = Money.zero(Currency.of("EUR"));
+
+    assertThrows(NullPointerException.class, () -> InsufficientMoneyException.of(current, null));
+  }
 }
