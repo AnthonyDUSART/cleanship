@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.exception;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.cleanship.rating.domain.model.money.Currency;
 import com.cleanship.rating.domain.model.money.Money;
@@ -15,5 +16,12 @@ final class InsufficientMoneyExceptionTest {
     InsufficientMoneyException exception = InsufficientMoneyException.of(current, subtrahend);
 
     assertEquals("Cannot subtract \"1 EUR\" from \"0 EUR\"", exception.getMessage());
+  }
+
+  @Test
+  void should_throw_exception_when_current_is_null() {
+    Money subtrahend = Money.zero(Currency.of("EUR"));
+
+    assertThrows(NullPointerException.class, () -> InsufficientMoneyException.of(null, subtrahend));
   }
 }
