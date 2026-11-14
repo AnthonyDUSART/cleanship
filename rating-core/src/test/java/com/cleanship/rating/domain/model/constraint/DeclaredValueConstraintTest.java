@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.cleanship.rating.domain.exception.CurrencyMismatchException;
 import com.cleanship.rating.domain.exception.InvalidDeclaredValueConstraintException;
 import com.cleanship.rating.domain.model.location.Country;
 import com.cleanship.rating.domain.model.location.Location;
@@ -52,6 +53,13 @@ final class DeclaredValueConstraintTest {
   }
 
   @Test
+  void should_throw_exception_when_min_inclusive_and_max_inclusive_have_currency_mismatch() {
+    assertThrows(
+        CurrencyMismatchException.class,
+        () -> DeclaredValueConstraint.of(MIN_INCLUSIVE, Money.of(300_00, Currency.of("USD"))));
+  }
+
+  @Test
   void should_throw_exception_when_min_inclusive_is_greater_than_max_inclusive() {
     assertThrows(
         InvalidDeclaredValueConstraintException.class,
@@ -77,5 +85,14 @@ final class DeclaredValueConstraintTest {
     DeclaredValueConstraint constraint = DeclaredValueConstraint.of(MIN_INCLUSIVE, MAX_INCLUSIVE);
 
     assertThrows(NullPointerException.class, () -> constraint.isSatisfiedBy(null));
+  }
+
+  @Test
+  void should_throw_exception_when_is_satisfied_by_shipment_with_currency_mismatch() {
+    DeclaredValueConstraint constraint =
+        DeclaredValueConstraint.of(
+            Money.zero(Currency.of("USD")), Money.of(300_00, Currency.of("USD")));
+
+    assertThrows(CurrencyMismatchException.class, () -> constraint.isSatisfiedBy(SHIPMENT));
   }
 }
