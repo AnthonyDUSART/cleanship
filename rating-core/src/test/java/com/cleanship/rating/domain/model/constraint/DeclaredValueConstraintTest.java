@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.cleanship.rating.domain.exception.CurrencyMismatchException;
 import com.cleanship.rating.domain.exception.InvalidDeclaredValueConstraintException;
 import com.cleanship.rating.domain.model.location.Country;
 import com.cleanship.rating.domain.model.location.Location;
@@ -49,6 +50,13 @@ final class DeclaredValueConstraintTest {
   @Test
   void should_throw_exception_when_max_inclusive_is_null() {
     assertThrows(NullPointerException.class, () -> DeclaredValueConstraint.of(MIN_INCLUSIVE, null));
+  }
+
+  @Test
+  void should_throw_exception_when_min_inclusive_and_max_inclusive_have_currency_mismatch() {
+    assertThrows(
+        CurrencyMismatchException.class,
+        () -> DeclaredValueConstraint.of(MIN_INCLUSIVE, Money.of(300_00, Currency.of("USD"))));
   }
 
   @Test

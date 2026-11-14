@@ -1,5 +1,6 @@
 package com.cleanship.rating.domain.model.constraint;
 
+import com.cleanship.rating.domain.exception.CurrencyMismatchException;
 import com.cleanship.rating.domain.exception.InvalidDeclaredValueConstraintException;
 import com.cleanship.rating.domain.model.money.Money;
 import com.cleanship.rating.domain.model.shipment.Shipment;
@@ -10,6 +11,10 @@ public record DeclaredValueConstraint(Money minInclusive, Money maxInclusive)
   public DeclaredValueConstraint {
     Objects.requireNonNull(minInclusive);
     Objects.requireNonNull(maxInclusive);
+
+    if (!minInclusive.currency().equals(maxInclusive.currency())) {
+      throw CurrencyMismatchException.of(minInclusive.currency(), maxInclusive.currency());
+    }
 
     if (minInclusive.compareTo(maxInclusive) > 0) {
       throw InvalidDeclaredValueConstraintException.of(minInclusive, maxInclusive);
