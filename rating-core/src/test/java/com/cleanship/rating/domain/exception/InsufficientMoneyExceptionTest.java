@@ -14,6 +14,6 @@ final class InsufficientMoneyExceptionTest {
 
     InsufficientMoneyException exception = InsufficientMoneyException.of(current, subtrahend);
 
-    assertEquals("Cannot subtract \"0 EUR\" from \"1 EUR\"", exception.getMessage());
+    assertEquals("Cannot subtract \"1 EUR\" from \"0 EUR\"", exception.getMessage());
   }
 }
