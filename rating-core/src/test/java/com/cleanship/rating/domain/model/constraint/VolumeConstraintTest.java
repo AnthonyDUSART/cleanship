@@ -76,6 +76,20 @@ final class VolumeConstraintTest {
   }
 
   @Test
+  void should_not_be_satisfied_with_no_dimension() {
+    Shipment shipment =
+        Shipment.of(
+            Location.of(Country.of("FR")),
+            Location.of(Country.of("FR")),
+            Parcel.of(Weight.of(1), Dimension.none()),
+            Money.zero(Currency.of("EUR")));
+
+    VolumeConstraint constraint = VolumeConstraint.of(MIN_INCLUSIVE, MAX_INCLUSIVE);
+
+    assertFalse(constraint.isSatisfiedBy(shipment));
+  }
+
+  @Test
   void should_throw_exception_when_is_satisfied_by_null_shipment() {
     VolumeConstraint constraint = VolumeConstraint.of(MIN_INCLUSIVE, MAX_INCLUSIVE);
 
