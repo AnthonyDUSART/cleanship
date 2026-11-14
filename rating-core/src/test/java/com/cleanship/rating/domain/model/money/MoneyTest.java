@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.cleanship.rating.domain.exception.CurrencyMismatchException;
+import com.cleanship.rating.domain.exception.InsufficientMoneyException;
 import com.cleanship.rating.domain.exception.InvalidMoneyException;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
@@ -85,6 +86,14 @@ final class MoneyTest {
     Money dollarAmount = Money.of(20_00, DOLLAR);
 
     assertThrows(CurrencyMismatchException.class, () -> euroAmount.subtract(dollarAmount));
+  }
+
+  @Test
+  void should_throw_exception_when_subtract_with_insufficient_money() {
+    Money current = Money.zero(EURO);
+    Money subtrahend = Money.of(1, EURO);
+
+    assertThrows(InsufficientMoneyException.class, () -> current.subtract(subtrahend));
   }
 
   @Test
