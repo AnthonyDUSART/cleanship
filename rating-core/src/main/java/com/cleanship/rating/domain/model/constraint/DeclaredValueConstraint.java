@@ -29,6 +29,11 @@ public record DeclaredValueConstraint(Money minInclusive, Money maxInclusive)
   public boolean isSatisfiedBy(Shipment shipment) {
     Objects.requireNonNull(shipment);
 
+    if (!shipment.declaredValue().currency().equals(minInclusive.currency())) {
+      throw CurrencyMismatchException.of(
+          minInclusive.currency(), shipment.declaredValue().currency());
+    }
+
     return shipment.declaredValue().isWithin(minInclusive, maxInclusive);
   }
 }

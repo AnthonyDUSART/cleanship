@@ -86,4 +86,13 @@ final class DeclaredValueConstraintTest {
 
     assertThrows(NullPointerException.class, () -> constraint.isSatisfiedBy(null));
   }
+
+  @Test
+  void should_throw_exception_when_is_satisfied_by_shipment_with_currency_mismatch() {
+    DeclaredValueConstraint constraint =
+        DeclaredValueConstraint.of(
+            Money.zero(Currency.of("USD")), Money.of(300_00, Currency.of("USD")));
+
+    assertThrows(CurrencyMismatchException.class, () -> constraint.isSatisfiedBy(SHIPMENT));
+  }
 }
