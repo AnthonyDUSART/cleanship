@@ -2,10 +2,10 @@ package com.cleanship.rating.domain.model.shipment;
 
 import java.util.Objects;
 
-enum NoDimension implements Dimension {
+public enum NoDimension implements Dimension {
   INSTANCE;
 
-  static NoDimension of() {
+  public static NoDimension of() {
     return INSTANCE;
   }
 
