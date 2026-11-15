@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.shipment;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -60,6 +61,15 @@ final class VolumeTest {
         Arguments.of(Volume.of(1), Volume.of(1), Volume.of(2)),
         Arguments.of(Volume.of(2), Volume.of(1), Volume.of(3)),
         Arguments.of(Volume.of(2), Volume.of(1), Volume.of(2)));
+  }
+
+  @Test
+  void should_not_be_within() {
+    Volume minInclusive = Volume.of(1);
+    Volume maxInclusive = Volume.of(2);
+    Volume volume = Volume.of(3);
+
+    assertFalse(volume.isWithin(minInclusive, maxInclusive));
   }
 
   @Test
