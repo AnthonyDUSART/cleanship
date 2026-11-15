@@ -9,6 +9,6 @@ final class InvalidSideExceptionTest {
   void should_have_valid_message() {
     InvalidSideException exception = InvalidSideException.of(-30_000);
 
-    assertEquals(exception.getMessage(), "Side \"-30000\" is invalid");
+    assertEquals("Side \"-30000\" is invalid", exception.getMessage());
   }
 }
