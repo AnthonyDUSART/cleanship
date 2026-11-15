@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.exception;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -10,5 +11,10 @@ final class InvalidCountryExceptionTest {
     InvalidCountryException exception = InvalidCountryException.of("FRA");
 
     assertEquals(exception.getMessage(), "Country \"FRA\" is invalid");
+  }
+
+  @Test
+  void should_throw_exception_when_code_is_null() {
+    assertThrows(NullPointerException.class, () -> InvalidCountryException.of(null));
   }
 }
