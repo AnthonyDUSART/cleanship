@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.location;
 
 import com.cleanship.rating.domain.exception.InvalidPostalCodeException;
+import java.util.Locale;
 import java.util.Objects;
 
 public record DefinedPostalCode(String value) implements PostalCode {
@@ -9,7 +10,7 @@ public record DefinedPostalCode(String value) implements PostalCode {
   public DefinedPostalCode {
     Objects.requireNonNull(value);
 
-    value = value.strip();
+    value = value.strip().toUpperCase(Locale.ROOT);
 
     if (value.isBlank() || MAX_LENGTH < value.length()) {
       throw InvalidPostalCodeException.of(value);
