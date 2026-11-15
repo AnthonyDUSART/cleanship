@@ -9,6 +9,6 @@ final class InvalidVolumeExceptionTest {
   void should_have_valid_message() {
     InvalidVolumeException exception = InvalidVolumeException.of(0);
 
-    assertEquals(exception.getMessage(), "Volume \"0\" is invalid");
+    assertEquals("Volume \"0\" is invalid", exception.getMessage());
   }
 }
