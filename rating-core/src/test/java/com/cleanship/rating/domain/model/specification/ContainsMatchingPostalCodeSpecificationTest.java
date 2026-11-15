@@ -26,7 +26,7 @@ final class ContainsMatchingPostalCodeSpecificationTest {
   }
 
   @Test
-  void should_throw_exception_when_sequence_is_blank() {
+  void should_throw_exception_when_sequence_is_empty() {
     assertThrows(
         InvalidContainsMatchingPostalCodeSpecificationException.class,
         () -> ContainsMatchingPostalCodeSpecification.of(""));
