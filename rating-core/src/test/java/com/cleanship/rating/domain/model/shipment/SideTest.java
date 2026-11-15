@@ -26,7 +26,7 @@ final class SideTest {
   @ParameterizedTest
   @MethodSource("provideComparisons")
   void should_compare_to_successfully(Side a, Side b, int comparisonResult) {
-    assertEquals(a.compareTo(b), comparisonResult);
+    assertEquals(comparisonResult, a.compareTo(b));
   }
 
   private static Stream<Arguments> provideComparisons() {
