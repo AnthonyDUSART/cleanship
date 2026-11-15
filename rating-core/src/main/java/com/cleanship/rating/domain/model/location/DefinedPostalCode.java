@@ -12,7 +12,7 @@ public record DefinedPostalCode(String value) implements PostalCode {
 
     value = value.strip().toUpperCase(Locale.ROOT);
 
-    if (value.isBlank() || MAX_LENGTH < value.length()) {
+    if (value.isBlank() || value.length() > MAX_LENGTH) {
       throw InvalidPostalCodeException.of(value);
     }
   }
