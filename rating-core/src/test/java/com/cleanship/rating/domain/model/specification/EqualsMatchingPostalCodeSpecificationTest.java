@@ -14,7 +14,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 final class EqualsMatchingPostalCodeSpecificationTest {
   @Test
   void should_store_value() {
-    EqualsMatchingPostalCodeSpecification spec = EqualsMatchingPostalCodeSpecification.of("75000");
+    EqualsMatchingPostalCodeSpecification spec =
+        EqualsMatchingPostalCodeSpecification.of("  75000 ");
 
     assertEquals("75000", spec.value());
   }
@@ -28,7 +29,7 @@ final class EqualsMatchingPostalCodeSpecificationTest {
   void should_throw_exception_when_value_is_blank() {
     assertThrows(
         InvalidEqualsMatchingPostalCodeSpecificationException.class,
-        () -> EqualsMatchingPostalCodeSpecification.of(""));
+        () -> EqualsMatchingPostalCodeSpecification.of("  "));
   }
 
   @ParameterizedTest
