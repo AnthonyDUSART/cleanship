@@ -8,6 +8,8 @@ record StartsWithMatchingPostalCodeSpecification(String prefix) implements Posta
   public StartsWithMatchingPostalCodeSpecification {
     Objects.requireNonNull(prefix);
 
+    prefix = prefix.strip();
+
     if (prefix.isBlank()) {
       throw InvalidStartsWithMatchingPostalCodeSpecificationException.of(prefix);
     }

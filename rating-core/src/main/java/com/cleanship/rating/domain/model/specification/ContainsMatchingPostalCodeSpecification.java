@@ -8,7 +8,7 @@ record ContainsMatchingPostalCodeSpecification(String sequence) implements Posta
   public ContainsMatchingPostalCodeSpecification {
     Objects.requireNonNull(sequence);
 
-    if (sequence.isBlank()) {
+    if (sequence.isEmpty()) {
       throw InvalidContainsMatchingPostalCodeSpecificationException.of(sequence);
     }
   }

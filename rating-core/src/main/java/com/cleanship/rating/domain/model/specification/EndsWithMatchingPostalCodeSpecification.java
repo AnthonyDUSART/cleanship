@@ -8,6 +8,8 @@ record EndsWithMatchingPostalCodeSpecification(String suffix) implements PostalC
   public EndsWithMatchingPostalCodeSpecification {
     Objects.requireNonNull(suffix);
 
+    suffix = suffix.strip();
+
     if (suffix.isBlank()) {
       throw InvalidEndsWithMatchingPostalCodeSpecificationException.of(suffix);
     }

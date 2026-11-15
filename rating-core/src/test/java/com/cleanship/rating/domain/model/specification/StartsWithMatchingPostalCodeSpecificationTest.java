@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 final class StartsWithMatchingPostalCodeSpecificationTest {
   @Test
   void should_store_prefix() {
-    assertEquals("75", StartsWithMatchingPostalCodeSpecification.of("75").prefix());
+    assertEquals("75", StartsWithMatchingPostalCodeSpecification.of("  75 ").prefix());
   }
 
   @Test
@@ -27,7 +27,7 @@ final class StartsWithMatchingPostalCodeSpecificationTest {
   void should_throw_exception_when_prefix_is_blank() {
     assertThrows(
         InvalidStartsWithMatchingPostalCodeSpecificationException.class,
-        () -> StartsWithMatchingPostalCodeSpecification.of(""));
+        () -> StartsWithMatchingPostalCodeSpecification.of("  "));
   }
 
   @ParameterizedTest

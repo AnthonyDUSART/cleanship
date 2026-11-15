@@ -14,9 +14,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 final class ContainsMatchingPostalCodeSpecificationTest {
   @Test
   void should_store_sequence() {
-    ContainsMatchingPostalCodeSpecification spec = ContainsMatchingPostalCodeSpecification.of("50");
+    ContainsMatchingPostalCodeSpecification spec = ContainsMatchingPostalCodeSpecification.of("  ");
 
-    assertEquals("50", spec.sequence());
+    assertEquals("  ", spec.sequence());
   }
 
   @Test
@@ -26,7 +26,7 @@ final class ContainsMatchingPostalCodeSpecificationTest {
   }
 
   @Test
-  void should_throw_exception_when_sequence_is_blank() {
+  void should_throw_exception_when_sequence_is_empty() {
     assertThrows(
         InvalidContainsMatchingPostalCodeSpecificationException.class,
         () -> ContainsMatchingPostalCodeSpecification.of(""));

@@ -8,6 +8,8 @@ record EqualsMatchingPostalCodeSpecification(String value) implements PostalCode
   public EqualsMatchingPostalCodeSpecification {
     Objects.requireNonNull(value);
 
+    value = value.strip();
+
     if (value.isBlank()) {
       throw InvalidEqualsMatchingPostalCodeSpecificationException.of(value);
     }
