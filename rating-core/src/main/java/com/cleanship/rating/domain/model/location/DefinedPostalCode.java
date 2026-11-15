@@ -39,7 +39,7 @@ public record DefinedPostalCode(String value) implements PostalCode {
   public boolean contains(String sequence) {
     Objects.requireNonNull(sequence);
 
-    return value.contains(sequence);
+    return value.contains(sequence.toUpperCase(Locale.ROOT));
   }
 
   @Override
