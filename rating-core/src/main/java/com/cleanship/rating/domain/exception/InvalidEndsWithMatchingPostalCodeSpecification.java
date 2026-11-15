@@ -1,7 +1,11 @@
 package com.cleanship.rating.domain.exception;
 
+import java.util.Objects;
+
 public final class InvalidEndsWithMatchingPostalCodeSpecification extends DomainException {
   private InvalidEndsWithMatchingPostalCodeSpecification(String suffix) {
+    Objects.requireNonNull(suffix);
+
     super(String.format("Ends with matching postal code specification \"%s\" is invalid", suffix));
   }
 
