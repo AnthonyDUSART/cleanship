@@ -39,7 +39,7 @@ final class VolumeTest {
   @ParameterizedTest
   @MethodSource("provideComparisons")
   void should_compare_to_successfully(Volume a, Volume b, int comparisonResult) {
-    assertEquals(a.compareTo(b), comparisonResult);
+    assertEquals(comparisonResult, a.compareTo(b));
   }
 
   private static Stream<Arguments> provideComparisons() {
