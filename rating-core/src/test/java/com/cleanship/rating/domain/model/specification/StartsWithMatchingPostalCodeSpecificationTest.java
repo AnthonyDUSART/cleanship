@@ -27,7 +27,7 @@ final class StartsWithMatchingPostalCodeSpecificationTest {
   void should_throw_exception_when_prefix_is_blank() {
     assertThrows(
         InvalidStartsWithMatchingPostalCodeSpecificationException.class,
-        () -> StartsWithMatchingPostalCodeSpecification.of(""));
+        () -> StartsWithMatchingPostalCodeSpecification.of("  "));
   }
 
   @ParameterizedTest
