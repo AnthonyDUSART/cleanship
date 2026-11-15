@@ -25,27 +25,27 @@ public record DefinedPostalCode(String value) implements PostalCode {
   public boolean startsWith(String prefix) {
     Objects.requireNonNull(prefix);
 
-    return value.startsWith(prefix);
+    return value.startsWith(prefix.toUpperCase(Locale.ROOT));
   }
 
   @Override
   public boolean endsWith(String suffix) {
     Objects.requireNonNull(suffix);
 
-    return value.endsWith(suffix);
+    return value.endsWith(suffix.toUpperCase(Locale.ROOT));
   }
 
   @Override
   public boolean contains(String sequence) {
     Objects.requireNonNull(sequence);
 
-    return value.contains(sequence);
+    return value.contains(sequence.toUpperCase(Locale.ROOT));
   }
 
   @Override
   public boolean isEqualTo(String value) {
     Objects.requireNonNull(value);
 
-    return this.value.equals(value);
+    return this.value.equals(value.toUpperCase(Locale.ROOT));
   }
 }

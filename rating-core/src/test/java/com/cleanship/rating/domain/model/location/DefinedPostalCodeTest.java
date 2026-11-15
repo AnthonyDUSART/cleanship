@@ -31,7 +31,7 @@ final class DefinedPostalCodeTest {
 
   @Test
   void should_starts_with_successfully() {
-    assertTrue(DefinedPostalCode.of("75000").startsWith("75"));
+    assertTrue(DefinedPostalCode.of("A75000").startsWith("a75"));
   }
 
   @Test
@@ -46,7 +46,7 @@ final class DefinedPostalCodeTest {
 
   @Test
   void should_ends_with_successfully() {
-    assertTrue(DefinedPostalCode.of("75000").endsWith("000"));
+    assertTrue(DefinedPostalCode.of("75000A").endsWith("000a"));
   }
 
   @Test
@@ -61,7 +61,7 @@ final class DefinedPostalCodeTest {
 
   @Test
   void should_contains_successfully() {
-    assertTrue(DefinedPostalCode.of("75000").contains("50"));
+    assertTrue(DefinedPostalCode.of("7A5000").contains("a50"));
   }
 
   @Test
@@ -76,7 +76,7 @@ final class DefinedPostalCodeTest {
 
   @Test
   void should_be_equal_to_successfully() {
-    assertTrue(DefinedPostalCode.of("75000").isEqualTo("75000"));
+    assertTrue(DefinedPostalCode.of("A75000").isEqualTo("a75000"));
   }
 
   @Test
