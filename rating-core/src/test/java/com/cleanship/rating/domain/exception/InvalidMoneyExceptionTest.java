@@ -9,6 +9,6 @@ final class InvalidMoneyExceptionTest {
   void should_have_valid_message() {
     InvalidMoneyException exception = InvalidMoneyException.of(-20_00);
 
-    assertEquals(exception.getMessage(), "Money \"-2000\" is invalid");
+    assertEquals("Money \"-2000\" is invalid", exception.getMessage());
   }
 }
