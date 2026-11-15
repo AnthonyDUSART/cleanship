@@ -9,6 +9,6 @@ public final class InvalidPercentageExceptionTest {
   void should_have_valid_message() {
     InvalidPercentageException exception = InvalidPercentageException.of(-20_000);
 
-    assertEquals(exception.getMessage(), "Percentage \"-20000\" is invalid");
+    assertEquals("Percentage \"-20000\" is invalid", exception.getMessage());
   }
 }
