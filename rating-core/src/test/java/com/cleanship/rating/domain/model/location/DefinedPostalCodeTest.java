@@ -31,7 +31,7 @@ final class DefinedPostalCodeTest {
 
   @Test
   void should_starts_with_successfully() {
-    assertTrue(DefinedPostalCode.of("75000").startsWith("75"));
+    assertTrue(DefinedPostalCode.of("A75000").startsWith("a75"));
   }
 
   @Test

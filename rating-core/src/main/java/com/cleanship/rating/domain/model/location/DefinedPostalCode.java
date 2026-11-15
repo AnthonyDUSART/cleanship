@@ -25,7 +25,7 @@ public record DefinedPostalCode(String value) implements PostalCode {
   public boolean startsWith(String prefix) {
     Objects.requireNonNull(prefix);
 
-    return value.startsWith(prefix);
+    return value.startsWith(prefix.toUpperCase(Locale.ROOT));
   }
 
   @Override
