@@ -76,7 +76,7 @@ final class DefinedPostalCodeTest {
 
   @Test
   void should_be_equal_to_successfully() {
-    assertTrue(DefinedPostalCode.of("75000").isEqualTo("75000"));
+    assertTrue(DefinedPostalCode.of("A75000").isEqualTo("a75000"));
   }
 
   @Test

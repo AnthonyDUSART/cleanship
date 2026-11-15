@@ -46,6 +46,6 @@ public record DefinedPostalCode(String value) implements PostalCode {
   public boolean isEqualTo(String value) {
     Objects.requireNonNull(value);
 
-    return this.value.equals(value);
+    return this.value.equals(value.toUpperCase(Locale.ROOT));
   }
 }
