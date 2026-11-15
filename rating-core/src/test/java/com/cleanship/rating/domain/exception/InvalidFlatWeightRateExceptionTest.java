@@ -17,9 +17,7 @@ final class InvalidFlatWeightRateExceptionTest {
         InvalidFlatWeightRateException.of(MIN_INCLUSIVE, MAX_INCLUSIVE);
 
     assertEquals(
-        String.format(
-            "Flat weight rate minInclusive \"%d\" cannot be greater than maxInclusive \"%d\"",
-            MIN_INCLUSIVE.grams(), MAX_INCLUSIVE.grams()),
+        "Flat weight rate minInclusive \"2\" cannot be greater than maxInclusive \"1\"",
         exception.getMessage());
   }
 
