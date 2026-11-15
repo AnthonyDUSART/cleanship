@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public record Side(int millimeters) implements Comparable<Side> {
   public Side {
-    if (0 >= millimeters) {
+    if (millimeters <= 0) {
       throw InvalidSideException.of(millimeters);
     }
   }
