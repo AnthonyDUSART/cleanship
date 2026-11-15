@@ -11,7 +11,7 @@ public record ZoneName(String value) {
 
     value = value.strip();
 
-    if (value.isBlank() || MAX_LENGTH < value.length()) {
+    if (value.isBlank() || value.length() > MAX_LENGTH) {
       throw InvalidZoneNameException.of(value);
     }
   }
