@@ -61,7 +61,7 @@ final class NoDimensionTest {
   }
 
   @Test
-  void should_throw_exception_when_volume_within_null_min_inclusive() {
+  void should_throw_exception_when_is_volume_within_null_min_inclusive() {
     Volume maxInclusive = Volume.of(2);
 
     assertThrows(
@@ -69,10 +69,21 @@ final class NoDimensionTest {
   }
 
   @Test
-  void should_throw_exception_when_volume_within_null_max_inclusive() {
+  void should_throw_exception_when_is_volume_within_null_max_inclusive() {
     Volume minInclusive = Volume.of(1);
 
     assertThrows(
         NullPointerException.class, () -> NoDimension.of().isVolumeWithin(minInclusive, null));
+  }
+
+  @Test
+  void
+      should_throw_exception_when_is_volume_within_with_min_inclusive_greater_than_max_inclusive() {
+    Volume minInclusive = Volume.of(2);
+    Volume maxInclusive = Volume.of(1);
+
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> NoDimension.of().isVolumeWithin(minInclusive, maxInclusive));
   }
 }

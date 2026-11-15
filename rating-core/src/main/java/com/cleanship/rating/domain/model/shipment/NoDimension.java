@@ -28,6 +28,10 @@ public enum NoDimension implements Dimension {
     Objects.requireNonNull(minInclusive);
     Objects.requireNonNull(maxInclusive);
 
+    if (minInclusive.compareTo(maxInclusive) > 0) {
+      throw new IllegalArgumentException("minInclusive cannot be greater than maxInclusive");
+    }
+
     return false;
   }
 
