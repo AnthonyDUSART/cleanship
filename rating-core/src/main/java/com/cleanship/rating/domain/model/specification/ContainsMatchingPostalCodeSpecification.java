@@ -19,6 +19,8 @@ record ContainsMatchingPostalCodeSpecification(String sequence) implements Posta
 
   @Override
   public boolean isSatisfiedBy(PostalCode postalCode) {
+    Objects.requireNonNull(sequence);
+
     return postalCode.contains(sequence);
   }
 }

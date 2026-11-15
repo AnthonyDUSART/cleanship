@@ -1,6 +1,6 @@
 package com.cleanship.rating.domain.model.specification;
 
-import com.cleanship.rating.domain.exception.InvalidEndsWithMatchingPostalCodeSpecification;
+import com.cleanship.rating.domain.exception.InvalidEndsWithMatchingPostalCodeSpecificationException;
 import com.cleanship.rating.domain.model.location.PostalCode;
 import java.util.Objects;
 
@@ -9,7 +9,7 @@ record EndsWithMatchingPostalCodeSpecification(String suffix) implements PostalC
     Objects.requireNonNull(suffix);
 
     if (suffix.isBlank()) {
-      throw InvalidEndsWithMatchingPostalCodeSpecification.of(suffix);
+      throw InvalidEndsWithMatchingPostalCodeSpecificationException.of(suffix);
     }
   }
 
