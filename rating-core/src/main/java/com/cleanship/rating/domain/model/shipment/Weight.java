@@ -28,8 +28,9 @@ public record Weight(int grams) implements Comparable<Weight> {
     if (minInclusive.compareTo(maxInclusive) > 0) {
       throw new IllegalArgumentException(
           String.format(
-              "minInclusive \"%d\" cannot be greater than maxInclusive \"%d\"",
-              minInclusive.grams, maxInclusive.grams));
+              "minInclusive cannot be greater than maxInclusive",
+              minInclusive.grams,
+              maxInclusive.grams));
     }
     return compareTo(minInclusive) >= 0 && compareTo(maxInclusive) <= 0;
   }
