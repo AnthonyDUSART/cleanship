@@ -9,6 +9,6 @@ final class InvalidWeightExceptionTest {
   void should_have_valid_message() {
     InvalidWeightException exception = InvalidWeightException.of(-300);
 
-    assertEquals(exception.getMessage(), "Weight \"-300\" is invalid");
+    assertEquals("Weight \"-300\" is invalid", exception.getMessage());
   }
 }
