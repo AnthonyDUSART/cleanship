@@ -17,7 +17,7 @@ public record DefinedPostalCode(String value) implements PostalCode {
     }
   }
 
-  static DefinedPostalCode of(String value) {
+  public static DefinedPostalCode of(String value) {
     return new DefinedPostalCode(value);
   }
 
