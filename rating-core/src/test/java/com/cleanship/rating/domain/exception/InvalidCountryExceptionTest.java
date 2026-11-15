@@ -10,7 +10,7 @@ final class InvalidCountryExceptionTest {
   void should_have_valid_message() {
     InvalidCountryException exception = InvalidCountryException.of("FRA");
 
-    assertEquals(exception.getMessage(), "Country \"FRA\" is invalid");
+    assertEquals("Country \"FRA\" is invalid", exception.getMessage());
   }
 
   @Test
