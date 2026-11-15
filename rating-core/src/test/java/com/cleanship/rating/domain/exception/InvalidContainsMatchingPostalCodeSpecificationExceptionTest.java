@@ -16,7 +16,7 @@ final class InvalidContainsMatchingPostalCodeSpecificationExceptionTest {
   }
 
   @Test
-  void should_throw_exception_when_suffix_is_invalid() {
+  void should_throw_exception_when_sequence_is_invalid() {
     assertThrows(
         NullPointerException.class,
         () -> InvalidContainsMatchingPostalCodeSpecificationException.of(null));
