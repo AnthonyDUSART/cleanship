@@ -2,6 +2,7 @@ package com.cleanship.rating.domain.model.specification;
 
 import com.cleanship.rating.domain.exception.InvalidEndsWithMatchingPostalCodeSpecificationException;
 import com.cleanship.rating.domain.model.location.PostalCode;
+import java.util.Locale;
 import java.util.Objects;
 
 public record EndsWithMatchingPostalCodeSpecification(String suffix)
@@ -9,7 +10,7 @@ public record EndsWithMatchingPostalCodeSpecification(String suffix)
   public EndsWithMatchingPostalCodeSpecification {
     Objects.requireNonNull(suffix);
 
-    suffix = suffix.strip();
+    suffix = suffix.strip().toUpperCase(Locale.ROOT);
 
     if (suffix.isBlank()) {
       throw InvalidEndsWithMatchingPostalCodeSpecificationException.of(suffix);

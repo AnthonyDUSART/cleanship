@@ -2,6 +2,7 @@ package com.cleanship.rating.domain.model.specification;
 
 import com.cleanship.rating.domain.exception.InvalidContainsMatchingPostalCodeSpecificationException;
 import com.cleanship.rating.domain.model.location.PostalCode;
+import java.util.Locale;
 import java.util.Objects;
 
 public record ContainsMatchingPostalCodeSpecification(String sequence)
@@ -12,6 +13,8 @@ public record ContainsMatchingPostalCodeSpecification(String sequence)
     if (sequence.isEmpty()) {
       throw InvalidContainsMatchingPostalCodeSpecificationException.of(sequence);
     }
+
+    sequence = sequence.toUpperCase(Locale.ROOT);
   }
 
   public static ContainsMatchingPostalCodeSpecification of(String sequence) {

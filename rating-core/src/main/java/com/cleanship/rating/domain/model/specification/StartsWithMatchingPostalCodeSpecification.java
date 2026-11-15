@@ -2,6 +2,7 @@ package com.cleanship.rating.domain.model.specification;
 
 import com.cleanship.rating.domain.exception.InvalidStartsWithMatchingPostalCodeSpecificationException;
 import com.cleanship.rating.domain.model.location.PostalCode;
+import java.util.Locale;
 import java.util.Objects;
 
 public record StartsWithMatchingPostalCodeSpecification(String prefix)
@@ -9,7 +10,7 @@ public record StartsWithMatchingPostalCodeSpecification(String prefix)
   public StartsWithMatchingPostalCodeSpecification {
     Objects.requireNonNull(prefix);
 
-    prefix = prefix.strip();
+    prefix = prefix.strip().toUpperCase(Locale.ROOT);
 
     if (prefix.isBlank()) {
       throw InvalidStartsWithMatchingPostalCodeSpecificationException.of(prefix);

@@ -14,9 +14,10 @@ import org.junit.jupiter.params.provider.CsvSource;
 final class ContainsMatchingPostalCodeSpecificationTest {
   @Test
   void should_store_sequence() {
-    ContainsMatchingPostalCodeSpecification spec = ContainsMatchingPostalCodeSpecification.of("  ");
+    ContainsMatchingPostalCodeSpecification spec =
+        ContainsMatchingPostalCodeSpecification.of("  a");
 
-    assertEquals("  ", spec.sequence());
+    assertEquals("  A", spec.sequence());
   }
 
   @Test

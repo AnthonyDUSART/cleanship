@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 final class DefinedPostalCodeTest {
   @Test
   void should_store_value() {
-    assertEquals("75000", DefinedPostalCode.of("  75000 ").value());
+    assertEquals("A75000", DefinedPostalCode.of("  a75000 ").value());
   }
 
   @Test

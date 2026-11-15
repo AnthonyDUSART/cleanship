@@ -15,9 +15,9 @@ final class EqualsMatchingPostalCodeSpecificationTest {
   @Test
   void should_store_value() {
     EqualsMatchingPostalCodeSpecification spec =
-        EqualsMatchingPostalCodeSpecification.of("  75000 ");
+        EqualsMatchingPostalCodeSpecification.of("  a75000 ");
 
-    assertEquals("75000", spec.value());
+    assertEquals("A75000", spec.value());
   }
 
   @Test

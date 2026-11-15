@@ -2,6 +2,7 @@ package com.cleanship.rating.domain.model.specification;
 
 import com.cleanship.rating.domain.exception.InvalidEqualsMatchingPostalCodeSpecificationException;
 import com.cleanship.rating.domain.model.location.PostalCode;
+import java.util.Locale;
 import java.util.Objects;
 
 public record EqualsMatchingPostalCodeSpecification(String value)
@@ -9,7 +10,7 @@ public record EqualsMatchingPostalCodeSpecification(String value)
   public EqualsMatchingPostalCodeSpecification {
     Objects.requireNonNull(value);
 
-    value = value.strip();
+    value = value.strip().toUpperCase(Locale.ROOT);
 
     if (value.isBlank()) {
       throw InvalidEqualsMatchingPostalCodeSpecificationException.of(value);
