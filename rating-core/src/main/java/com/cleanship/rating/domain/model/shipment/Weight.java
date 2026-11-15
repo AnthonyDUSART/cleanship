@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public record Weight(int grams) implements Comparable<Weight> {
   public Weight {
-    if (0 >= grams) {
+    if (grams <= 0) {
       throw InvalidWeightException.of(grams);
     }
   }
