@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public record Volume(long cubicMillimeters) implements Comparable<Volume> {
   public Volume {
-    if (0 >= cubicMillimeters) {
+    if (cubicMillimeters <= 0) {
       throw InvalidVolumeException.of(cubicMillimeters);
     }
   }
