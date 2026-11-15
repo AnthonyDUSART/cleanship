@@ -1,11 +1,16 @@
 package com.cleanship.rating.domain.model.specification;
 
+import com.cleanship.rating.domain.exception.InvalidContainsMatchingPostalCodeSpecificationException;
 import com.cleanship.rating.domain.model.location.PostalCode;
 import java.util.Objects;
 
 record ContainsMatchingPostalCodeSpecification(String sequence) implements PostalCodeSpecification {
   public ContainsMatchingPostalCodeSpecification {
     Objects.requireNonNull(sequence);
+
+    if (sequence.isBlank()) {
+      throw InvalidContainsMatchingPostalCodeSpecificationException.of(sequence);
+    }
   }
 
   public static ContainsMatchingPostalCodeSpecification of(String sequence) {
@@ -14,6 +19,8 @@ record ContainsMatchingPostalCodeSpecification(String sequence) implements Posta
 
   @Override
   public boolean isSatisfiedBy(PostalCode postalCode) {
+    Objects.requireNonNull(sequence);
+
     return postalCode.contains(sequence);
   }
 }

@@ -1,11 +1,16 @@
 package com.cleanship.rating.domain.model.specification;
 
+import com.cleanship.rating.domain.exception.InvalidEqualsMatchingPostalCodeSpecificationException;
 import com.cleanship.rating.domain.model.location.PostalCode;
 import java.util.Objects;
 
 record EqualsMatchingPostalCodeSpecification(String value) implements PostalCodeSpecification {
   public EqualsMatchingPostalCodeSpecification {
     Objects.requireNonNull(value);
+
+    if (value.isBlank()) {
+      throw InvalidEqualsMatchingPostalCodeSpecificationException.of(value);
+    }
   }
 
   public static EqualsMatchingPostalCodeSpecification of(String value) {

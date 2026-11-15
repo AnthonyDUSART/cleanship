@@ -1,11 +1,16 @@
 package com.cleanship.rating.domain.model.specification;
 
+import com.cleanship.rating.domain.exception.InvalidEndsWithMatchingPostalCodeSpecificationException;
 import com.cleanship.rating.domain.model.location.PostalCode;
 import java.util.Objects;
 
 record EndsWithMatchingPostalCodeSpecification(String suffix) implements PostalCodeSpecification {
   public EndsWithMatchingPostalCodeSpecification {
     Objects.requireNonNull(suffix);
+
+    if (suffix.isBlank()) {
+      throw InvalidEndsWithMatchingPostalCodeSpecificationException.of(suffix);
+    }
   }
 
   public static EndsWithMatchingPostalCodeSpecification of(String suffix) {
