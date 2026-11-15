@@ -12,7 +12,7 @@ final class CurrencyMismatchExceptionTest {
     CurrencyMismatchException exception =
         CurrencyMismatchException.of(Currency.of("EUR"), Currency.of("USD"));
 
-    assertEquals(exception.getMessage(), "Currency mismatch, expected \"EUR\", actual \"USD\"");
+    assertEquals("Currency mismatch, expected \"EUR\", actual \"USD\"", exception.getMessage());
   }
 
   @Test
