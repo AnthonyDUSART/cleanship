@@ -3,7 +3,7 @@ package com.cleanship.rating.domain.model.specification;
 import com.cleanship.rating.domain.model.location.PostalCode;
 import java.util.Objects;
 
-record NotPostalCodeSpecification(PostalCodeSpecification postalCodeSpecification)
+public record NotPostalCodeSpecification(PostalCodeSpecification postalCodeSpecification)
     implements PostalCodeSpecification {
   public NotPostalCodeSpecification {
     Objects.requireNonNull(postalCodeSpecification);

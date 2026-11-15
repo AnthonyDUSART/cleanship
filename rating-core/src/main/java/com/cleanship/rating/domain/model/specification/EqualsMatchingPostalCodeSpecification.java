@@ -4,7 +4,8 @@ import com.cleanship.rating.domain.exception.InvalidEqualsMatchingPostalCodeSpec
 import com.cleanship.rating.domain.model.location.PostalCode;
 import java.util.Objects;
 
-record EqualsMatchingPostalCodeSpecification(String value) implements PostalCodeSpecification {
+public record EqualsMatchingPostalCodeSpecification(String value)
+    implements PostalCodeSpecification {
   public EqualsMatchingPostalCodeSpecification {
     Objects.requireNonNull(value);
 
