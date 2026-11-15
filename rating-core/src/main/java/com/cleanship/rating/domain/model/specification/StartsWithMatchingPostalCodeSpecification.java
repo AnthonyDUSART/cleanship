@@ -4,7 +4,8 @@ import com.cleanship.rating.domain.exception.InvalidStartsWithMatchingPostalCode
 import com.cleanship.rating.domain.model.location.PostalCode;
 import java.util.Objects;
 
-record StartsWithMatchingPostalCodeSpecification(String prefix) implements PostalCodeSpecification {
+public record StartsWithMatchingPostalCodeSpecification(String prefix)
+    implements PostalCodeSpecification {
   public StartsWithMatchingPostalCodeSpecification {
     Objects.requireNonNull(prefix);
 

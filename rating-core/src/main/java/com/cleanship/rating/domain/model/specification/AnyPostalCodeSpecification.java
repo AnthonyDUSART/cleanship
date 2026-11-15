@@ -3,7 +3,7 @@ package com.cleanship.rating.domain.model.specification;
 import com.cleanship.rating.domain.model.location.PostalCode;
 import java.util.Objects;
 
-enum AnyPostalCodeSpecification implements PostalCodeSpecification {
+public enum AnyPostalCodeSpecification implements PostalCodeSpecification {
   INSTANCE;
 
   public static AnyPostalCodeSpecification of() {
