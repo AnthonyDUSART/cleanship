@@ -34,4 +34,12 @@ final class PercentageTest {
   void should_throw_exception_when_apply_to_null_money_amount() {
     assertThrows(NullPointerException.class, () -> Percentage.of(50_000).applyTo(null));
   }
+
+  @Test
+  void should_throw_when_apply_to_maximum_amount() {
+    Money current = Money.of(Long.MAX_VALUE, Currency.of("EUR"));
+    Percentage percentage = Percentage.of(1_001);
+
+    assertThrows(ArithmeticException.class, () -> percentage.applyTo(current));
+  }
 }
