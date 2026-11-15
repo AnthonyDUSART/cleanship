@@ -32,7 +32,7 @@ public record DefinedPostalCode(String value) implements PostalCode {
   public boolean endsWith(String suffix) {
     Objects.requireNonNull(suffix);
 
-    return value.endsWith(suffix);
+    return value.endsWith(suffix.toUpperCase(Locale.ROOT));
   }
 
   @Override
