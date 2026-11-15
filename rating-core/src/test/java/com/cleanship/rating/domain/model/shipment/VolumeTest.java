@@ -37,6 +37,15 @@ final class VolumeTest {
     assertThrows(NullPointerException.class, () -> Volume.of(null));
   }
 
+  @Test
+  void should_throw_exception_when_create_from_max_defined_dimension() {
+    DefinedDimension maxDimension =
+        DefinedDimension.of(
+            Side.of(Integer.MAX_VALUE), Side.of(Integer.MAX_VALUE), Side.of(Integer.MAX_VALUE));
+
+    assertThrows(ArithmeticException.class, () -> Volume.of(maxDimension));
+  }
+
   @ParameterizedTest
   @MethodSource("provideComparisons")
   void should_compare_to_successfully(Volume a, Volume b, int comparisonResult) {

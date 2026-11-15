@@ -17,10 +17,10 @@ public record Volume(long cubicMillimeters) implements Comparable<Volume> {
   public static Volume of(DefinedDimension dimension) {
     Objects.requireNonNull(dimension);
 
-    return new Volume(
-        (long) dimension.length().millimeters()
-            * dimension.width().millimeters()
-            * dimension.height().millimeters());
+    long surface = (long) dimension.length().millimeters() * dimension.width().millimeters();
+    long cubicMillimeters = Math.multiplyExact(surface, dimension.height().millimeters());
+
+    return new Volume(cubicMillimeters);
   }
 
   @Override
