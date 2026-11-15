@@ -15,7 +15,7 @@ final class EndsWithMatchingPostalCodeSpecificationTest {
   @Test
   void should_store_suffix() {
     EndsWithMatchingPostalCodeSpecification spec =
-        EndsWithMatchingPostalCodeSpecification.of("000");
+        EndsWithMatchingPostalCodeSpecification.of("  000 ");
 
     assertEquals("000", spec.suffix());
   }
@@ -30,7 +30,7 @@ final class EndsWithMatchingPostalCodeSpecificationTest {
   void should_throw_exception_when_suffix_is_blank() {
     assertThrows(
         InvalidEndsWithMatchingPostalCodeSpecificationException.class,
-        () -> EndsWithMatchingPostalCodeSpecification.of(""));
+        () -> EndsWithMatchingPostalCodeSpecification.of("  "));
   }
 
   @ParameterizedTest
