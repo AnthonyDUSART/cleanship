@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.cleanship.rating.domain.exception.InvalidEqualsMatchingPostalCodeSpecificationException;
 import com.cleanship.rating.domain.model.location.PostalCode;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,6 +22,13 @@ final class EqualsMatchingPostalCodeSpecificationTest {
   @Test
   void should_throw_exception_when_value_is_null() {
     assertThrows(NullPointerException.class, () -> EqualsMatchingPostalCodeSpecification.of(null));
+  }
+
+  @Test
+  void should_throw_exception_when_value_is_blank() {
+    assertThrows(
+        InvalidEqualsMatchingPostalCodeSpecificationException.class,
+        () -> EqualsMatchingPostalCodeSpecification.of(""));
   }
 
   @ParameterizedTest
