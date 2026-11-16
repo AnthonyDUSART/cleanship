@@ -45,4 +45,11 @@ final class FlatSurchargeTest {
 
     assertEquals(expected, surcharge.apply(currentPrice, SHIPMENT));
   }
+
+  @Test
+  void should_throw_exception_when_apply_with_null_current_price() {
+    FlatSurcharge surcharge = FlatSurcharge.of(Money.of(4_00, Currency.of("EUR")));
+
+    assertThrows(NullPointerException.class, () -> surcharge.apply(null, SHIPMENT));
+  }
 }

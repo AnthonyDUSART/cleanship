@@ -14,6 +14,8 @@ public record FlatSurcharge(Money amount) implements PriceModifier {
 
   @Override
   public Optional<Money> apply(Money currentPrice, Shipment shipment) {
+    Objects.requireNonNull(currentPrice);
+
     return Optional.of(currentPrice.add(amount));
   }
 }
