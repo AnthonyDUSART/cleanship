@@ -18,6 +18,7 @@ public record FlatSurcharge(Money amount) implements PriceModifier {
   @Override
   public Optional<Money> apply(Money currentPrice, Shipment shipment) {
     Objects.requireNonNull(currentPrice);
+    Objects.requireNonNull(shipment);
 
     if (!shipment.declaredValue().currency().equals(amount.currency())) {
       throw CurrencyMismatchException.of(amount.currency(), shipment.declaredValue().currency());

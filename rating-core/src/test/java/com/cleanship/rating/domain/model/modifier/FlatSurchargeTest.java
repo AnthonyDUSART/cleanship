@@ -55,6 +55,14 @@ final class FlatSurchargeTest {
   }
 
   @Test
+  void should_throw_exception_when_apply_with_null_shipment() {
+    FlatSurcharge surcharge = FlatSurcharge.of(Money.of(4_00, Currency.of("EUR")));
+
+    assertThrows(
+        NullPointerException.class, () -> surcharge.apply(Money.zero(Currency.of("EUR")), null));
+  }
+
+  @Test
   void should_throw_exception_when_apply_with_current_price_currency_mismatch() {
     FlatSurcharge surcharge = FlatSurcharge.of(Money.of(4_00, Currency.of("EUR")));
 
