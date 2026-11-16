@@ -24,6 +24,11 @@ public record FreeThresholdDiscount(Money minDeclaredValue) implements PriceModi
       throw CurrencyMismatchException.of(minDeclaredValue.currency(), currentPrice.currency());
     }
 
+    if (!shipment.declaredValue().currency().equals(minDeclaredValue.currency())) {
+      throw CurrencyMismatchException.of(
+          minDeclaredValue.currency(), shipment.declaredValue().currency());
+    }
+
     if (!shipment.declaredValue().isGreaterThanOrEqualTo(minDeclaredValue)) {
       return Optional.empty();
     }

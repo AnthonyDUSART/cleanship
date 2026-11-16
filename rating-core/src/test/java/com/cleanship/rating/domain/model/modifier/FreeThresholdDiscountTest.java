@@ -76,8 +76,17 @@ final class FreeThresholdDiscountTest {
   }
 
   @Test
-  void should_throw_exception_when_apply_with_currency_mismatch() {
+  void should_throw_exception_when_apply_with_current_price_currency_mismatch() {
     FreeThresholdDiscount discount = FreeThresholdDiscount.of(Money.zero(Currency.of("EUR")));
+
+    assertThrows(
+        CurrencyMismatchException.class,
+        () -> discount.apply(Money.zero(Currency.of("USD")), SHIPMENT));
+  }
+
+  @Test
+  void should_throw_exception_when_apply_with_declared_value_currency_mismatch() {
+    FreeThresholdDiscount discount = FreeThresholdDiscount.of(Money.zero(Currency.of("USD")));
 
     assertThrows(
         CurrencyMismatchException.class,
