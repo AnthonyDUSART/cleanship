@@ -7,9 +7,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 public record FlatSurcharge(Money amount) implements PriceModifier {
-  public static FlatSurcharge of(Money amount) {
+  public FlatSurcharge {
     Objects.requireNonNull(amount);
+  }
 
+  public static FlatSurcharge of(Money amount) {
     return new FlatSurcharge(amount);
   }
 
