@@ -16,7 +16,7 @@ public record FreeThresholdDiscount(Money minDeclaredValue) implements PriceModi
 
   @Override
   public Optional<Money> apply(Money currentPrice, Shipment shipment) {
-    // TODO Auto-generated method stub
-    return Optional.empty();
+
+    return Optional.of(Money.zero(minDeclaredValue.currency()));
   }
 }
