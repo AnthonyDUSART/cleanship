@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.cleanship.rating.domain.model.money.Currency;
 import com.cleanship.rating.domain.model.money.Money;
+import com.cleanship.rating.domain.model.money.Percentage;
 import org.junit.jupiter.api.Test;
 
 final class PriceModifierTest {
@@ -30,5 +31,12 @@ final class PriceModifierTest {
   @Test
   void should_throw_exception_when_flat_surcharge_with_null_amount() {
     assertThrows(NullPointerException.class, () -> PriceModifier.flatSurcharge(null));
+  }
+
+  @Test
+  void should_create_percentage_surcharge() {
+    PercentageSurcharge expected = PercentageSurcharge.of(Percentage.of(10_000));
+
+    assertEquals(expected, PriceModifier.percentageSurcharge(Percentage.of(10_000)));
   }
 }

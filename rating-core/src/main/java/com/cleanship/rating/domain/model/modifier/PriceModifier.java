@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.modifier;
 
 import com.cleanship.rating.domain.model.money.Money;
+import com.cleanship.rating.domain.model.money.Percentage;
 import com.cleanship.rating.domain.model.shipment.Shipment;
 import java.util.Objects;
 import java.util.Optional;
@@ -19,5 +20,9 @@ public sealed interface PriceModifier
     Objects.requireNonNull(amount);
 
     return FlatSurcharge.of(amount);
+  }
+
+  public static PriceModifier percentageSurcharge(Percentage percentage) {
+    return PercentageSurcharge.of(percentage);
   }
 }
