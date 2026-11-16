@@ -13,4 +13,8 @@ public sealed interface PriceModifier permits FreeThresholdDiscount, FlatSurchar
 
     return FreeThresholdDiscount.of(minDeclaredValue);
   }
+
+  public static PriceModifier flatSurcharge(Money amount) {
+    return FlatSurcharge.of(amount);
+  }
 }

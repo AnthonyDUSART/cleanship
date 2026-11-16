@@ -19,4 +19,11 @@ final class PriceModifierTest {
   void should_throw_exception_when_free_threshold_discount_with_null_min_declared_value() {
     assertThrows(NullPointerException.class, () -> PriceModifier.freeThresholdDiscount(null));
   }
+
+  @Test
+  void should_create_flat_surcharge() {
+    FlatSurcharge expected = FlatSurcharge.of(Money.of(4_00, Currency.of("EUR")));
+
+    assertEquals(expected, PriceModifier.flatSurcharge(Money.of(4_00, Currency.of("EUR"))));
+  }
 }
