@@ -47,4 +47,15 @@ final class FreeThresholdDiscountTest {
 
     assertEquals(expected, discount.apply(currentPrice, SHIPMENT));
   }
+
+  @ParameterizedTest
+  @ValueSource(ints = {50_01, 60_00, 100_00})
+  void should_not_apply(int minDeclaredValueInCents) {
+    Money currentPrice = Money.of(4_57, Currency.of("EUR"));
+
+    FreeThresholdDiscount discount =
+        FreeThresholdDiscount.of(Money.of(minDeclaredValueInCents, Currency.of("EUR")));
+
+    assertEquals(Optional.empty(), discount.apply(currentPrice, SHIPMENT));
+  }
 }
