@@ -3,6 +3,7 @@ package com.cleanship.rating.domain.model.modifier;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.cleanship.rating.domain.exception.CurrencyMismatchException;
 import com.cleanship.rating.domain.model.location.Country;
 import com.cleanship.rating.domain.model.location.Location;
 import com.cleanship.rating.domain.model.money.Currency;
@@ -63,5 +64,14 @@ final class PercentageSurchargeTest {
     assertThrows(
         NullPointerException.class,
         () -> surcharge.apply(Money.of(4_00, Currency.of("EUR")), null));
+  }
+
+  @Test
+  void should_throw_exception_when_apply_with_current_price_currency_mismatch() {
+    PercentageSurcharge surcharge = PercentageSurcharge.of(Percentage.of(10_000));
+
+    assertThrows(
+        CurrencyMismatchException.class,
+        () -> surcharge.apply(Money.of(4_00, Currency.of("USD")), SHIPMENT));
   }
 }

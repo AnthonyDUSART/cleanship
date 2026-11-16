@@ -1,5 +1,6 @@
 package com.cleanship.rating.domain.model.modifier;
 
+import com.cleanship.rating.domain.exception.CurrencyMismatchException;
 import com.cleanship.rating.domain.model.money.Money;
 import com.cleanship.rating.domain.model.money.Percentage;
 import com.cleanship.rating.domain.model.shipment.Shipment;
@@ -19,6 +20,11 @@ public record PercentageSurcharge(Percentage percentage) implements PriceModifie
   public Optional<Money> apply(Money currentPrice, Shipment shipment) {
     Objects.requireNonNull(currentPrice);
     Objects.requireNonNull(shipment);
+
+    if (!currentPrice.currency().equals(shipment.declaredValue().currency())) {
+      throw CurrencyMismatchException.of(
+          currentPrice.currency(), shipment.declaredValue().currency());
+    }
 
     Money surcharge = currentPrice.applyPercentage(percentage);
 
