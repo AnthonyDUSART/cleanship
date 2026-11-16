@@ -16,11 +16,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 final class FreeThresholdDiscountTest {
-  private static final Shipment SHIPMENT = Shipment.of(
-      Location.of(Country.of("FR")),
-      Location.of(Country.of("FR")),
-      Parcel.of(Weight.of(250)),
-      Money.of(50_00, Currency.of("EUR")));
+  private static final Shipment SHIPMENT =
+      Shipment.of(
+          Location.of(Country.of("FR")),
+          Location.of(Country.of("FR")),
+          Parcel.of(Weight.of(250)),
+          Money.of(50_00, Currency.of("EUR")));
 
   @Test
   void should_store_min_declared_value() {
@@ -35,11 +36,12 @@ final class FreeThresholdDiscountTest {
   }
 
   @ParameterizedTest
-  @ValueSource(ints = { 0, 40_00, 50_00 })
+  @ValueSource(ints = {0, 40_00, 50_00})
   void should_apply_successfully(int minDeclaredValueInCents) {
     Money currentPrice = Money.of(4_57, Currency.of("EUR"));
 
-    FreeThresholdDiscount discount = FreeThresholdDiscount.of(Money.of(minDeclaredValueInCents, Currency.of("EUR")));
+    FreeThresholdDiscount discount =
+        FreeThresholdDiscount.of(Money.of(minDeclaredValueInCents, Currency.of("EUR")));
 
     Optional<Money> expected = Optional.of(Money.zero(Currency.of("EUR")));
 
@@ -47,11 +49,12 @@ final class FreeThresholdDiscountTest {
   }
 
   @ParameterizedTest
-  @ValueSource(ints = { 50_01, 60_00, 100_00 })
+  @ValueSource(ints = {50_01, 60_00, 100_00})
   void should_not_apply(int minDeclaredValueInCents) {
     Money currentPrice = Money.of(4_57, Currency.of("EUR"));
 
-    FreeThresholdDiscount discount = FreeThresholdDiscount.of(Money.of(minDeclaredValueInCents, Currency.of("EUR")));
+    FreeThresholdDiscount discount =
+        FreeThresholdDiscount.of(Money.of(minDeclaredValueInCents, Currency.of("EUR")));
 
     assertEquals(Optional.empty(), discount.apply(currentPrice, SHIPMENT));
   }
@@ -61,5 +64,13 @@ final class FreeThresholdDiscountTest {
     FreeThresholdDiscount discount = FreeThresholdDiscount.of(Money.of(50_00, Currency.of("EUR")));
 
     assertThrows(NullPointerException.class, () -> discount.apply(null, SHIPMENT));
+  }
+
+  @Test
+  void should_throw_exception_when_apply_with_null_shipment() {
+    FreeThresholdDiscount discount = FreeThresholdDiscount.of(Money.zero(Currency.of("EUR")));
+
+    assertThrows(
+        NullPointerException.class, () -> discount.apply(Money.zero(Currency.of("EUR")), null));
   }
 }
