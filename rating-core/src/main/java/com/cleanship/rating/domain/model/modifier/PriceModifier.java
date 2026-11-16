@@ -15,6 +15,8 @@ public sealed interface PriceModifier permits FreeThresholdDiscount, FlatSurchar
   }
 
   public static PriceModifier flatSurcharge(Money amount) {
+    Objects.requireNonNull(amount);
+
     return FlatSurcharge.of(amount);
   }
 }

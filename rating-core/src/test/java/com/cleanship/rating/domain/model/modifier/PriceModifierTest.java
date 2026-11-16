@@ -26,4 +26,9 @@ final class PriceModifierTest {
 
     assertEquals(expected, PriceModifier.flatSurcharge(Money.of(4_00, Currency.of("EUR"))));
   }
+
+  @Test
+  void should_throw_exception_when_flat_surcharge_with_null_amount() {
+    assertThrows(NullPointerException.class, () -> PriceModifier.flatSurcharge(null));
+  }
 }
