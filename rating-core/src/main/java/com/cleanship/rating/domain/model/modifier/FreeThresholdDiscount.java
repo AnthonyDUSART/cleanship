@@ -1,5 +1,6 @@
 package com.cleanship.rating.domain.model.modifier;
 
+import com.cleanship.rating.domain.exception.CurrencyMismatchException;
 import com.cleanship.rating.domain.model.money.Money;
 import com.cleanship.rating.domain.model.shipment.Shipment;
 import java.util.Objects;
@@ -18,6 +19,10 @@ public record FreeThresholdDiscount(Money minDeclaredValue) implements PriceModi
   public Optional<Money> apply(Money currentPrice, Shipment shipment) {
     Objects.requireNonNull(currentPrice);
     Objects.requireNonNull(shipment);
+
+    if (!currentPrice.currency().equals(minDeclaredValue.currency())) {
+      throw CurrencyMismatchException.of(minDeclaredValue.currency(), currentPrice.currency());
+    }
 
     if (!shipment.declaredValue().isGreaterThanOrEqualTo(minDeclaredValue)) {
       return Optional.empty();

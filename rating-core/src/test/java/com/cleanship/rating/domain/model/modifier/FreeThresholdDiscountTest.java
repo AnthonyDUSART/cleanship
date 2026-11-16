@@ -3,6 +3,7 @@ package com.cleanship.rating.domain.model.modifier;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.cleanship.rating.domain.exception.CurrencyMismatchException;
 import com.cleanship.rating.domain.model.location.Country;
 import com.cleanship.rating.domain.model.location.Location;
 import com.cleanship.rating.domain.model.money.Currency;
@@ -72,5 +73,14 @@ final class FreeThresholdDiscountTest {
 
     assertThrows(
         NullPointerException.class, () -> discount.apply(Money.zero(Currency.of("EUR")), null));
+  }
+
+  @Test
+  void should_throw_exception_when_apply_with_currency_mismatch() {
+    FreeThresholdDiscount discount = FreeThresholdDiscount.of(Money.zero(Currency.of("EUR")));
+
+    assertThrows(
+        CurrencyMismatchException.class,
+        () -> discount.apply(Money.zero(Currency.of("USD")), SHIPMENT));
   }
 }
