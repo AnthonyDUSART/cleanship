@@ -6,4 +6,8 @@ import java.util.Optional;
 
 public sealed interface PriceModifier permits FreeThresholdDiscount {
   public Optional<Money> apply(Money currentPrice, Shipment shipment);
+
+  public static PriceModifier freeThresholdDiscount(Money minDeclaredValue) {
+    return FreeThresholdDiscount.of(minDeclaredValue);
+  }
 }
