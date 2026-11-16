@@ -16,6 +16,8 @@ public record FreeThresholdDiscount(Money minDeclaredValue) implements PriceModi
 
   @Override
   public Optional<Money> apply(Money currentPrice, Shipment shipment) {
+    Objects.requireNonNull(currentPrice);
+
     if (!shipment.declaredValue().isGreaterThanOrEqualTo(minDeclaredValue)) {
       return Optional.empty();
     }
