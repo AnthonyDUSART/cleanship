@@ -23,6 +23,8 @@ public sealed interface PriceModifier
   }
 
   public static PriceModifier percentageSurcharge(Percentage percentage) {
+    Objects.requireNonNull(percentage);
+
     return PercentageSurcharge.of(percentage);
   }
 }

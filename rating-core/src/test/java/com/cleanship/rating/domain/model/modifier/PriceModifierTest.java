@@ -39,4 +39,9 @@ final class PriceModifierTest {
 
     assertEquals(expected, PriceModifier.percentageSurcharge(Percentage.of(10_000)));
   }
+
+  @Test
+  void should_throw_exception_when_percentage_surcharge_percentage_is_null() {
+    assertThrows(NullPointerException.class, () -> PriceModifier.percentageSurcharge(null));
+  }
 }
