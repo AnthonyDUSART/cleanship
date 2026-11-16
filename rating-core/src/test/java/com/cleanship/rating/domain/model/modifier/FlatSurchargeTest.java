@@ -3,6 +3,7 @@ package com.cleanship.rating.domain.model.modifier;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.cleanship.rating.domain.exception.CurrencyMismatchException;
 import com.cleanship.rating.domain.model.location.Country;
 import com.cleanship.rating.domain.model.location.Location;
 import com.cleanship.rating.domain.model.money.Currency;
@@ -51,5 +52,23 @@ final class FlatSurchargeTest {
     FlatSurcharge surcharge = FlatSurcharge.of(Money.of(4_00, Currency.of("EUR")));
 
     assertThrows(NullPointerException.class, () -> surcharge.apply(null, SHIPMENT));
+  }
+
+  @Test
+  void should_throw_exception_when_apply_with_current_price_currency_mismatch() {
+    FlatSurcharge surcharge = FlatSurcharge.of(Money.of(4_00, Currency.of("EUR")));
+
+    Money currentPrice = Money.zero(Currency.of("USD"));
+
+    assertThrows(CurrencyMismatchException.class, () -> surcharge.apply(currentPrice, SHIPMENT));
+  }
+
+  @Test
+  void should_throw_exception_when_apply_with_declared_value_currency_mismatch() {
+    FlatSurcharge surcharge = FlatSurcharge.of(Money.of(4_00, Currency.of("USD")));
+
+    Money currentPrice = Money.zero(Currency.of("USD"));
+
+    assertThrows(CurrencyMismatchException.class, () -> surcharge.apply(currentPrice, SHIPMENT));
   }
 }
