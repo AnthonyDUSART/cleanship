@@ -18,6 +18,7 @@ public record PercentageSurcharge(Percentage percentage) implements PriceModifie
   @Override
   public Optional<Money> apply(Money currentPrice, Shipment shipment) {
     Objects.requireNonNull(currentPrice);
+    Objects.requireNonNull(shipment);
 
     Money surcharge = currentPrice.applyPercentage(percentage);
 

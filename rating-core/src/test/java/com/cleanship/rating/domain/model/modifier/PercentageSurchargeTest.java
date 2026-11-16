@@ -55,4 +55,13 @@ final class PercentageSurchargeTest {
 
     assertThrows(NullPointerException.class, () -> surcharge.apply(null, SHIPMENT));
   }
+
+  @Test
+  void should_throw_exception_when_apply_with_null_shipment() {
+    PercentageSurcharge surcharge = PercentageSurcharge.of(Percentage.of(10_000));
+
+    assertThrows(
+        NullPointerException.class,
+        () -> surcharge.apply(Money.of(4_00, Currency.of("EUR")), null));
+  }
 }
