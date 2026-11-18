@@ -2,9 +2,14 @@ package com.cleanship.rating.domain.model.pricing;
 
 import com.cleanship.rating.domain.model.modifier.PriceModifier;
 import com.cleanship.rating.domain.model.money.Money;
+import java.util.Objects;
 
 public record AppliedPriceModifier(
     PriceModifier priceModifier, Money priceBefore, Money priceAfter) {
+  public AppliedPriceModifier {
+    Objects.requireNonNull(priceModifier);
+  }
+
   public static AppliedPriceModifier of(
       PriceModifier priceModifier, Money priceBefore, Money priceAfter) {
     return new AppliedPriceModifier(priceModifier, priceBefore, priceAfter);

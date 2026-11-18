@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.pricing;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.cleanship.rating.domain.model.modifier.PriceModifier;
 import com.cleanship.rating.domain.model.money.Currency;
@@ -37,5 +38,12 @@ final class AppliedPriceModifierTest {
         AppliedPriceModifier.of(FLAT_SURCHARGE, PRICE_BEFORE_SURCHARGE, PRICE_AFTER_SURCHARGE);
 
     assertEquals(PRICE_AFTER_SURCHARGE, appliedPriceModifier.priceAfter());
+  }
+
+  @Test
+  void should_throw_exception_when_price_modifier_is_null() {
+    assertThrows(
+        NullPointerException.class,
+        () -> AppliedPriceModifier.of(null, PRICE_BEFORE_SURCHARGE, PRICE_AFTER_SURCHARGE));
   }
 }
