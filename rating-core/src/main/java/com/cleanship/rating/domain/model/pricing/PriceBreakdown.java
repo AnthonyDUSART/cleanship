@@ -15,6 +15,8 @@ public record PriceBreakdown(Money basePrice, List<AppliedPriceModifier> applied
     Objects.requireNonNull(basePrice);
     Objects.requireNonNull(appliedPriceModifiers);
 
+    appliedPriceModifiers = List.copyOf(appliedPriceModifiers);
+
     Money expectedPrice = basePrice;
     for (AppliedPriceModifier appliedPriceModifier : appliedPriceModifiers) {
       if (!expectedPrice.currency().equals(appliedPriceModifier.priceBefore().currency())) {
@@ -29,8 +31,6 @@ public record PriceBreakdown(Money basePrice, List<AppliedPriceModifier> applied
 
       expectedPrice = appliedPriceModifier.priceAfter();
     }
-
-    appliedPriceModifiers = List.copyOf(appliedPriceModifiers);
   }
 
   public static PriceBreakdown of(Money basePrice) {
@@ -49,8 +49,7 @@ public record PriceBreakdown(Money basePrice, List<AppliedPriceModifier> applied
       return this;
     }
 
-    List<AppliedPriceModifier> updatedAppliedPriceModifiers =
-        new ArrayList<>(appliedPriceModifiers);
+    List<AppliedPriceModifier> updatedAppliedPriceModifiers = new ArrayList<>(appliedPriceModifiers);
     updatedAppliedPriceModifiers.add(
         AppliedPriceModifier.of(priceModifier, priceBefore, priceAfter.get()));
 
