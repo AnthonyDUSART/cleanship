@@ -44,7 +44,7 @@ final class PriceBreakdownTest {
 
   @Test
   void should_throw_exception_when_applied_price_modifiers_is_null() {
-    assertThrows(NullPointerException.class, () -> new PriceBreakdown(BASE_PRICE, null));
+    assertThrows(NullPointerException.class, () -> PriceBreakdown.of(BASE_PRICE, null));
   }
 
   @Test
@@ -61,7 +61,7 @@ final class PriceBreakdownTest {
 
     assertThrows(
         CurrencyMismatchException.class,
-        () -> new PriceBreakdown(BASE_PRICE, appliedPriceModifiers));
+        () -> PriceBreakdown.of(BASE_PRICE, appliedPriceModifiers));
   }
 
   @Test
@@ -76,7 +76,7 @@ final class PriceBreakdownTest {
 
     assertThrows(
         PriceBreakdownContinuityException.class,
-        () -> new PriceBreakdown(BASE_PRICE, appliedPriceModifiers));
+        () -> PriceBreakdown.of(BASE_PRICE, appliedPriceModifiers));
   }
 
   @Test
@@ -86,7 +86,7 @@ final class PriceBreakdownTest {
 
     assertNotSame(
         appliedPriceModifiers,
-        new PriceBreakdown(BASE_PRICE, appliedPriceModifiers).appliedPriceModifiers());
+        PriceBreakdown.of(BASE_PRICE, appliedPriceModifiers).appliedPriceModifiers());
   }
 
   @Test
@@ -103,7 +103,7 @@ final class PriceBreakdownTest {
     List<AppliedPriceModifier> expectedAppliedPriceModifiers =
         List.of(AppliedPriceModifier.of(FLAT_SURCHARGE, BASE_PRICE, PRICE_AFTER));
 
-    PriceBreakdown expected = new PriceBreakdown(BASE_PRICE, expectedAppliedPriceModifiers);
+    PriceBreakdown expected = PriceBreakdown.of(BASE_PRICE, expectedAppliedPriceModifiers);
 
     assertEquals(expected, updatedPriceBreakdown);
   }
@@ -117,7 +117,7 @@ final class PriceBreakdownTest {
 
     PriceBreakdown updatedPriceBreakdown = priceBreakdown.apply(freeThresholdDiscount, SHIPMENT);
 
-    PriceBreakdown expected = new PriceBreakdown(BASE_PRICE, List.of());
+    PriceBreakdown expected = PriceBreakdown.of(BASE_PRICE, List.of());
 
     assertEquals(expected, updatedPriceBreakdown);
   }
@@ -141,7 +141,7 @@ final class PriceBreakdownTest {
     List<AppliedPriceModifier> appliedPriceModifiers =
         List.of(AppliedPriceModifier.of(FLAT_SURCHARGE, BASE_PRICE, PRICE_AFTER));
 
-    PriceBreakdown priceBreakdown = new PriceBreakdown(BASE_PRICE, appliedPriceModifiers);
+    PriceBreakdown priceBreakdown = PriceBreakdown.of(BASE_PRICE, appliedPriceModifiers);
 
     assertEquals(PRICE_AFTER, priceBreakdown.finalPrice());
   }

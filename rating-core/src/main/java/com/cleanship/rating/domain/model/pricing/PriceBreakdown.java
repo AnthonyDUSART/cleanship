@@ -38,6 +38,11 @@ public record PriceBreakdown(Money basePrice, List<AppliedPriceModifier> applied
     return new PriceBreakdown(basePrice, List.of());
   }
 
+  public static PriceBreakdown of(
+      Money basePrice, List<AppliedPriceModifier> appliedPriceModifiers) {
+    return new PriceBreakdown(basePrice, appliedPriceModifiers);
+  }
+
   public PriceBreakdown apply(PriceModifier priceModifier, Shipment shipment) {
     Objects.requireNonNull(priceModifier);
     Objects.requireNonNull(shipment);
