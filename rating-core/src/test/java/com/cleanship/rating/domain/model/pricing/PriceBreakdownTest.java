@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.cleanship.rating.domain.exception.CurrencyMismatchException;
 import com.cleanship.rating.domain.exception.PriceBreakdownContinuityException;
 import com.cleanship.rating.domain.model.location.Country;
 import com.cleanship.rating.domain.model.location.Location;
@@ -42,6 +43,23 @@ final class PriceBreakdownTest {
   @Test
   void should_throw_exception_when_applied_price_modifiers_is_null() {
     assertThrows(NullPointerException.class, () -> new PriceBreakdown(BASE_PRICE, null));
+  }
+
+  @Test
+  void should_throw_exception_when_applied_price_modifiers_have_currency_mismatch() {
+    List<AppliedPriceModifier> appliedPriceModifiers =
+        List.of(
+            AppliedPriceModifier.of(FLAT_SURCHARGE, BASE_PRICE, PRICE_AFTER),
+            AppliedPriceModifier.of(
+                FLAT_SURCHARGE, PRICE_AFTER, Money.of(30_00, Currency.of("EUR"))),
+            AppliedPriceModifier.of(
+                FLAT_SURCHARGE,
+                Money.of(30_00, Currency.of("USD")),
+                Money.of(35_00, Currency.of("USD"))));
+
+    assertThrows(
+        CurrencyMismatchException.class,
+        () -> new PriceBreakdown(BASE_PRICE, appliedPriceModifiers));
   }
 
   @Test

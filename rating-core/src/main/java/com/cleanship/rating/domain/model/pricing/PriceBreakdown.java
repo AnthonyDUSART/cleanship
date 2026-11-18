@@ -1,5 +1,6 @@
 package com.cleanship.rating.domain.model.pricing;
 
+import com.cleanship.rating.domain.exception.CurrencyMismatchException;
 import com.cleanship.rating.domain.exception.PriceBreakdownContinuityException;
 import com.cleanship.rating.domain.model.modifier.PriceModifier;
 import com.cleanship.rating.domain.model.money.Money;
@@ -16,6 +17,11 @@ public record PriceBreakdown(Money basePrice, List<AppliedPriceModifier> applied
 
     Money expectedPrice = basePrice;
     for (AppliedPriceModifier appliedPriceModifier : appliedPriceModifiers) {
+      if (!expectedPrice.currency().equals(appliedPriceModifier.priceBefore().currency())) {
+        throw CurrencyMismatchException.of(
+            expectedPrice.currency(), appliedPriceModifier.priceBefore().currency());
+      }
+
       if (!expectedPrice.equals(appliedPriceModifier.priceBefore())) {
         throw PriceBreakdownContinuityException.of(
             expectedPrice, appliedPriceModifier.priceBefore());
