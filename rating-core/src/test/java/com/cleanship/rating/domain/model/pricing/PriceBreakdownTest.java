@@ -99,4 +99,14 @@ final class PriceBreakdownTest {
 
     assertThrows(NullPointerException.class, () -> priceBreakdown.apply(FLAT_SURCHARGE, null));
   }
+
+  @Test
+  void should_have_valid_final_price_with_applied_price_modifiers() {
+    List<AppliedPriceModifier> appliedPriceModifiers =
+        List.of(AppliedPriceModifier.of(FLAT_SURCHARGE, BASE_PRICE, PRICE_AFTER));
+
+    PriceBreakdown priceBreakdown = new PriceBreakdown(BASE_PRICE, appliedPriceModifiers);
+
+    assertEquals(PRICE_AFTER, priceBreakdown.finalPrice());
+  }
 }
