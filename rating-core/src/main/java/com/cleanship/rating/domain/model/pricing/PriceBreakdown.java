@@ -49,7 +49,8 @@ public record PriceBreakdown(Money basePrice, List<AppliedPriceModifier> applied
       return this;
     }
 
-    List<AppliedPriceModifier> updatedAppliedPriceModifiers = new ArrayList<>(appliedPriceModifiers);
+    List<AppliedPriceModifier> updatedAppliedPriceModifiers =
+        new ArrayList<>(appliedPriceModifiers);
     updatedAppliedPriceModifiers.add(
         AppliedPriceModifier.of(priceModifier, priceBefore, priceAfter.get()));
 
