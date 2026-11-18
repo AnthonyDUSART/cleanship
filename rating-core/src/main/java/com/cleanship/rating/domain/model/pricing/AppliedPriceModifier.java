@@ -9,6 +9,7 @@ public record AppliedPriceModifier(
   public AppliedPriceModifier {
     Objects.requireNonNull(priceModifier);
     Objects.requireNonNull(priceBefore);
+    Objects.requireNonNull(priceAfter);
   }
 
   public static AppliedPriceModifier of(
