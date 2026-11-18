@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public record PriceBreakdown(Money basePrice, List<AppliedPriceModifier> appliedPriceModifiers) {
+public record PriceBreakdown(Money basePrice, List<AppliedPriceModifier> appliedPriceModifiers)
+    implements Comparable<PriceBreakdown> {
   public PriceBreakdown {
     Objects.requireNonNull(basePrice);
     Objects.requireNonNull(appliedPriceModifiers);
@@ -61,5 +62,10 @@ public record PriceBreakdown(Money basePrice, List<AppliedPriceModifier> applied
     return appliedPriceModifiers.isEmpty()
         ? basePrice
         : appliedPriceModifiers.getLast().priceAfter();
+  }
+
+  @Override
+  public int compareTo(PriceBreakdown o) {
+    return finalPrice().compareTo(o.finalPrice());
   }
 }

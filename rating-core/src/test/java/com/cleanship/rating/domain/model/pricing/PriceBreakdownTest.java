@@ -17,6 +17,8 @@ import com.cleanship.rating.domain.model.shipment.Weight;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 final class PriceBreakdownTest {
   private static final Money BASE_PRICE = Money.of(20_00, Currency.of("EUR"));
@@ -149,5 +151,17 @@ final class PriceBreakdownTest {
     PriceBreakdown priceBreakdown = PriceBreakdown.of(BASE_PRICE);
 
     assertEquals(BASE_PRICE, priceBreakdown.finalPrice());
+  }
+
+  @ParameterizedTest
+  @CsvSource({"1, 2, -1", "1, 1, 0", "2, 1, 1"})
+  void should_compare_to_successfully(
+      int currentFinalPriceInCents, int otherFinalPriceInCents, int comparisonResult) {
+    PriceBreakdown current =
+        PriceBreakdown.of(Money.of(currentFinalPriceInCents, Currency.of("EUR")));
+
+    PriceBreakdown other = PriceBreakdown.of(Money.of(otherFinalPriceInCents, Currency.of("EUR")));
+
+    assertEquals(comparisonResult, current.compareTo(other));
   }
 }
