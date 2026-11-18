@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.exception;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.cleanship.rating.domain.model.money.Currency;
 import com.cleanship.rating.domain.model.money.Money;
@@ -16,5 +17,12 @@ final class PriceBreakdownContinuityExceptionTest {
     assertEquals(
         "Price breakdown expected priceBefore \"2000 EUR\", actual \"0 EUR\"",
         exception.getMessage());
+  }
+
+  @Test
+  void should_throw_exception_when_expected_price_before_is_null() {
+    assertThrows(
+        NullPointerException.class,
+        () -> PriceBreakdownContinuityException.of(null, Money.zero(Currency.of("EUR"))));
   }
 }
