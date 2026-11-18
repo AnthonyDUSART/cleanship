@@ -8,6 +8,7 @@ public record AppliedPriceModifier(
     PriceModifier priceModifier, Money priceBefore, Money priceAfter) {
   public AppliedPriceModifier {
     Objects.requireNonNull(priceModifier);
+    Objects.requireNonNull(priceBefore);
   }
 
   public static AppliedPriceModifier of(

@@ -46,4 +46,11 @@ final class AppliedPriceModifierTest {
         NullPointerException.class,
         () -> AppliedPriceModifier.of(null, PRICE_BEFORE_SURCHARGE, PRICE_AFTER_SURCHARGE));
   }
+
+  @Test
+  void should_throw_exception_when_price_before_is_null() {
+    assertThrows(
+        NullPointerException.class,
+        () -> AppliedPriceModifier.of(FLAT_SURCHARGE, null, PRICE_AFTER_SURCHARGE));
+  }
 }
