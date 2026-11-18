@@ -171,4 +171,14 @@ final class PriceBreakdownTest {
 
     assertThrows(NullPointerException.class, () -> priceBreakdown.compareTo(null));
   }
+
+  @Test
+  void should_throw_exception_when_compare_to_with_currency_mismatch() {
+    PriceBreakdown euroPriceBreakdown = PriceBreakdown.of(BASE_PRICE);
+
+    PriceBreakdown dollarPriceBreakdown = PriceBreakdown.of(Money.zero(Currency.of("USD")));
+
+    assertThrows(
+        CurrencyMismatchException.class, () -> euroPriceBreakdown.compareTo(dollarPriceBreakdown));
+  }
 }
