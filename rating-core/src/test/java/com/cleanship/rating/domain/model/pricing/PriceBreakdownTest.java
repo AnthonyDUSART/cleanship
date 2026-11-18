@@ -85,4 +85,11 @@ final class PriceBreakdownTest {
 
     assertEquals(expected, updatedPriceBreakdown);
   }
+
+  @Test
+  void should_throw_exception_when_apply_with_null_price_modifier() {
+    PriceBreakdown priceBreakdown = PriceBreakdown.of(BASE_PRICE);
+
+    assertThrows(NullPointerException.class, () -> priceBreakdown.apply(null, SHIPMENT));
+  }
 }
