@@ -66,6 +66,8 @@ public record PriceBreakdown(Money basePrice, List<AppliedPriceModifier> applied
 
   @Override
   public int compareTo(PriceBreakdown o) {
+    Objects.requireNonNull(o);
+
     return finalPrice().compareTo(o.finalPrice());
   }
 }

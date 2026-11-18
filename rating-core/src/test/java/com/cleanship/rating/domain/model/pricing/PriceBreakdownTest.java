@@ -164,4 +164,11 @@ final class PriceBreakdownTest {
 
     assertEquals(comparisonResult, current.compareTo(other));
   }
+
+  @Test
+  void should_throw_exception_when_compare_to_null() {
+    PriceBreakdown priceBreakdown = PriceBreakdown.of(BASE_PRICE);
+
+    assertThrows(NullPointerException.class, () -> priceBreakdown.compareTo(null));
+  }
 }
