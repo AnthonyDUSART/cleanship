@@ -6,6 +6,7 @@ import java.util.Objects;
 public final class PriceBreakdownContinuityException extends DomainException {
   private PriceBreakdownContinuityException(Money expectedPriceBefore, Money actualPriceBefore) {
     Objects.requireNonNull(expectedPriceBefore);
+    Objects.requireNonNull(actualPriceBefore);
 
     super(
         String.format(

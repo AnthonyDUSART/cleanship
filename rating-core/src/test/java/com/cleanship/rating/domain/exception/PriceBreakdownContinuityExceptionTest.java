@@ -25,4 +25,11 @@ final class PriceBreakdownContinuityExceptionTest {
         NullPointerException.class,
         () -> PriceBreakdownContinuityException.of(null, Money.zero(Currency.of("EUR"))));
   }
+
+  @Test
+  void should_throw_exception_when_actual_price_before_is_null() {
+    assertThrows(
+        NullPointerException.class,
+        () -> PriceBreakdownContinuityException.of(Money.zero(Currency.of("EUR")), null));
+  }
 }
