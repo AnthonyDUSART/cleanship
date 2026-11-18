@@ -1,5 +1,6 @@
 package com.cleanship.rating.domain.model.pricing;
 
+import com.cleanship.rating.domain.exception.PriceBreakdownContinuityException;
 import com.cleanship.rating.domain.model.modifier.PriceModifier;
 import com.cleanship.rating.domain.model.money.Money;
 import com.cleanship.rating.domain.model.shipment.Shipment;
@@ -12,6 +13,16 @@ public record PriceBreakdown(Money basePrice, List<AppliedPriceModifier> applied
   public PriceBreakdown {
     Objects.requireNonNull(basePrice);
     Objects.requireNonNull(appliedPriceModifiers);
+
+    Money expectedPrice = basePrice;
+    for (AppliedPriceModifier appliedPriceModifier : appliedPriceModifiers) {
+      if (!expectedPrice.equals(appliedPriceModifier.priceBefore())) {
+        throw PriceBreakdownContinuityException.of(
+            expectedPrice, appliedPriceModifier.priceBefore());
+      }
+
+      expectedPrice = appliedPriceModifier.priceAfter();
+    }
 
     appliedPriceModifiers = List.copyOf(appliedPriceModifiers);
   }
