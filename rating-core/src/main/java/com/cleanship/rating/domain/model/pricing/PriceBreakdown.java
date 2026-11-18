@@ -22,6 +22,7 @@ public record PriceBreakdown(Money basePrice, List<AppliedPriceModifier> applied
 
   public PriceBreakdown apply(PriceModifier priceModifier, Shipment shipment) {
     Objects.requireNonNull(priceModifier);
+    Objects.requireNonNull(shipment);
 
     Money priceBefore =
         appliedPriceModifiers.isEmpty() ? basePrice : appliedPriceModifiers.getLast().priceAfter();

@@ -92,4 +92,11 @@ final class PriceBreakdownTest {
 
     assertThrows(NullPointerException.class, () -> priceBreakdown.apply(null, SHIPMENT));
   }
+
+  @Test
+  void should_throw_exception_when_apply_with_null_shipment() {
+    PriceBreakdown priceBreakdown = PriceBreakdown.of(BASE_PRICE);
+
+    assertThrows(NullPointerException.class, () -> priceBreakdown.apply(FLAT_SURCHARGE, null));
+  }
 }
