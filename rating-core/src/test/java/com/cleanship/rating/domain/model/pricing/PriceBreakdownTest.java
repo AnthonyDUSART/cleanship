@@ -109,6 +109,24 @@ final class PriceBreakdownTest {
   }
 
   @Test
+  void should_apply_multiple_price_modifiers_successfully() {
+    PriceBreakdown priceBreakdown = PriceBreakdown.of(BASE_PRICE);
+
+    PriceBreakdown updatedPriceBreakdown =
+        priceBreakdown.apply(FLAT_SURCHARGE, SHIPMENT).apply(FLAT_SURCHARGE, SHIPMENT);
+
+    Money finalPriceAfterSecondSurcharge = Money.of(30_00, Currency.of("EUR"));
+    List<AppliedPriceModifier> expectedAppliedPriceModifiers =
+        List.of(
+            AppliedPriceModifier.of(FLAT_SURCHARGE, BASE_PRICE, PRICE_AFTER),
+            AppliedPriceModifier.of(FLAT_SURCHARGE, PRICE_AFTER, finalPriceAfterSecondSurcharge));
+
+    PriceBreakdown expected = PriceBreakdown.of(BASE_PRICE, expectedAppliedPriceModifiers);
+
+    assertEquals(expected, updatedPriceBreakdown);
+  }
+
+  @Test
   void should_apply_with_empty_successfully() {
     PriceBreakdown priceBreakdown = PriceBreakdown.of(BASE_PRICE);
 
