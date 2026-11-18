@@ -3,6 +3,7 @@ package com.cleanship.rating.domain.model.pricing;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.cleanship.rating.domain.exception.CurrencyMismatchException;
 import com.cleanship.rating.domain.model.modifier.PriceModifier;
 import com.cleanship.rating.domain.model.money.Currency;
 import com.cleanship.rating.domain.model.money.Money;
@@ -59,5 +60,14 @@ final class AppliedPriceModifierTest {
     assertThrows(
         NullPointerException.class,
         () -> AppliedPriceModifier.of(FLAT_SURCHARGE, PRICE_BEFORE_SURCHARGE, null));
+  }
+
+  @Test
+  void should_throw_exception_when_price_after_have_currency_mismatch() {
+    assertThrows(
+        CurrencyMismatchException.class,
+        () ->
+            AppliedPriceModifier.of(
+                FLAT_SURCHARGE, PRICE_BEFORE_SURCHARGE, Money.of(10_00, Currency.of("USD"))));
   }
 }
