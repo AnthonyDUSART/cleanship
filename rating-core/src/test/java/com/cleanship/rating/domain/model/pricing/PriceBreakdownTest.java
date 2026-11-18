@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.pricing;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.cleanship.rating.domain.model.modifier.PriceModifier;
 import com.cleanship.rating.domain.model.money.Currency;
@@ -18,5 +19,10 @@ final class PriceBreakdownTest {
     PriceBreakdown priceBreakdown = PriceBreakdown.of(BASE_PRICE);
 
     assertEquals(BASE_PRICE, priceBreakdown.basePrice());
+  }
+
+  @Test
+  void should_throw_exception_when_base_price_is_null() {
+    assertThrows(NullPointerException.class, () -> PriceBreakdown.of(null));
   }
 }
