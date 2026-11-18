@@ -109,4 +109,11 @@ final class PriceBreakdownTest {
 
     assertEquals(PRICE_AFTER, priceBreakdown.finalPrice());
   }
+
+  @Test
+  void should_have_valid_final_price_without_applied_price_modifiers() {
+    PriceBreakdown priceBreakdown = PriceBreakdown.of(BASE_PRICE);
+
+    assertEquals(BASE_PRICE, priceBreakdown.finalPrice());
+  }
 }

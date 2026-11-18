@@ -42,6 +42,8 @@ public record PriceBreakdown(Money basePrice, List<AppliedPriceModifier> applied
   }
 
   public Money finalPrice() {
-    return appliedPriceModifiers.getLast().priceAfter();
+    return appliedPriceModifiers.isEmpty()
+        ? basePrice
+        : appliedPriceModifiers.getLast().priceAfter();
   }
 }
