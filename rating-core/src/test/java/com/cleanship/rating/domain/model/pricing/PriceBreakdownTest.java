@@ -71,4 +71,18 @@ final class PriceBreakdownTest {
 
     assertEquals(expected, updatedPriceBreakdown);
   }
+
+  @Test
+  void should_apply_with_empty_successfully() {
+    PriceBreakdown priceBreakdown = PriceBreakdown.of(BASE_PRICE);
+
+    PriceModifier freeThresholdDiscount =
+        PriceModifier.freeThresholdDiscount(Money.of(100_00, Currency.of("EUR")));
+
+    PriceBreakdown updatedPriceBreakdown = priceBreakdown.apply(freeThresholdDiscount, SHIPMENT);
+
+    PriceBreakdown expected = new PriceBreakdown(BASE_PRICE, List.of());
+
+    assertEquals(expected, updatedPriceBreakdown);
+  }
 }
