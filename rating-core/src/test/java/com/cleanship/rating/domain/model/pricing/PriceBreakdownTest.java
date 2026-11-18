@@ -184,6 +184,14 @@ final class PriceBreakdownTest {
   }
 
   @Test
+  void should_compare_to_using_final_price_with_applied_price_modifiers() {
+    PriceBreakdown current = PriceBreakdown.of(BASE_PRICE).apply(FLAT_SURCHARGE, SHIPMENT);
+    PriceBreakdown other = PriceBreakdown.of(Money.of(22_00, Currency.of("EUR")));
+
+    assertEquals(1, current.compareTo(other));
+  }
+
+  @Test
   void should_throw_exception_when_compare_to_null() {
     PriceBreakdown priceBreakdown = PriceBreakdown.of(BASE_PRICE);
 
