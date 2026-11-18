@@ -22,4 +22,12 @@ final class AppliedPriceModifierTest {
 
     assertEquals(FLAT_SURCHARGE, appliedPriceModifier.priceModifier());
   }
+
+  @Test
+  void should_store_price_before() {
+    AppliedPriceModifier appliedPriceModifier =
+        AppliedPriceModifier.of(FLAT_SURCHARGE, PRICE_BEFORE_SURCHARGE, PRICE_AFTER_SURCHARGE);
+
+    assertEquals(PRICE_BEFORE_SURCHARGE, appliedPriceModifier.priceBefore());
+  }
 }
