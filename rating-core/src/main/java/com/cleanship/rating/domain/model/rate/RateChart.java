@@ -56,7 +56,7 @@ public record RateChart(
   private void ensureNoOverlappingRates(Zone zone, Set<Rate> rates) {
     List<Rate> rateList = List.copyOf(rates);
     for (int i = 0; i < rateList.size(); i++) {
-      for (int j = 0; j < rateList.size(); j++) {
+      for (int j = i + 1; j < rateList.size(); j++) {
         if (rateList.get(i).overlaps(rateList.get(j))) {
           throw OverlappingRateChartException.of(zone);
         }
