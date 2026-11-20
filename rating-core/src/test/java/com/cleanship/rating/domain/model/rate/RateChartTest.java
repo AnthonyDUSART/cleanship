@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.rate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -16,6 +17,7 @@ import com.cleanship.rating.domain.model.zone.Subdivision;
 import com.cleanship.rating.domain.model.zone.SubdivisionName;
 import com.cleanship.rating.domain.model.zone.Zone;
 import com.cleanship.rating.domain.model.zone.ZoneName;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
@@ -48,9 +50,12 @@ final class RateChartTest {
 
   @Test
   void should_store_rates() {
-    RateChart rateChart = RateChart.of(FRANCE, RATES, PRICE_MODIFIERS, SHIPMENT_CONSTRAINTS);
+    Set<Rate> rates = new HashSet<>(RATES);
 
-    assertEquals(RATES, rateChart.rates());
+    RateChart rateChart = RateChart.of(FRANCE, rates, PRICE_MODIFIERS, SHIPMENT_CONSTRAINTS);
+
+    assertEquals(rates, rateChart.rates());
+    assertNotSame(rates, rateChart.rates());
   }
 
   @Test
