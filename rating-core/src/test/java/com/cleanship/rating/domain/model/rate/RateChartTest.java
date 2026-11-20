@@ -184,6 +184,20 @@ final class RateChartTest {
   }
 
   @Test
+  void should_not_evaluate_when_shipment_constraints_are_not_satisfied() {
+    RateChart rateChart = RateChart.of(FRANCE, RATES, PRICE_MODIFIERS, SHIPMENT_CONSTRAINTS);
+
+    Shipment shipment =
+        Shipment.of(
+            Location.of(Country.of("FR")),
+            Location.of(Country.of("FR")),
+            Parcel.of(Weight.of(750)),
+            Money.of(120_00, Currency.of("EUR")));
+
+    assertEquals(Optional.empty(), rateChart.evaluate(shipment));
+  }
+
+  @Test
   void should_not_evaluate_when_rates_are_not_satisfied() {
     RateChart rateChart = RateChart.of(FRANCE, RATES);
 
