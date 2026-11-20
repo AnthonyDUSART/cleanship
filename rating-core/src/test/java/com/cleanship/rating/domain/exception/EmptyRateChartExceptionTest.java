@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.exception;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.cleanship.rating.domain.model.location.Country;
 import com.cleanship.rating.domain.model.zone.Subdivision;
@@ -21,5 +22,10 @@ final class EmptyRateChartExceptionTest {
 
     assertEquals(
         "Rate chart for zone \"France\" must contain at least one rate", exception.getMessage());
+  }
+
+  @Test
+  void should_throw_exception_when_zone_is_null() {
+    assertThrows(NullPointerException.class, () -> EmptyRateChartException.of(null));
   }
 }
