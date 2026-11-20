@@ -10,10 +10,15 @@ import com.cleanship.rating.domain.exception.OverlappingRateChartException;
 import com.cleanship.rating.domain.model.constraint.DeclaredValueConstraint;
 import com.cleanship.rating.domain.model.constraint.ShipmentConstraint;
 import com.cleanship.rating.domain.model.location.Country;
+import com.cleanship.rating.domain.model.location.Location;
 import com.cleanship.rating.domain.model.modifier.FlatSurcharge;
 import com.cleanship.rating.domain.model.modifier.PriceModifier;
 import com.cleanship.rating.domain.model.money.Currency;
 import com.cleanship.rating.domain.model.money.Money;
+import com.cleanship.rating.domain.model.pricing.AppliedPriceModifier;
+import com.cleanship.rating.domain.model.pricing.PriceBreakdown;
+import com.cleanship.rating.domain.model.shipment.Parcel;
+import com.cleanship.rating.domain.model.shipment.Shipment;
 import com.cleanship.rating.domain.model.shipment.Weight;
 import com.cleanship.rating.domain.model.zone.Subdivision;
 import com.cleanship.rating.domain.model.zone.SubdivisionName;
@@ -22,6 +27,7 @@ import com.cleanship.rating.domain.model.zone.ZoneName;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 
@@ -43,6 +49,13 @@ final class RateChartTest {
       Set.of(
           DeclaredValueConstraint.of(
               Money.zero(Currency.of("EUR")), Money.of(100_00, Currency.of("EUR"))));
+
+  private static final Shipment SHIPMENT =
+      Shipment.of(
+          Location.of(Country.of("FR")),
+          Location.of(Country.of("FR")),
+          Parcel.of(Weight.of(750)),
+          Money.of(99_90, Currency.of("EUR")));
 
   @Test
   void should_store_zone() {
@@ -136,5 +149,23 @@ final class RateChartTest {
             FlatWeightRate.of(Weight.of(300), Weight.of(399), Money.zero(Currency.of("EUR"))));
 
     assertThrows(OverlappingRateChartException.class, () -> RateChart.of(FRANCE, rates));
+  }
+
+  @Test
+  void should_evaluate_successfully() {
+    RateChart rateChart = RateChart.of(FRANCE, RATES, PRICE_MODIFIERS, SHIPMENT_CONSTRAINTS);
+
+    AppliedPriceModifier expectedAppliedPriceModifier =
+        AppliedPriceModifier.of(
+            PRICE_MODIFIERS.getFirst(),
+            Money.of(12_00, Currency.of("EUR")),
+            Money.of(17_00, Currency.of("EUR")));
+
+    Optional<PriceBreakdown> expected =
+        Optional.of(
+            PriceBreakdown.of(
+                Money.of(12_00, Currency.of("EUR")), List.of(expectedAppliedPriceModifier)));
+
+    assertEquals(expected, rateChart.evaluate(SHIPMENT));
   }
 }
