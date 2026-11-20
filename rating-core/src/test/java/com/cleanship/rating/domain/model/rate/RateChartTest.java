@@ -57,4 +57,11 @@ final class RateChartTest {
 
     assertEquals(PRICE_MODIFIERS, rateChart.priceModifiers());
   }
+
+  @Test
+  void should_store_shipment_constraints() {
+    RateChart rateChart = RateChart.of(FRANCE, RATES, PRICE_MODIFIERS, SHIPMENT_CONSTRAINTS);
+
+    assertEquals(SHIPMENT_CONSTRAINTS, rateChart.shipmentConstraints());
+  }
 }
