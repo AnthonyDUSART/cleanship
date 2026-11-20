@@ -84,9 +84,7 @@ public record RateChart(
     }
 
     for (ShipmentConstraint shipmentConstraint : shipmentConstraints) {
-      boolean isSatisfied = shipmentConstraint.isSatisfiedBy(shipment);
-
-      if (!isSatisfied) {
+      if (!shipmentConstraint.isSatisfiedBy(shipment)) {
         return false;
       }
     }
