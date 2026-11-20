@@ -43,4 +43,11 @@ final class RateChartTest {
 
     assertEquals(FRANCE, rateChart.zone());
   }
+
+  @Test
+  void should_store_rates() {
+    RateChart rateChart = RateChart.of(FRANCE, RATES, PRICE_MODIFIERS, SHIPMENT_CONSTRAINTS);
+
+    assertEquals(RATES, rateChart.rates());
+  }
 }
