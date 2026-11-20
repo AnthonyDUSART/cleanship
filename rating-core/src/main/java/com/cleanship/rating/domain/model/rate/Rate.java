@@ -16,4 +16,6 @@ public sealed interface Rate permits FlatWeightRate {
   }
 
   public Optional<Money> evaluatePrice(Shipment shipment);
+
+  public boolean overlaps(Rate other);
 }

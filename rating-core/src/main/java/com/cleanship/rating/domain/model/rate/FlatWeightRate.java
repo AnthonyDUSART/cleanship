@@ -31,4 +31,10 @@ public record FlatWeightRate(Weight minInclusive, Weight maxInclusive, Money pri
         ? Optional.of(price)
         : Optional.empty();
   }
+
+  @Override
+  public boolean overlaps(Rate other) {
+    // TODO Auto-generated method stub
+    return false;
+  }
 }
