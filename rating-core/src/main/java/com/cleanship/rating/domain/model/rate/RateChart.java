@@ -15,6 +15,7 @@ public record RateChart(
   public RateChart {
     Objects.requireNonNull(zone);
     Objects.requireNonNull(rates);
+    Objects.requireNonNull(priceModifiers);
   }
 
   public static RateChart of(
