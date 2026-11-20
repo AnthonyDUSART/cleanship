@@ -58,6 +58,8 @@ public record RateChart(
   }
 
   public Optional<PriceBreakdown> evaluate(Shipment shipment) {
+    Objects.requireNonNull(shipment);
+
     if (!isSatisfiedBy(shipment)) {
       return Optional.empty();
     }

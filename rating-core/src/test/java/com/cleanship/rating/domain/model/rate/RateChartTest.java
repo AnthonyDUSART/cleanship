@@ -168,4 +168,11 @@ final class RateChartTest {
 
     assertEquals(expected, rateChart.evaluate(SHIPMENT));
   }
+
+  @Test
+  void should_throw_exception_when_evaluate_null() {
+    RateChart rateChart = RateChart.of(FRANCE, RATES, PRICE_MODIFIERS, SHIPMENT_CONSTRAINTS);
+
+    assertThrows(NullPointerException.class, () -> rateChart.evaluate(null));
+  }
 }
