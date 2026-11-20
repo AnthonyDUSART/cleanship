@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.rate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -112,6 +113,24 @@ final class FlatWeightRateTest {
             Weight.of(otherMinInclusiveInGrams), Weight.of(otherMaxInclusiveInGrams), PRICE);
 
     assertTrue(current.overlaps(other));
+  }
+
+  @ParameterizedTest
+  @CsvSource({"1, 99, 100, 199", "100, 199, 1, 99", "1, 49, 100, 149"})
+  void should_not_overlaps(
+      int currentMinInclusiveInGrams,
+      int currentMaxInclusiveInGrams,
+      int otherMinInclusiveInGrams,
+      int otherMaxInclusiveInGrams) {
+    FlatWeightRate current =
+        FlatWeightRate.of(
+            Weight.of(currentMinInclusiveInGrams), Weight.of(currentMaxInclusiveInGrams), PRICE);
+
+    FlatWeightRate other =
+        FlatWeightRate.of(
+            Weight.of(otherMinInclusiveInGrams), Weight.of(otherMaxInclusiveInGrams), PRICE);
+
+    assertFalse(current.overlaps(other));
   }
 
   @Test
