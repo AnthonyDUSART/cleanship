@@ -34,6 +34,8 @@ public record FlatWeightRate(Weight minInclusive, Weight maxInclusive, Money pri
 
   @Override
   public boolean overlaps(Rate other) {
+    Objects.requireNonNull(other);
+
     return switch (other) {
       case FlatWeightRate o ->
           minInclusive.compareTo(o.maxInclusive) <= 0

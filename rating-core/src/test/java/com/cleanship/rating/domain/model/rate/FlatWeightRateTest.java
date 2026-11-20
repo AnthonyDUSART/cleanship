@@ -113,4 +113,11 @@ final class FlatWeightRateTest {
 
     assertTrue(current.overlaps(other));
   }
+
+  @Test
+  void should_throw_exception_when_overlaps_null() {
+    FlatWeightRate flatWeightRate = FlatWeightRate.of(MIN_INCLUSIVE, MAX_INCLUSIVE, PRICE);
+
+    assertThrows(NullPointerException.class, () -> flatWeightRate.overlaps(null));
+  }
 }
