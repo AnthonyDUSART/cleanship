@@ -1,5 +1,6 @@
 package com.cleanship.rating.domain.model.rate;
 
+import com.cleanship.rating.domain.exception.EmptyRateChartException;
 import com.cleanship.rating.domain.model.constraint.ShipmentConstraint;
 import com.cleanship.rating.domain.model.modifier.PriceModifier;
 import com.cleanship.rating.domain.model.zone.Zone;
@@ -19,6 +20,11 @@ public record RateChart(
     Objects.requireNonNull(shipmentConstraints);
 
     rates = Set.copyOf(rates);
+
+    if (rates.isEmpty()) {
+      throw EmptyRateChartException.of(zone);
+    }
+
     priceModifiers = List.copyOf(priceModifiers);
     shipmentConstraints = Set.copyOf(shipmentConstraints);
   }
@@ -38,5 +44,9 @@ public record RateChart(
 
   public static RateChart of(Zone zone, Set<Rate> rates, List<PriceModifier> priceModifiers) {
     return new RateChart(zone, rates, priceModifiers, Set.of());
+  }
+
+  public static RateChart of(Zone zone, Set<Rate> rates) {
+    return new RateChart(zone, rates, List.of(), Set.of());
   }
 }

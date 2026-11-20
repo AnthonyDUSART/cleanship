@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.cleanship.rating.domain.exception.EmptyRateChartException;
 import com.cleanship.rating.domain.model.constraint.DeclaredValueConstraint;
 import com.cleanship.rating.domain.model.constraint.ShipmentConstraint;
 import com.cleanship.rating.domain.model.location.Country;
@@ -117,5 +118,10 @@ final class RateChartTest {
     RateChart rateChart = RateChart.of(FRANCE, RATES, PRICE_MODIFIERS);
 
     assertTrue(rateChart.shipmentConstraints().isEmpty());
+  }
+
+  @Test
+  void should_throw_exception_when_rates_is_empty() {
+    assertThrows(EmptyRateChartException.class, () -> RateChart.of(FRANCE, Set.of()));
   }
 }
