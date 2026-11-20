@@ -34,7 +34,10 @@ public record FlatWeightRate(Weight minInclusive, Weight maxInclusive, Money pri
 
   @Override
   public boolean overlaps(Rate other) {
-    // TODO Auto-generated method stub
-    return false;
+    return switch (other) {
+      case FlatWeightRate o ->
+          minInclusive.compareTo(o.maxInclusive) <= 0
+              && maxInclusive.compareTo(o.minInclusive) >= 0;
+    };
   }
 }
