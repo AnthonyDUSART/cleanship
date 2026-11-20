@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.rate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.cleanship.rating.domain.model.constraint.DeclaredValueConstraint;
 import com.cleanship.rating.domain.model.constraint.ShipmentConstraint;
@@ -63,5 +64,12 @@ final class RateChartTest {
     RateChart rateChart = RateChart.of(FRANCE, RATES, PRICE_MODIFIERS, SHIPMENT_CONSTRAINTS);
 
     assertEquals(SHIPMENT_CONSTRAINTS, rateChart.shipmentConstraints());
+  }
+
+  @Test
+  void should_throw_exception_when_zone_is_null() {
+    assertThrows(
+        NullPointerException.class,
+        () -> RateChart.of(null, RATES, PRICE_MODIFIERS, SHIPMENT_CONSTRAINTS));
   }
 }
