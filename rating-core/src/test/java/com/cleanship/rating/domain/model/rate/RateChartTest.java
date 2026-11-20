@@ -71,9 +71,12 @@ final class RateChartTest {
 
   @Test
   void should_store_shipment_constraints() {
-    RateChart rateChart = RateChart.of(FRANCE, RATES, PRICE_MODIFIERS, SHIPMENT_CONSTRAINTS);
+    Set<ShipmentConstraint> shipmentConstraints = new HashSet<>(SHIPMENT_CONSTRAINTS);
 
-    assertEquals(SHIPMENT_CONSTRAINTS, rateChart.shipmentConstraints());
+    RateChart rateChart = RateChart.of(FRANCE, RATES, PRICE_MODIFIERS, shipmentConstraints);
+
+    assertEquals(shipmentConstraints, rateChart.shipmentConstraints());
+    assertNotSame(shipmentConstraints, rateChart.shipmentConstraints());
   }
 
   @Test

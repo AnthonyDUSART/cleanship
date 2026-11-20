@@ -20,6 +20,7 @@ public record RateChart(
 
     rates = Set.copyOf(rates);
     priceModifiers = List.copyOf(priceModifiers);
+    shipmentConstraints = Set.copyOf(shipmentConstraints);
   }
 
   public static RateChart of(
