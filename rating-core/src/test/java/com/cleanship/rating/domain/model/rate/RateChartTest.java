@@ -170,6 +170,20 @@ final class RateChartTest {
   }
 
   @Test
+  void should_not_evaluate_when_zone_is_not_satisfied() {
+    RateChart rateChart = RateChart.of(FRANCE, RATES, PRICE_MODIFIERS, SHIPMENT_CONSTRAINTS);
+
+    Shipment shipment =
+        Shipment.of(
+            Location.of(Country.of("FR")),
+            Location.of(Country.of("EN")),
+            Parcel.of(Weight.of(750)),
+            Money.of(99_90, Currency.of("EUR")));
+
+    assertEquals(Optional.empty(), rateChart.evaluate(shipment));
+  }
+
+  @Test
   void should_not_evaluate_when_rates_are_not_satisfied() {
     RateChart rateChart = RateChart.of(FRANCE, RATES);
 
