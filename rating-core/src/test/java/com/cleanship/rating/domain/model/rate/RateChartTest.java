@@ -17,6 +17,7 @@ import com.cleanship.rating.domain.model.zone.Subdivision;
 import com.cleanship.rating.domain.model.zone.SubdivisionName;
 import com.cleanship.rating.domain.model.zone.Zone;
 import com.cleanship.rating.domain.model.zone.ZoneName;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -60,9 +61,12 @@ final class RateChartTest {
 
   @Test
   void should_store_price_modifiers() {
-    RateChart rateChart = RateChart.of(FRANCE, RATES, PRICE_MODIFIERS, SHIPMENT_CONSTRAINTS);
+    List<PriceModifier> priceModifiers = new ArrayList<>(PRICE_MODIFIERS);
 
-    assertEquals(PRICE_MODIFIERS, rateChart.priceModifiers());
+    RateChart rateChart = RateChart.of(FRANCE, RATES, priceModifiers, SHIPMENT_CONSTRAINTS);
+
+    assertEquals(priceModifiers, rateChart.priceModifiers());
+    assertNotSame(priceModifiers, rateChart.priceModifiers());
   }
 
   @Test
