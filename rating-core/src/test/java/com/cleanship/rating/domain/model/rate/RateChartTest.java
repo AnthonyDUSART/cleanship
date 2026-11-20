@@ -2,6 +2,7 @@ package com.cleanship.rating.domain.model.rate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.cleanship.rating.domain.model.constraint.DeclaredValueConstraint;
 import com.cleanship.rating.domain.model.constraint.ShipmentConstraint;
@@ -90,5 +91,19 @@ final class RateChartTest {
   void should_throw_exception_when_shipment_constraints_is_null() {
     assertThrows(
         NullPointerException.class, () -> RateChart.of(FRANCE, RATES, PRICE_MODIFIERS, null));
+  }
+
+  @Test
+  void should_have_default_empty_price_modifiers() {
+    RateChart rateChart = RateChart.of(FRANCE, RATES, SHIPMENT_CONSTRAINTS);
+
+    assertTrue(rateChart.priceModifiers().isEmpty());
+  }
+
+  @Test
+  void should_have_default_empty_shipment_constraints() {
+    RateChart rateChart = RateChart.of(FRANCE, RATES, PRICE_MODIFIERS);
+
+    assertTrue(rateChart.shipmentConstraints().isEmpty());
   }
 }

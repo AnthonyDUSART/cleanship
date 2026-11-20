@@ -26,4 +26,13 @@ public record RateChart(
       Set<ShipmentConstraint> shipmentConstraints) {
     return new RateChart(zone, rates, priceModifiers, shipmentConstraints);
   }
+
+  public static RateChart of(
+      Zone zone, Set<Rate> rates, Set<ShipmentConstraint> shipmentConstraints) {
+    return new RateChart(zone, rates, List.of(), shipmentConstraints);
+  }
+
+  public static RateChart of(Zone zone, Set<Rate> rates, List<PriceModifier> priceModifiers) {
+    return new RateChart(zone, rates, priceModifiers, Set.of());
+  }
 }
