@@ -104,7 +104,7 @@ public record RateChart(
     return Optional.empty();
   }
 
-  private void ensureNoOverlappingRates(Zone zone, Set<Rate> rates) {
+  private static void ensureNoOverlappingRates(Zone zone, Set<Rate> rates) {
     List<Rate> rateList = List.copyOf(rates);
     for (int i = 0; i < rateList.size(); i++) {
       for (int j = i + 1; j < rateList.size(); j++) {
