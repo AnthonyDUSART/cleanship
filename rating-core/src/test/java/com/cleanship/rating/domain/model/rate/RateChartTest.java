@@ -72,4 +72,11 @@ final class RateChartTest {
         NullPointerException.class,
         () -> RateChart.of(null, RATES, PRICE_MODIFIERS, SHIPMENT_CONSTRAINTS));
   }
+
+  @Test
+  void should_throw_exception_when_rates_is_null() {
+    assertThrows(
+        NullPointerException.class,
+        () -> RateChart.of(FRANCE, null, PRICE_MODIFIERS, SHIPMENT_CONSTRAINTS));
+  }
 }

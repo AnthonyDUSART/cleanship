@@ -14,6 +14,7 @@ public record RateChart(
     Set<ShipmentConstraint> shipmentConstraints) {
   public RateChart {
     Objects.requireNonNull(zone);
+    Objects.requireNonNull(rates);
   }
 
   public static RateChart of(
