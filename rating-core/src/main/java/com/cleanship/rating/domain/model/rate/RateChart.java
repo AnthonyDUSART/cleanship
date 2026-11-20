@@ -58,7 +58,7 @@ public record RateChart(
   }
 
   public Optional<PriceBreakdown> evaluate(Shipment shipment) {
-    if (!isSatisfied(shipment)) {
+    if (!isSatisfiedBy(shipment)) {
       return Optional.empty();
     }
 
@@ -76,7 +76,7 @@ public record RateChart(
     return Optional.of(priceBreakdown);
   }
 
-  private boolean isSatisfied(Shipment shipment) {
+  private boolean isSatisfiedBy(Shipment shipment) {
     if (!zone.isSatisfiedBy(shipment.destination())) {
       return false;
     }
