@@ -16,6 +16,7 @@ public record RateChart(
     Objects.requireNonNull(zone);
     Objects.requireNonNull(rates);
     Objects.requireNonNull(priceModifiers);
+    Objects.requireNonNull(shipmentConstraints);
   }
 
   public static RateChart of(

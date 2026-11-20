@@ -20,20 +20,23 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 final class RateChartTest {
-  private static final Zone FRANCE = Zone.of(
-      ZoneName.of("France"),
-      Set.of(Subdivision.of(SubdivisionName.of("France"), Country.of("FR"))));
+  private static final Zone FRANCE =
+      Zone.of(
+          ZoneName.of("France"),
+          Set.of(Subdivision.of(SubdivisionName.of("France"), Country.of("FR"))));
 
-  private static final Set<Rate> RATES = Set.of(
-      FlatWeightRate.of(Weight.of(1), Weight.of(499), Money.of(9_00, Currency.of("EUR"))),
-      FlatWeightRate.of(Weight.of(500), Weight.of(1_000), Money.of(12_00, Currency.of("EUR"))));
+  private static final Set<Rate> RATES =
+      Set.of(
+          FlatWeightRate.of(Weight.of(1), Weight.of(499), Money.of(9_00, Currency.of("EUR"))),
+          FlatWeightRate.of(Weight.of(500), Weight.of(1_000), Money.of(12_00, Currency.of("EUR"))));
 
-  private static final List<PriceModifier> PRICE_MODIFIERS = List
-      .of(FlatSurcharge.of(Money.of(5_00, Currency.of("EUR"))));
+  private static final List<PriceModifier> PRICE_MODIFIERS =
+      List.of(FlatSurcharge.of(Money.of(5_00, Currency.of("EUR"))));
 
-  private static final Set<ShipmentConstraint> SHIPMENT_CONSTRAINTS = Set.of(
-      DeclaredValueConstraint.of(
-          Money.zero(Currency.of("EUR")), Money.of(100_00, Currency.of("EUR"))));
+  private static final Set<ShipmentConstraint> SHIPMENT_CONSTRAINTS =
+      Set.of(
+          DeclaredValueConstraint.of(
+              Money.zero(Currency.of("EUR")), Money.of(100_00, Currency.of("EUR"))));
 
   @Test
   void should_store_zone() {
@@ -79,6 +82,13 @@ final class RateChartTest {
 
   @Test
   void should_throw_exception_when_price_modifiers_is_null() {
-    assertThrows(NullPointerException.class, () -> RateChart.of(FRANCE, RATES, null, SHIPMENT_CONSTRAINTS));
+    assertThrows(
+        NullPointerException.class, () -> RateChart.of(FRANCE, RATES, null, SHIPMENT_CONSTRAINTS));
+  }
+
+  @Test
+  void should_throw_exception_when_shipment_constraints_is_null() {
+    assertThrows(
+        NullPointerException.class, () -> RateChart.of(FRANCE, RATES, PRICE_MODIFIERS, null));
   }
 }
