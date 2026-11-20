@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 final class OverlappingRateChartExceptionTest {
   @Test
-  void should__have_valid_message() {
+  void should_have_valid_message() {
     Zone zone =
         Zone.of(
             ZoneName.of("France"),
