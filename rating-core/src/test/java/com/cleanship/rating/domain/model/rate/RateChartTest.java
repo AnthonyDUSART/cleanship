@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.cleanship.rating.domain.exception.EmptyRateChartException;
+import com.cleanship.rating.domain.exception.OverlappingRateChartException;
 import com.cleanship.rating.domain.model.constraint.DeclaredValueConstraint;
 import com.cleanship.rating.domain.model.constraint.ShipmentConstraint;
 import com.cleanship.rating.domain.model.location.Country;
@@ -123,5 +124,17 @@ final class RateChartTest {
   @Test
   void should_throw_exception_when_rates_is_empty() {
     assertThrows(EmptyRateChartException.class, () -> RateChart.of(FRANCE, Set.of()));
+  }
+
+  @Test
+  void should_throw_exception_when_rates_contains_overlaps() {
+    Set<Rate> rates =
+        Set.of(
+            FlatWeightRate.of(Weight.of(1), Weight.of(99), Money.zero(Currency.of("EUR"))),
+            FlatWeightRate.of(Weight.of(100), Weight.of(200), Money.zero(Currency.of("EUR"))),
+            FlatWeightRate.of(Weight.of(200), Weight.of(299), Money.zero(Currency.of("EUR"))),
+            FlatWeightRate.of(Weight.of(300), Weight.of(399), Money.zero(Currency.of("EUR"))));
+
+    assertThrows(OverlappingRateChartException.class, () -> RateChart.of(FRANCE, rates));
   }
 }

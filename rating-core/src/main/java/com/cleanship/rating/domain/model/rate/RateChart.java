@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.rate;
 
 import com.cleanship.rating.domain.exception.EmptyRateChartException;
+import com.cleanship.rating.domain.exception.OverlappingRateChartException;
 import com.cleanship.rating.domain.model.constraint.ShipmentConstraint;
 import com.cleanship.rating.domain.model.modifier.PriceModifier;
 import com.cleanship.rating.domain.model.zone.Zone;
@@ -25,6 +26,8 @@ public record RateChart(
       throw EmptyRateChartException.of(zone);
     }
 
+    ensureNoOverlappingRates(zone, rates);
+
     priceModifiers = List.copyOf(priceModifiers);
     shipmentConstraints = Set.copyOf(shipmentConstraints);
   }
@@ -48,5 +51,16 @@ public record RateChart(
 
   public static RateChart of(Zone zone, Set<Rate> rates) {
     return new RateChart(zone, rates, List.of(), Set.of());
+  }
+
+  private void ensureNoOverlappingRates(Zone zone, Set<Rate> rates) {
+    List<Rate> rateList = List.copyOf(rates);
+    for (int i = 0; i < rateList.size(); i++) {
+      for (int j = 0; j < rateList.size(); j++) {
+        if (rateList.get(i).overlaps(rateList.get(j))) {
+          throw OverlappingRateChartException.of(zone);
+        }
+      }
+    }
   }
 }
