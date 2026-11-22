@@ -118,4 +118,8 @@ public record RateChart(
       }
     }
   }
+
+  public Currency currency() {
+    return rates.iterator().next().currency();
+  }
 }

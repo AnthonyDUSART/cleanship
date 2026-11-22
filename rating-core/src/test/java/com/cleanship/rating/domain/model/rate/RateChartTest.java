@@ -228,4 +228,11 @@ final class RateChartTest {
 
     assertThrows(CurrencyMismatchException.class, () -> RateChart.of(FRANCE, rates));
   }
+
+  @Test
+  void should_have_valid_currency() {
+    RateChart rateChart = RateChart.of(FRANCE, RATES);
+
+    assertEquals(Currency.of("EUR"), rateChart.currency());
+  }
 }
