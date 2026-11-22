@@ -139,4 +139,11 @@ final class FlatWeightRateTest {
 
     assertThrows(NullPointerException.class, () -> flatWeightRate.overlaps(null));
   }
+
+  @Test
+  void should_have_valid_currency() {
+    FlatWeightRate flatWeightRate = FlatWeightRate.of(MIN_INCLUSIVE, MAX_INCLUSIVE, PRICE);
+
+    assertEquals(PRICE.currency(), flatWeightRate.currency());
+  }
 }
