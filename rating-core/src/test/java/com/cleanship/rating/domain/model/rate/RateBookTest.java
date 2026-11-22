@@ -3,6 +3,7 @@ package com.cleanship.rating.domain.model.rate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.cleanship.rating.domain.exception.EmptyRateBookException;
 import com.cleanship.rating.domain.model.location.Country;
 import com.cleanship.rating.domain.model.money.Currency;
 import com.cleanship.rating.domain.model.money.Money;
@@ -37,5 +38,10 @@ final class RateBookTest {
   @Test
   void should_throw_exception_when_rate_charts_is_null() {
     assertThrows(NullPointerException.class, () -> RateBook.of(null));
+  }
+
+  @Test
+  void should_throw_exception_when_rate_book_is_empty() {
+    assertThrows(EmptyRateBookException.class, () -> RateBook.of(Set.of()));
   }
 }
