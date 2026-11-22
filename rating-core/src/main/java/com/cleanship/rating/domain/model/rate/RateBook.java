@@ -36,6 +36,8 @@ public record RateBook(Set<RateChart> rateCharts) {
   }
 
   public Optional<PriceBreakdown> evaluate(Shipment shipment) {
+    Objects.requireNonNull(shipment);
+
     Optional<PriceBreakdown> bestPriceBreakdown = Optional.empty();
 
     for (RateChart rateChart : rateCharts) {

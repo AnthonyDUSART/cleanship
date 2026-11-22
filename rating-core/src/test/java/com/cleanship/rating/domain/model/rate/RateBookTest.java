@@ -105,4 +105,11 @@ final class RateBookTest {
 
     assertEquals(Optional.empty(), rateBook.evaluate(shipment));
   }
+
+  @Test
+  void should_throw_exception_when_evaluate_null_shipment() {
+    RateBook rateBook = RateBook.of(RATE_CHARTS);
+
+    assertThrows(NullPointerException.class, () -> rateBook.evaluate(null));
+  }
 }
