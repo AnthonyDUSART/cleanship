@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public final class InvalidPercentageExceptionTest {
+final class InvalidPercentageExceptionTest {
   @Test
   void should_have_valid_message() {
     InvalidPercentageException exception = InvalidPercentageException.of(-20_000);
