@@ -4,6 +4,7 @@ import com.cleanship.rating.domain.exception.EmptyRateChartException;
 import com.cleanship.rating.domain.exception.OverlappingRateChartException;
 import com.cleanship.rating.domain.model.constraint.ShipmentConstraint;
 import com.cleanship.rating.domain.model.modifier.PriceModifier;
+import com.cleanship.rating.domain.model.money.Currency;
 import com.cleanship.rating.domain.model.money.Money;
 import com.cleanship.rating.domain.model.pricing.PriceBreakdown;
 import com.cleanship.rating.domain.model.shipment.Shipment;
@@ -30,7 +31,7 @@ public record RateChart(
       throw EmptyRateChartException.of(zone);
     }
 
-    ensureNoOverlappingRates(zone, rates);
+    ensureRates(zone, rates);
 
     priceModifiers = List.copyOf(priceModifiers);
     shipmentConstraints = Set.copyOf(shipmentConstraints);
@@ -104,9 +105,12 @@ public record RateChart(
     return Optional.empty();
   }
 
-  private static void ensureNoOverlappingRates(Zone zone, Set<Rate> rates) {
+  private static void ensureRates(Zone zone, Set<Rate> rates) {
     List<Rate> rateList = List.copyOf(rates);
+    Currency expectedCurrency = rateList.getFirst().currency();
+
     for (int i = 0; i < rateList.size(); i++) {
+      expectedCurrency.ensureSame(rateList.get(i).currency());
       for (int j = i + 1; j < rateList.size(); j++) {
         if (rateList.get(i).overlaps(rateList.get(j))) {
           throw OverlappingRateChartException.of(zone);

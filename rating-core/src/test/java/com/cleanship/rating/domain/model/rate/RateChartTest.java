@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.cleanship.rating.domain.exception.CurrencyMismatchException;
 import com.cleanship.rating.domain.exception.EmptyRateChartException;
 import com.cleanship.rating.domain.exception.OverlappingRateChartException;
 import com.cleanship.rating.domain.model.constraint.DeclaredValueConstraint;
@@ -216,5 +217,15 @@ final class RateChartTest {
     RateChart rateChart = RateChart.of(FRANCE, RATES, PRICE_MODIFIERS, SHIPMENT_CONSTRAINTS);
 
     assertThrows(NullPointerException.class, () -> rateChart.evaluate(null));
+  }
+
+  @Test
+  void should_throw_exception_when_rates_have_currency_mismatch() {
+    Set<Rate> rates =
+        Set.of(
+            Rate.flatWeight(Weight.of(1), Weight.of(100), Money.of(9_00, Currency.of("EUR"))),
+            Rate.flatWeight(Weight.of(101), Weight.of(200), Money.of(1_200, Currency.of("USD"))));
+
+    assertThrows(CurrencyMismatchException.class, () -> RateChart.of(FRANCE, rates));
   }
 }
