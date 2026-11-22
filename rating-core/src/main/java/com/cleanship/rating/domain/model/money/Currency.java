@@ -21,6 +21,8 @@ public record Currency(String code) {
   }
 
   public void ensureSame(Currency other) {
+    Objects.requireNonNull(other);
+
     if (!code.equals(other.code)) {
       throw CurrencyMismatchException.of(this, other);
     }

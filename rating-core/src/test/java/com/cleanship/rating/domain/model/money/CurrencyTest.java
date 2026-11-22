@@ -33,6 +33,11 @@ final class CurrencyTest {
   }
 
   @Test
+  void should_throw_exception_when_ensure_same_with_null() {
+    assertThrows(NullPointerException.class, () -> Currency.of("EUR").ensureSame(null));
+  }
+
+  @Test
   void should_throw_exception_when_ensure_same_with_currency_mismatch() {
     assertThrows(
         CurrencyMismatchException.class, () -> Currency.of("EUR").ensureSame(Currency.of("USD")));
