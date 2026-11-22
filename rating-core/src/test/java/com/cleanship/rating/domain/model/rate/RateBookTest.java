@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.cleanship.rating.domain.exception.CurrencyMismatchException;
 import com.cleanship.rating.domain.exception.EmptyRateBookException;
 import com.cleanship.rating.domain.model.location.Country;
 import com.cleanship.rating.domain.model.money.Currency;
@@ -47,5 +48,19 @@ final class RateBookTest {
   @Test
   void should_throw_exception_when_rate_book_is_empty() {
     assertThrows(EmptyRateBookException.class, () -> RateBook.of(Set.of()));
+  }
+
+  @Test
+  void should_throw_exception_when_rate_charts_have_currency_mismatch() {
+    Set<RateChart> rateCharts =
+        Set.of(
+            RateChart.of(ZONE, RATES),
+            RateChart.of(
+                ZONE,
+                Set.of(
+                    Rate.flatWeight(
+                        Weight.of(1), Weight.of(499), Money.of(4_20, Currency.of("USD"))))));
+
+    assertThrows(CurrencyMismatchException.class, () -> RateBook.of(rateCharts));
   }
 }
