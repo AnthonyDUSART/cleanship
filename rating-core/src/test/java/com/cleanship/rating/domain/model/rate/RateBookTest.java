@@ -91,4 +91,18 @@ final class RateBookTest {
 
     assertEquals(expected, rateBook.evaluate(shipment));
   }
+
+  @Test
+  void should_not_evaluate() {
+    Shipment shipment =
+        Shipment.of(
+            Location.of(Country.of("FR")),
+            Location.of(Country.of("EN")),
+            Parcel.of(Weight.of(220)),
+            Money.of(100_00, Currency.of("EUR")));
+
+    RateBook rateBook = RateBook.of(RATE_CHARTS);
+
+    assertEquals(Optional.empty(), rateBook.evaluate(shipment));
+  }
 }
