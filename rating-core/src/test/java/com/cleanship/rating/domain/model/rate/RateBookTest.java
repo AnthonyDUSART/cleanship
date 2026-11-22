@@ -37,7 +37,7 @@ final class RateBookTest {
     RateBook rateBook = RateBook.of(rateCharts);
 
     assertEquals(RATE_CHARTS, rateBook.rateCharts());
-    assertNotSame(RATE_CHARTS, rateBook.rateCharts());
+    assertNotSame(rateCharts, rateBook.rateCharts());
   }
 
   @Test
