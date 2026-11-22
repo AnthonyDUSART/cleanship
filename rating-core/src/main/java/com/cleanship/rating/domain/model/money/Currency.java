@@ -1,5 +1,6 @@
 package com.cleanship.rating.domain.model.money;
 
+import com.cleanship.rating.domain.exception.CurrencyMismatchException;
 import com.cleanship.rating.domain.exception.InvalidCurrencyException;
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -17,5 +18,13 @@ public record Currency(String code) {
 
   public static Currency of(String code) {
     return new Currency(code);
+  }
+
+  public void ensureSame(Currency other) {
+    Objects.requireNonNull(other);
+
+    if (!code.equals(other.code)) {
+      throw CurrencyMismatchException.of(this, other);
+    }
   }
 }

@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model.rate;
 
 import com.cleanship.rating.domain.exception.InvalidFlatWeightRateException;
+import com.cleanship.rating.domain.model.money.Currency;
 import com.cleanship.rating.domain.model.money.Money;
 import com.cleanship.rating.domain.model.shipment.Shipment;
 import com.cleanship.rating.domain.model.shipment.Weight;
@@ -30,5 +31,21 @@ public record FlatWeightRate(Weight minInclusive, Weight maxInclusive, Money pri
     return shipment.parcel().weight().isWithin(minInclusive, maxInclusive)
         ? Optional.of(price)
         : Optional.empty();
+  }
+
+  @Override
+  public boolean overlaps(Rate other) {
+    Objects.requireNonNull(other);
+
+    return switch (other) {
+      case FlatWeightRate o ->
+          minInclusive.compareTo(o.maxInclusive) <= 0
+              && maxInclusive.compareTo(o.minInclusive) >= 0;
+    };
+  }
+
+  @Override
+  public Currency currency() {
+    return price.currency();
   }
 }

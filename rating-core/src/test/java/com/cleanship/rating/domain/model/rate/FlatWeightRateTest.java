@@ -1,7 +1,9 @@
 package com.cleanship.rating.domain.model.rate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.cleanship.rating.domain.exception.InvalidFlatWeightRateException;
 import com.cleanship.rating.domain.model.location.Country;
@@ -13,6 +15,8 @@ import com.cleanship.rating.domain.model.shipment.Shipment;
 import com.cleanship.rating.domain.model.shipment.Weight;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 final class FlatWeightRateTest {
   private static final Weight MIN_INCLUSIVE = Weight.of(1);
@@ -91,5 +95,55 @@ final class FlatWeightRateTest {
     FlatWeightRate rate = FlatWeightRate.of(MIN_INCLUSIVE, MAX_INCLUSIVE, PRICE);
 
     assertThrows(NullPointerException.class, () -> rate.evaluatePrice(null));
+  }
+
+  @ParameterizedTest
+  @CsvSource({"1, 100, 100, 1000", "100, 1000, 1, 100", "1, 100, 50, 250"})
+  void should_overlaps(
+      int currentMinInclusiveInGrams,
+      int currentMaxInclusiveInGrams,
+      int otherMinInclusiveInGrams,
+      int otherMaxInclusiveInGrams) {
+    FlatWeightRate current =
+        FlatWeightRate.of(
+            Weight.of(currentMinInclusiveInGrams), Weight.of(currentMaxInclusiveInGrams), PRICE);
+
+    FlatWeightRate other =
+        FlatWeightRate.of(
+            Weight.of(otherMinInclusiveInGrams), Weight.of(otherMaxInclusiveInGrams), PRICE);
+
+    assertTrue(current.overlaps(other));
+  }
+
+  @ParameterizedTest
+  @CsvSource({"1, 99, 100, 199", "100, 199, 1, 99", "1, 49, 100, 149"})
+  void should_not_overlaps(
+      int currentMinInclusiveInGrams,
+      int currentMaxInclusiveInGrams,
+      int otherMinInclusiveInGrams,
+      int otherMaxInclusiveInGrams) {
+    FlatWeightRate current =
+        FlatWeightRate.of(
+            Weight.of(currentMinInclusiveInGrams), Weight.of(currentMaxInclusiveInGrams), PRICE);
+
+    FlatWeightRate other =
+        FlatWeightRate.of(
+            Weight.of(otherMinInclusiveInGrams), Weight.of(otherMaxInclusiveInGrams), PRICE);
+
+    assertFalse(current.overlaps(other));
+  }
+
+  @Test
+  void should_throw_exception_when_overlaps_null() {
+    FlatWeightRate flatWeightRate = FlatWeightRate.of(MIN_INCLUSIVE, MAX_INCLUSIVE, PRICE);
+
+    assertThrows(NullPointerException.class, () -> flatWeightRate.overlaps(null));
+  }
+
+  @Test
+  void should_have_valid_currency() {
+    FlatWeightRate flatWeightRate = FlatWeightRate.of(MIN_INCLUSIVE, MAX_INCLUSIVE, PRICE);
+
+    assertEquals(PRICE.currency(), flatWeightRate.currency());
   }
 }
