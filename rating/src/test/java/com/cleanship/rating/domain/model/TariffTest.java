@@ -1,7 +1,9 @@
 package com.cleanship.rating.domain.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.cleanship.rating.domain.model.location.Country;
 import com.cleanship.rating.domain.model.money.Currency;
@@ -76,5 +78,23 @@ final class TariffTest {
   @Test
   void should_throw_exception_when_reconstitute_with_null_version() {
     assertThrows(NullPointerException.class, () -> Tariff.reconstitute(ID, RATE_BOOK, null));
+  }
+
+  @Test
+  void should_be_equals_successfully() {
+    Tariff current = Tariff.create(ID, RATE_BOOK);
+    Tariff other = Tariff.reconstitute(ID, RATE_BOOK, Version.of(3));
+
+    assertTrue(current.equals(other));
+  }
+
+  @Test
+  void should_not_be_equals() {
+    Tariff current = Tariff.create(ID, RATE_BOOK);
+    Tariff other =
+        Tariff.create(
+            TariffId.of(UUID.fromString("01a20edf-51ce-778e-8363-c2431ec5f043")), RATE_BOOK);
+
+    assertFalse(current.equals(other));
   }
 }

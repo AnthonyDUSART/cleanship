@@ -39,4 +39,14 @@ public final class Tariff {
   public Version version() {
     return version;
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    return obj instanceof Tariff other && id.equals(other.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return id.hashCode();
+  }
 }
