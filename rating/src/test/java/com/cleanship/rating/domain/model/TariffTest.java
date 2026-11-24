@@ -128,7 +128,7 @@ final class TariffTest {
   }
 
   @Test
-  void should_update_emit_tariff_updated_event() {
+  void should_update_successfully() {
     Tariff tariff = Tariff.create(ID, RATE_BOOK, NOW);
 
     RateBook updatedRateBook =
@@ -148,8 +148,12 @@ final class TariffTest {
 
     Tariff updatedTariff = tariff.update(updatedRateBook, NOW);
 
-    TariffUpdated expected = TariffUpdated.of(ID, updatedRateBook, Version.of(2), NOW);
+    Version expectedVersion = Version.of(2);
+
+    TariffUpdated expected = TariffUpdated.of(ID, updatedRateBook, expectedVersion, NOW);
 
     assertEquals(expected, updatedTariff.uncommittedEvents().getLast());
+    assertEquals(updatedRateBook, updatedTariff.rateBook());
+    assertEquals(expectedVersion, updatedTariff.version());
   }
 }
