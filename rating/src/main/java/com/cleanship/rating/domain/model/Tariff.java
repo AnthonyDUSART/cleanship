@@ -108,6 +108,6 @@ public final class Tariff {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id.hashCode(), tenantId.hashCode());
+    return Objects.hash(id, tenantId);
   }
 }
