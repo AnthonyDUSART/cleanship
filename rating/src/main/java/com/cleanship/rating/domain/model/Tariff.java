@@ -7,6 +7,7 @@ public record Tariff(TariffId id, RateBook rateBook, Version version) {
   public Tariff {
     Objects.requireNonNull(id);
     Objects.requireNonNull(rateBook);
+    Objects.requireNonNull(version);
   }
 
   public static Tariff create(TariffId id, RateBook rateBook) {

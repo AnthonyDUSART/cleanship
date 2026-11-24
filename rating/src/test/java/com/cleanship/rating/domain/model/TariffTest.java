@@ -72,4 +72,9 @@ final class TariffTest {
     assertEquals(RATE_BOOK, tariff.rateBook());
     assertEquals(Version.of(10), tariff.version());
   }
+
+  @Test
+  void should_throw_exception_when_reconstitute_with_null_version() {
+    assertThrows(NullPointerException.class, () -> Tariff.reconstitute(ID, RATE_BOOK, null));
+  }
 }
