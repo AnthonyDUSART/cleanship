@@ -29,6 +29,8 @@ public final class Tariff {
   }
 
   public static Tariff create(TariffId id, RateBook rateBook, Instant now) {
+    Objects.requireNonNull(now);
+
     Version version = Version.initial();
 
     List<DomainEvent> uncommittedEvents = List.of(TariffCreated.of(id, rateBook, version, now));

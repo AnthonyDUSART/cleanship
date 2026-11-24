@@ -64,6 +64,11 @@ final class TariffTest {
   }
 
   @Test
+  void should_throw_exception_when_create_with_null_now() {
+    assertThrows(NullPointerException.class, () -> Tariff.create(ID, RATE_BOOK, null));
+  }
+
+  @Test
   void should_create_with_initial_version() {
     Tariff tariff = Tariff.create(ID, RATE_BOOK, NOW);
 
