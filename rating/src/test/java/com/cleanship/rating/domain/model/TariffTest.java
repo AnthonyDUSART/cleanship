@@ -38,4 +38,11 @@ final class TariffTest {
 
     assertEquals(ID, tariff.id());
   }
+
+  @Test
+  void should_store_rate_book() {
+    Tariff tariff = Tariff.create(ID, RATE_BOOK);
+
+    assertEquals(RATE_BOOK, tariff.rateBook());
+  }
 }
