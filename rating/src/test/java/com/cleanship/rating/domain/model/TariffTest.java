@@ -1,0 +1,41 @@
+package com.cleanship.rating.domain.model;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import com.cleanship.rating.domain.model.location.Country;
+import com.cleanship.rating.domain.model.money.Currency;
+import com.cleanship.rating.domain.model.money.Money;
+import com.cleanship.rating.domain.model.rate.Rate;
+import com.cleanship.rating.domain.model.rate.RateBook;
+import com.cleanship.rating.domain.model.rate.RateChart;
+import com.cleanship.rating.domain.model.shipment.Weight;
+import com.cleanship.rating.domain.model.zone.Subdivision;
+import com.cleanship.rating.domain.model.zone.SubdivisionName;
+import com.cleanship.rating.domain.model.zone.Zone;
+import com.cleanship.rating.domain.model.zone.ZoneName;
+import java.util.Set;
+import java.util.UUID;
+import org.junit.jupiter.api.Test;
+
+final class TariffTest {
+  private static final TariffId ID =
+      TariffId.of(UUID.fromString("01a20ad9-3328-73e9-b493-46d6c3ed874b"));
+
+  private static final RateBook RATE_BOOK =
+      RateBook.of(
+          Set.of(
+              RateChart.of(
+                  Zone.of(
+                      ZoneName.of("France"),
+                      Set.of(Subdivision.of(SubdivisionName.of("France"), Country.of("FR")))),
+                  Set.of(
+                      Rate.flatWeight(
+                          Weight.of(1), Weight.of(999), Money.of(6_50, Currency.of("EUR")))))));
+
+  @Test
+  void should_store_id() {
+    Tariff tariff = Tariff.create(ID, RATE_BOOK);
+
+    assertEquals(ID, tariff.id());
+  }
+}
