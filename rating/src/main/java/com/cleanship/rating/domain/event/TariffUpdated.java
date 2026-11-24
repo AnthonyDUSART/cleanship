@@ -12,6 +12,7 @@ public record TariffUpdated(
   public TariffUpdated {
     Objects.requireNonNull(tariffId);
     Objects.requireNonNull(rateBook);
+    Objects.requireNonNull(version);
   }
 
   public static TariffUpdated of(
