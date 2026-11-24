@@ -11,6 +11,7 @@ public record TariffCreated(
     implements DomainEvent {
   public TariffCreated {
     Objects.requireNonNull(tariffId);
+    Objects.requireNonNull(rateBook);
   }
 
   public static TariffCreated of(
