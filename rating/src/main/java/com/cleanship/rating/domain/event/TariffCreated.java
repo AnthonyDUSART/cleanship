@@ -12,6 +12,7 @@ public record TariffCreated(
     implements DomainEvent {
   public TariffCreated {
     Objects.requireNonNull(tariffId);
+    Objects.requireNonNull(tenantId);
     Objects.requireNonNull(rateBook);
     Objects.requireNonNull(version);
     Objects.requireNonNull(occurredAt);
