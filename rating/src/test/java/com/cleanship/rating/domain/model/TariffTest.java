@@ -51,4 +51,9 @@ final class TariffTest {
   void should_throw_exception_when_id_is_null() {
     assertThrows(NullPointerException.class, () -> Tariff.create(null, RATE_BOOK));
   }
+
+  @Test
+  void should_throw_exception_when_rate_book_is_null() {
+    assertThrows(NullPointerException.class, () -> Tariff.create(ID, null));
+  }
 }
