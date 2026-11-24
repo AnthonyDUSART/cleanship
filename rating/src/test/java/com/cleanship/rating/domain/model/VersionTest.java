@@ -7,6 +7,11 @@ import org.junit.jupiter.api.Test;
 final class VersionTest {
   @Test
   void should_store_value() {
-    assertEquals((long) 3, Version.of(3).value());
+    assertEquals(3, Version.of(3).value());
+  }
+
+  @Test
+  void should_initial_successfully() {
+    assertEquals(1, Version.initial().value());
   }
 }
