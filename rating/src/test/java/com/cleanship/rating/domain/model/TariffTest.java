@@ -167,4 +167,11 @@ final class TariffTest {
     assertFalse(updatedTariff.uncommittedEvents().getLast() instanceof TariffUpdated);
     assertSame(tariff, updatedTariff);
   }
+
+  @Test
+  void should_throw_exception_when_update_with_null_updated_rate_book() {
+    Tariff tariff = Tariff.create(ID, RATE_BOOK, NOW);
+
+    assertThrows(NullPointerException.class, () -> tariff.update(null, NOW));
+  }
 }
