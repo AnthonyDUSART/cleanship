@@ -3,11 +3,14 @@ package com.cleanship.rating.domain.model;
 import com.cleanship.rating.domain.event.DomainEvent;
 import com.cleanship.rating.domain.event.TariffCreated;
 import com.cleanship.rating.domain.event.TariffUpdated;
+import com.cleanship.rating.domain.model.pricing.PriceBreakdown;
 import com.cleanship.rating.domain.model.rate.RateBook;
+import com.cleanship.rating.domain.model.shipment.Shipment;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public final class Tariff {
   private final TariffId id;
@@ -59,6 +62,10 @@ public final class Tariff {
     updatedUncommittedEvents.add(TariffUpdated.of(id, updatedRateBook, updatedVersion, now));
 
     return new Tariff(id, updatedRateBook, updatedVersion, updatedUncommittedEvents);
+  }
+
+  public Optional<PriceBreakdown> evaluate(Shipment shipment) {
+    return rateBook.evaluate(shipment);
   }
 
   public TariffId id() {

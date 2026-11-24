@@ -9,17 +9,22 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.cleanship.rating.domain.event.TariffCreated;
 import com.cleanship.rating.domain.event.TariffUpdated;
 import com.cleanship.rating.domain.model.location.Country;
+import com.cleanship.rating.domain.model.location.Location;
 import com.cleanship.rating.domain.model.money.Currency;
 import com.cleanship.rating.domain.model.money.Money;
+import com.cleanship.rating.domain.model.pricing.PriceBreakdown;
 import com.cleanship.rating.domain.model.rate.Rate;
 import com.cleanship.rating.domain.model.rate.RateBook;
 import com.cleanship.rating.domain.model.rate.RateChart;
+import com.cleanship.rating.domain.model.shipment.Parcel;
+import com.cleanship.rating.domain.model.shipment.Shipment;
 import com.cleanship.rating.domain.model.shipment.Weight;
 import com.cleanship.rating.domain.model.zone.Subdivision;
 import com.cleanship.rating.domain.model.zone.SubdivisionName;
 import com.cleanship.rating.domain.model.zone.Zone;
 import com.cleanship.rating.domain.model.zone.ZoneName;
 import java.time.Instant;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -180,5 +185,21 @@ final class TariffTest {
     Tariff tariff = Tariff.create(ID, RATE_BOOK, NOW);
 
     assertThrows(NullPointerException.class, () -> tariff.update(RATE_BOOK, null));
+  }
+
+  @Test
+  void should_evaluate_successfully() {
+    Shipment shipment =
+        Shipment.of(
+            Location.of(Country.of("FR")),
+            Location.of(Country.of("FR")),
+            Parcel.of(Weight.of(250)),
+            Money.of(200_00, Currency.of("EUR")));
+
+    Tariff tariff = Tariff.create(ID, RATE_BOOK, NOW);
+
+    Optional<PriceBreakdown> expected = RATE_BOOK.evaluate(shipment);
+
+    assertEquals(expected, tariff.evaluate(shipment));
   }
 }
