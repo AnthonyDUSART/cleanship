@@ -63,4 +63,13 @@ final class TariffTest {
 
     assertEquals(Version.initial(), tariff.version());
   }
+
+  @Test
+  void should_reconstitute_successfully() {
+    Tariff tariff = Tariff.reconstitute(ID, RATE_BOOK, Version.of(10));
+
+    assertEquals(ID, tariff.id());
+    assertEquals(RATE_BOOK, tariff.rateBook());
+    assertEquals(Version.of(10), tariff.version());
+  }
 }

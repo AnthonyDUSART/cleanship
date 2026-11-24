@@ -12,4 +12,8 @@ public record Tariff(TariffId id, RateBook rateBook, Version version) {
   public static Tariff create(TariffId id, RateBook rateBook) {
     return new Tariff(id, rateBook, Version.initial());
   }
+
+  public static Tariff reconstitute(TariffId id, RateBook rateBook, Version version) {
+    return new Tariff(id, rateBook, version);
+  }
 }
