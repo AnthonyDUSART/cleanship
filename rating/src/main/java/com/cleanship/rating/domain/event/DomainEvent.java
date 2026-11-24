@@ -4,7 +4,7 @@ import com.cleanship.rating.domain.model.TariffId;
 import com.cleanship.rating.domain.model.Version;
 import java.time.Instant;
 
-public sealed interface DomainEvent permits TariffCreated {
+public sealed interface DomainEvent permits TariffCreated, TariffUpdated {
   public TariffId tariffId();
 
   public Version version();
