@@ -45,7 +45,7 @@ public final class Tariff {
   }
 
   public Tariff update(RateBook updatedRateBook, Instant now) {
-    Objects.requireNonNull(rateBook);
+    Objects.requireNonNull(updatedRateBook);
     Objects.requireNonNull(now);
 
     if (rateBook.equals(updatedRateBook)) {
