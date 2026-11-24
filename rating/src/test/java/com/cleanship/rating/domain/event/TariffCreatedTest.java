@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.cleanship.rating.domain.model.TariffId;
+import com.cleanship.rating.domain.model.TenantId;
 import com.cleanship.rating.domain.model.Version;
 import com.cleanship.rating.domain.model.location.Country;
 import com.cleanship.rating.domain.model.money.Currency;
@@ -25,6 +26,9 @@ final class TariffCreatedTest {
   private static final TariffId TARIFF_ID =
       TariffId.of(UUID.fromString("01a20ee2-e8f6-702d-bffe-7dce8cea3ef0"));
 
+  private static final TenantId TENANT_ID =
+      TenantId.of(UUID.fromString("01a20f5f-7e06-73d1-9f28-0f9c6ad79722"));
+
   private static final RateBook RATE_BOOK =
       RateBook.of(
           Set.of(
@@ -42,28 +46,35 @@ final class TariffCreatedTest {
 
   @Test
   void should_store_tariff_id() {
-    TariffCreated event = TariffCreated.of(TARIFF_ID, RATE_BOOK, VERSION, OCCURRED_AT);
+    TariffCreated event = TariffCreated.of(TARIFF_ID, TENANT_ID, RATE_BOOK, VERSION, OCCURRED_AT);
 
     assertEquals(TARIFF_ID, event.tariffId());
   }
 
   @Test
+  void should_store_tenant_id() {
+    TariffCreated event = TariffCreated.of(TARIFF_ID, TENANT_ID, RATE_BOOK, VERSION, OCCURRED_AT);
+
+    assertEquals(TENANT_ID, event.tenantId());
+  }
+
+  @Test
   void should_store_rate_book() {
-    TariffCreated event = TariffCreated.of(TARIFF_ID, RATE_BOOK, VERSION, OCCURRED_AT);
+    TariffCreated event = TariffCreated.of(TARIFF_ID, TENANT_ID, RATE_BOOK, VERSION, OCCURRED_AT);
 
     assertEquals(RATE_BOOK, event.rateBook());
   }
 
   @Test
   void should_store_version() {
-    TariffCreated event = TariffCreated.of(TARIFF_ID, RATE_BOOK, VERSION, OCCURRED_AT);
+    TariffCreated event = TariffCreated.of(TARIFF_ID, TENANT_ID, RATE_BOOK, VERSION, OCCURRED_AT);
 
     assertEquals(VERSION, event.version());
   }
 
   @Test
   void should_store_occurred_at() {
-    TariffCreated event = TariffCreated.of(TARIFF_ID, RATE_BOOK, VERSION, OCCURRED_AT);
+    TariffCreated event = TariffCreated.of(TARIFF_ID, TENANT_ID, RATE_BOOK, VERSION, OCCURRED_AT);
 
     assertEquals(OCCURRED_AT, event.occurredAt());
   }
@@ -71,25 +82,28 @@ final class TariffCreatedTest {
   @Test
   void should_throw_exception_when_tariff_id_is_null() {
     assertThrows(
-        NullPointerException.class, () -> TariffCreated.of(null, RATE_BOOK, VERSION, OCCURRED_AT));
+        NullPointerException.class,
+        () -> TariffCreated.of(null, TENANT_ID, RATE_BOOK, VERSION, OCCURRED_AT));
   }
 
   @Test
   void should_throw_exception_when_rate_book_is_null() {
     assertThrows(
-        NullPointerException.class, () -> TariffCreated.of(TARIFF_ID, null, VERSION, OCCURRED_AT));
+        NullPointerException.class,
+        () -> TariffCreated.of(TARIFF_ID, TENANT_ID, null, VERSION, OCCURRED_AT));
   }
 
   @Test
   void should_throw_exception_when_version_is_null() {
     assertThrows(
         NullPointerException.class,
-        () -> TariffCreated.of(TARIFF_ID, RATE_BOOK, null, OCCURRED_AT));
+        () -> TariffCreated.of(TARIFF_ID, TENANT_ID, RATE_BOOK, null, OCCURRED_AT));
   }
 
   @Test
   void should_throw_exception_when_occurred_at_is_null() {
     assertThrows(
-        NullPointerException.class, () -> TariffCreated.of(TARIFF_ID, RATE_BOOK, VERSION, null));
+        NullPointerException.class,
+        () -> TariffCreated.of(TARIFF_ID, TENANT_ID, RATE_BOOK, VERSION, null));
   }
 }
