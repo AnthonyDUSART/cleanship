@@ -12,6 +12,7 @@ public record TariffUpdated(
     implements DomainEvent {
   public TariffUpdated {
     Objects.requireNonNull(tariffId);
+    Objects.requireNonNull(tenantId);
     Objects.requireNonNull(rateBook);
     Objects.requireNonNull(version);
     Objects.requireNonNull(occurredAt);
