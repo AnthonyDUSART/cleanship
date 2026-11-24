@@ -35,7 +35,7 @@ public final class Tariff {
 
     List<DomainEvent> uncommittedEvents = List.of(TariffCreated.of(id, rateBook, version, now));
 
-    return new Tariff(id, rateBook, Version.initial(), uncommittedEvents);
+    return new Tariff(id, rateBook, version, uncommittedEvents);
   }
 
   public static Tariff reconstitute(TariffId id, RateBook rateBook, Version version) {
