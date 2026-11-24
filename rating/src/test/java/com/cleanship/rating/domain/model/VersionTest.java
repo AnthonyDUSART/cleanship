@@ -33,4 +33,11 @@ final class VersionTest {
 
     assertEquals(expected, version.next().next());
   }
+
+  @Test
+  void should_throw_exception_when_next_too_long_value() {
+    Version version = Version.of(Long.MAX_VALUE);
+
+    assertThrows(ArithmeticException.class, () -> version.next());
+  }
 }
