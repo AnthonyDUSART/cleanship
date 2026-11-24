@@ -13,6 +13,7 @@ public record TariffUpdated(
     Objects.requireNonNull(tariffId);
     Objects.requireNonNull(rateBook);
     Objects.requireNonNull(version);
+    Objects.requireNonNull(occurredAt);
   }
 
   public static TariffUpdated of(
