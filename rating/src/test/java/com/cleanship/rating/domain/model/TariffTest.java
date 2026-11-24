@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.cleanship.rating.domain.event.TariffCreated;
+import com.cleanship.rating.domain.event.TariffUpdated;
 import com.cleanship.rating.domain.model.location.Country;
 import com.cleanship.rating.domain.model.money.Currency;
 import com.cleanship.rating.domain.model.money.Money;
@@ -124,5 +125,31 @@ final class TariffTest {
     TariffCreated expected = TariffCreated.of(ID, RATE_BOOK, Version.initial(), NOW);
 
     assertEquals(expected, tariff.uncommittedEvents().getFirst());
+  }
+
+  @Test
+  void should_update_emit_tariff_updated_event() {
+    Tariff tariff = Tariff.create(ID, RATE_BOOK, NOW);
+
+    RateBook updatedRateBook =
+        RateBook.of(
+            Set.of(
+                RateChart.of(
+                    Zone.of(
+                        ZoneName.of("France"),
+                        Set.of(Subdivision.of(SubdivisionName.of("France"), Country.of("FR")))),
+                    Set.of(
+                        Rate.flatWeight(
+                            Weight.of(1), Weight.of(999), Money.of(6_50, Currency.of("EUR"))),
+                        Rate.flatWeight(
+                            Weight.of(1_000),
+                            Weight.of(1_999),
+                            Money.of(12_20, Currency.of("EUR")))))));
+
+    Tariff updatedTariff = tariff.update(updatedRateBook, NOW);
+
+    TariffUpdated expected = TariffUpdated.of(ID, updatedRateBook, Version.of(2), NOW);
+
+    assertEquals(expected, updatedTariff.uncommittedEvents().getLast());
   }
 }

@@ -2,8 +2,10 @@ package com.cleanship.rating.domain.model;
 
 import com.cleanship.rating.domain.event.DomainEvent;
 import com.cleanship.rating.domain.event.TariffCreated;
+import com.cleanship.rating.domain.event.TariffUpdated;
 import com.cleanship.rating.domain.model.rate.RateBook;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,6 +42,16 @@ public final class Tariff {
 
   public static Tariff reconstitute(TariffId id, RateBook rateBook, Version version) {
     return new Tariff(id, rateBook, version, List.of());
+  }
+
+  public Tariff update(RateBook updatedRateBook, Instant now) {
+    Version updatedVersion = version.next();
+
+    List<DomainEvent> updatedUncommittedEvents = new ArrayList<>(uncommittedEvents);
+
+    updatedUncommittedEvents.add(TariffUpdated.of(id, updatedRateBook, updatedVersion, now));
+
+    return new Tariff(id, updatedRateBook, updatedVersion, updatedUncommittedEvents);
   }
 
   public TariffId id() {
