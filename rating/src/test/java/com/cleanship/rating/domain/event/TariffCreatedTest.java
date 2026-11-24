@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.event;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.cleanship.rating.domain.model.TariffId;
 import com.cleanship.rating.domain.model.Version;
@@ -65,5 +66,11 @@ final class TariffCreatedTest {
     TariffCreated event = TariffCreated.of(TARIFF_ID, RATE_BOOK, VERSION, OCCURRED_AT);
 
     assertEquals(OCCURRED_AT, event.occurredAt());
+  }
+
+  @Test
+  void should_throw_exception_when_tariff_id_is_null() {
+    assertThrows(
+        NullPointerException.class, () -> TariffCreated.of(null, RATE_BOOK, VERSION, OCCURRED_AT));
   }
 }
