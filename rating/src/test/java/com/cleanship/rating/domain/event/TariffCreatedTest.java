@@ -79,4 +79,11 @@ final class TariffCreatedTest {
     assertThrows(
         NullPointerException.class, () -> TariffCreated.of(TARIFF_ID, null, VERSION, OCCURRED_AT));
   }
+
+  @Test
+  void should_throw_exception_when_version_is_null() {
+    assertThrows(
+        NullPointerException.class,
+        () -> TariffCreated.of(TARIFF_ID, RATE_BOOK, null, OCCURRED_AT));
+  }
 }
