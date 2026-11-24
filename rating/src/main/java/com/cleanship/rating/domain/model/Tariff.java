@@ -65,6 +65,8 @@ public final class Tariff {
   }
 
   public Optional<PriceBreakdown> evaluate(Shipment shipment) {
+    Objects.requireNonNull(shipment);
+
     return rateBook.evaluate(shipment);
   }
 

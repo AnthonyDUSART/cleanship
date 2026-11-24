@@ -202,4 +202,11 @@ final class TariffTest {
 
     assertEquals(expected, tariff.evaluate(shipment));
   }
+
+  @Test
+  void should_throw_exception_when_evaluate_null_shipment() {
+    Tariff tariff = Tariff.create(ID, RATE_BOOK, NOW);
+
+    assertThrows(NullPointerException.class, () -> tariff.evaluate(null));
+  }
 }
