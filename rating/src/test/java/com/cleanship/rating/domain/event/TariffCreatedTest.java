@@ -45,4 +45,11 @@ final class TariffCreatedTest {
 
     assertEquals(TARIFF_ID, event.tariffId());
   }
+
+  @Test
+  void should_store_rate_book() {
+    TariffCreated event = TariffCreated.of(TARIFF_ID, RATE_BOOK, VERSION, OCCURRED_AT);
+
+    assertEquals(RATE_BOOK, event.rateBook());
+  }
 }
