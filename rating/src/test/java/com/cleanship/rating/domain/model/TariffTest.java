@@ -1,6 +1,7 @@
 package com.cleanship.rating.domain.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.cleanship.rating.domain.model.location.Country;
 import com.cleanship.rating.domain.model.money.Currency;
@@ -44,5 +45,10 @@ final class TariffTest {
     Tariff tariff = Tariff.create(ID, RATE_BOOK);
 
     assertEquals(RATE_BOOK, tariff.rateBook());
+  }
+
+  @Test
+  void should_throw_exception_when_id_is_null() {
+    assertThrows(NullPointerException.class, () -> Tariff.create(null, RATE_BOOK));
   }
 }
