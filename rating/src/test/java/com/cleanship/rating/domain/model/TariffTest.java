@@ -28,10 +28,15 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 final class TariffTest {
   private static final TariffId ID =
       TariffId.of(UUID.fromString("01a20ad9-3328-73e9-b493-46d6c3ed874b"));
+
+  private static final TenantId TENANT_ID =
+      TenantId.of(UUID.fromString("01a20f51-b7ac-706d-88b4-cdc1ff648081"));
 
   private static final RateBook RATE_BOOK =
       RateBook.of(
@@ -48,43 +53,50 @@ final class TariffTest {
 
   @Test
   void should_store_id() {
-    Tariff tariff = Tariff.create(ID, RATE_BOOK, NOW);
+    Tariff tariff = Tariff.create(ID, TENANT_ID, RATE_BOOK, NOW);
 
     assertEquals(ID, tariff.id());
   }
 
   @Test
+  void should_store_tenant_id() {
+    Tariff tariff = Tariff.create(ID, TENANT_ID, RATE_BOOK, NOW);
+
+    assertEquals(TENANT_ID, tariff.tenantId());
+  }
+
+  @Test
   void should_store_rate_book() {
-    Tariff tariff = Tariff.create(ID, RATE_BOOK, NOW);
+    Tariff tariff = Tariff.create(ID, TENANT_ID, RATE_BOOK, NOW);
 
     assertEquals(RATE_BOOK, tariff.rateBook());
   }
 
   @Test
   void should_throw_exception_when_id_is_null() {
-    assertThrows(NullPointerException.class, () -> Tariff.create(null, RATE_BOOK, NOW));
+    assertThrows(NullPointerException.class, () -> Tariff.create(null, TENANT_ID, RATE_BOOK, NOW));
   }
 
   @Test
   void should_throw_exception_when_rate_book_is_null() {
-    assertThrows(NullPointerException.class, () -> Tariff.create(ID, null, NOW));
+    assertThrows(NullPointerException.class, () -> Tariff.create(ID, TENANT_ID, null, NOW));
   }
 
   @Test
   void should_throw_exception_when_create_with_null_now() {
-    assertThrows(NullPointerException.class, () -> Tariff.create(ID, RATE_BOOK, null));
+    assertThrows(NullPointerException.class, () -> Tariff.create(ID, TENANT_ID, RATE_BOOK, null));
   }
 
   @Test
   void should_create_with_initial_version() {
-    Tariff tariff = Tariff.create(ID, RATE_BOOK, NOW);
+    Tariff tariff = Tariff.create(ID, TENANT_ID, RATE_BOOK, NOW);
 
     assertEquals(Version.initial(), tariff.version());
   }
 
   @Test
   void should_reconstitute_successfully() {
-    Tariff tariff = Tariff.reconstitute(ID, RATE_BOOK, Version.of(10));
+    Tariff tariff = Tariff.reconstitute(ID, TENANT_ID, RATE_BOOK, Version.of(10));
 
     assertEquals(ID, tariff.id());
     assertEquals(RATE_BOOK, tariff.rateBook());
@@ -94,30 +106,39 @@ final class TariffTest {
 
   @Test
   void should_throw_exception_when_reconstitute_with_null_version() {
-    assertThrows(NullPointerException.class, () -> Tariff.reconstitute(ID, RATE_BOOK, null));
+    assertThrows(
+        NullPointerException.class, () -> Tariff.reconstitute(ID, TENANT_ID, RATE_BOOK, null));
   }
 
   @Test
   void should_be_equals_successfully() {
-    Tariff current = Tariff.create(ID, RATE_BOOK, NOW);
-    Tariff other = Tariff.reconstitute(ID, RATE_BOOK, Version.of(3));
+    Tariff current = Tariff.create(ID, TENANT_ID, RATE_BOOK, NOW);
+    Tariff other = Tariff.reconstitute(ID, TENANT_ID, RATE_BOOK, Version.of(3));
 
     assertTrue(current.equals(other));
   }
 
-  @Test
-  void should_not_be_equals() {
-    Tariff current = Tariff.create(ID, RATE_BOOK, NOW);
+  @ParameterizedTest
+  @CsvSource({
+    "01a20edf-51ce-778e-8363-c2431ec5f043, 01a20f51-b7ac-706d-88b4-cdc1ff648081",
+    "01a20ad9-3328-73e9-b493-46d6c3ed874b, 01a20f57-5cf9-7768-8a08-ec439633dbd0",
+  })
+  void should_not_be_equals(String idValue, String tenantIdValue) {
+    Tariff current = Tariff.create(ID, TENANT_ID, RATE_BOOK, NOW);
+
     Tariff other =
         Tariff.create(
-            TariffId.of(UUID.fromString("01a20edf-51ce-778e-8363-c2431ec5f043")), RATE_BOOK, NOW);
+            TariffId.of(UUID.fromString(idValue)),
+            TenantId.of(UUID.fromString(tenantIdValue)),
+            RATE_BOOK,
+            NOW);
 
     assertFalse(current.equals(other));
   }
 
   @Test
   void should_have_valid_hashcode() {
-    Tariff current = Tariff.create(ID, RATE_BOOK, NOW);
+    Tariff current = Tariff.create(ID, TENANT_ID, RATE_BOOK, NOW);
 
     int expected = ID.hashCode();
 
@@ -126,7 +147,7 @@ final class TariffTest {
 
   @Test
   void should_create_emit_tariff_created_event() {
-    Tariff tariff = Tariff.create(ID, RATE_BOOK, NOW);
+    Tariff tariff = Tariff.create(ID, TENANT_ID, RATE_BOOK, NOW);
 
     TariffCreated expected = TariffCreated.of(ID, RATE_BOOK, Version.initial(), NOW);
 
@@ -135,7 +156,7 @@ final class TariffTest {
 
   @Test
   void should_update_successfully() {
-    Tariff tariff = Tariff.create(ID, RATE_BOOK, NOW);
+    Tariff tariff = Tariff.create(ID, TENANT_ID, RATE_BOOK, NOW);
 
     RateBook updatedRateBook =
         RateBook.of(
@@ -165,7 +186,7 @@ final class TariffTest {
 
   @Test
   void should_update_be_idempotent() {
-    Tariff tariff = Tariff.create(ID, RATE_BOOK, NOW);
+    Tariff tariff = Tariff.create(ID, TENANT_ID, RATE_BOOK, NOW);
 
     Tariff updatedTariff = tariff.update(RATE_BOOK, NOW);
 
@@ -175,14 +196,14 @@ final class TariffTest {
 
   @Test
   void should_throw_exception_when_update_with_null_updated_rate_book() {
-    Tariff tariff = Tariff.create(ID, RATE_BOOK, NOW);
+    Tariff tariff = Tariff.create(ID, TENANT_ID, RATE_BOOK, NOW);
 
     assertThrows(NullPointerException.class, () -> tariff.update(null, NOW));
   }
 
   @Test
   void should_throw_exception_when_update_with_null_now() {
-    Tariff tariff = Tariff.create(ID, RATE_BOOK, NOW);
+    Tariff tariff = Tariff.create(ID, TENANT_ID, RATE_BOOK, NOW);
 
     assertThrows(NullPointerException.class, () -> tariff.update(RATE_BOOK, null));
   }
@@ -196,7 +217,7 @@ final class TariffTest {
             Parcel.of(Weight.of(250)),
             Money.of(200_00, Currency.of("EUR")));
 
-    Tariff tariff = Tariff.create(ID, RATE_BOOK, NOW);
+    Tariff tariff = Tariff.create(ID, TENANT_ID, RATE_BOOK, NOW);
 
     Optional<PriceBreakdown> expected = RATE_BOOK.evaluate(shipment);
 
@@ -205,7 +226,7 @@ final class TariffTest {
 
   @Test
   void should_throw_exception_when_evaluate_null_shipment() {
-    Tariff tariff = Tariff.create(ID, RATE_BOOK, NOW);
+    Tariff tariff = Tariff.create(ID, TENANT_ID, RATE_BOOK, NOW);
 
     assertThrows(NullPointerException.class, () -> tariff.evaluate(null));
   }

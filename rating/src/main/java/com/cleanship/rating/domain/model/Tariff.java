@@ -15,6 +15,8 @@ import java.util.Optional;
 public final class Tariff {
   private final TariffId id;
 
+  private final TenantId tenantId;
+
   private final RateBook rateBook;
 
   private final Version version;
@@ -22,29 +24,35 @@ public final class Tariff {
   private final List<DomainEvent> uncommittedEvents;
 
   private Tariff(
-      TariffId id, RateBook rateBook, Version version, List<DomainEvent> uncommittedEvents) {
+      TariffId id,
+      TenantId tenantId,
+      RateBook rateBook,
+      Version version,
+      List<DomainEvent> uncommittedEvents) {
     Objects.requireNonNull(id);
     Objects.requireNonNull(rateBook);
     Objects.requireNonNull(version);
 
     this.id = id;
+    this.tenantId = tenantId;
     this.rateBook = rateBook;
     this.version = version;
     this.uncommittedEvents = List.copyOf(uncommittedEvents);
   }
 
-  public static Tariff create(TariffId id, RateBook rateBook, Instant now) {
+  public static Tariff create(TariffId id, TenantId tenantId, RateBook rateBook, Instant now) {
     Objects.requireNonNull(now);
 
     Version version = Version.initial();
 
     List<DomainEvent> uncommittedEvents = List.of(TariffCreated.of(id, rateBook, version, now));
 
-    return new Tariff(id, rateBook, version, uncommittedEvents);
+    return new Tariff(id, tenantId, rateBook, version, uncommittedEvents);
   }
 
-  public static Tariff reconstitute(TariffId id, RateBook rateBook, Version version) {
-    return new Tariff(id, rateBook, version, List.of());
+  public static Tariff reconstitute(
+      TariffId id, TenantId tenantId, RateBook rateBook, Version version) {
+    return new Tariff(id, tenantId, rateBook, version, List.of());
   }
 
   public Tariff update(RateBook updatedRateBook, Instant now) {
@@ -61,7 +69,7 @@ public final class Tariff {
 
     updatedUncommittedEvents.add(TariffUpdated.of(id, updatedRateBook, updatedVersion, now));
 
-    return new Tariff(id, updatedRateBook, updatedVersion, updatedUncommittedEvents);
+    return new Tariff(id, tenantId, updatedRateBook, updatedVersion, updatedUncommittedEvents);
   }
 
   public Optional<PriceBreakdown> evaluate(Shipment shipment) {
@@ -72,6 +80,10 @@ public final class Tariff {
 
   public TariffId id() {
     return id;
+  }
+
+  public TenantId tenantId() {
+    return tenantId;
   }
 
   public RateBook rateBook() {
@@ -88,7 +100,7 @@ public final class Tariff {
 
   @Override
   public boolean equals(Object obj) {
-    return obj instanceof Tariff other && id.equals(other.id);
+    return obj instanceof Tariff other && id.equals(other.id) && tenantId.equals(other.tenantId);
   }
 
   @Override
