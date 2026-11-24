@@ -97,4 +97,13 @@ final class TariffTest {
 
     assertFalse(current.equals(other));
   }
+
+  @Test
+  void should_have_valid_hashcode() {
+    Tariff current = Tariff.create(ID, RATE_BOOK);
+
+    int expected = ID.hashCode();
+
+    assertEquals(expected, current.hashCode());
+  }
 }
