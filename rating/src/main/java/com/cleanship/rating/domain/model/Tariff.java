@@ -46,7 +46,8 @@ public final class Tariff {
 
     Version version = Version.initial();
 
-    List<DomainEvent> uncommittedEvents = List.of(TariffCreated.of(id, rateBook, version, now));
+    List<DomainEvent> uncommittedEvents =
+        List.of(TariffCreated.of(id, tenantId, rateBook, version, now));
 
     return new Tariff(id, tenantId, rateBook, version, uncommittedEvents);
   }
@@ -68,7 +69,8 @@ public final class Tariff {
 
     List<DomainEvent> updatedUncommittedEvents = new ArrayList<>(uncommittedEvents);
 
-    updatedUncommittedEvents.add(TariffUpdated.of(id, updatedRateBook, updatedVersion, now));
+    updatedUncommittedEvents.add(
+        TariffUpdated.of(id, tenantId, updatedRateBook, updatedVersion, now));
 
     return new Tariff(id, tenantId, updatedRateBook, updatedVersion, updatedUncommittedEvents);
   }

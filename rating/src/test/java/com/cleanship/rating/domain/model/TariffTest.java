@@ -154,7 +154,7 @@ final class TariffTest {
   void should_create_emit_tariff_created_event() {
     Tariff tariff = Tariff.create(ID, TENANT_ID, RATE_BOOK, NOW);
 
-    TariffCreated expected = TariffCreated.of(ID, RATE_BOOK, Version.initial(), NOW);
+    TariffCreated expected = TariffCreated.of(ID, TENANT_ID, RATE_BOOK, Version.initial(), NOW);
 
     assertEquals(expected, tariff.uncommittedEvents().getFirst());
   }
@@ -182,7 +182,7 @@ final class TariffTest {
 
     Version expectedVersion = Version.of(2);
 
-    TariffUpdated expected = TariffUpdated.of(ID, updatedRateBook, expectedVersion, NOW);
+    TariffUpdated expected = TariffUpdated.of(ID, TENANT_ID, updatedRateBook, expectedVersion, NOW);
 
     assertEquals(expected, updatedTariff.uncommittedEvents().getLast());
     assertEquals(updatedRateBook, updatedTariff.rateBook());
