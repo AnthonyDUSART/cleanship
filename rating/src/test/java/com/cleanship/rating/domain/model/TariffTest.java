@@ -82,6 +82,7 @@ final class TariffTest {
     assertEquals(ID, tariff.id());
     assertEquals(RATE_BOOK, tariff.rateBook());
     assertEquals(Version.of(10), tariff.version());
+    assertTrue(tariff.uncommittedEvents().isEmpty());
   }
 
   @Test
