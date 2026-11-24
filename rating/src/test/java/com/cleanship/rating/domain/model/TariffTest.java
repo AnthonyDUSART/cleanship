@@ -2,6 +2,7 @@ package com.cleanship.rating.domain.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -155,5 +156,15 @@ final class TariffTest {
     assertEquals(expected, updatedTariff.uncommittedEvents().getLast());
     assertEquals(updatedRateBook, updatedTariff.rateBook());
     assertEquals(expectedVersion, updatedTariff.version());
+  }
+
+  @Test
+  void should_update_be_idempotent() {
+    Tariff tariff = Tariff.create(ID, RATE_BOOK, NOW);
+
+    Tariff updatedTariff = tariff.update(RATE_BOOK, NOW);
+
+    assertFalse(updatedTariff.uncommittedEvents().getLast() instanceof TariffUpdated);
+    assertSame(tariff, updatedTariff);
   }
 }

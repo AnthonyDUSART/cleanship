@@ -45,6 +45,10 @@ public final class Tariff {
   }
 
   public Tariff update(RateBook updatedRateBook, Instant now) {
+    if (rateBook.equals(updatedRateBook)) {
+      return this;
+    }
+
     Version updatedVersion = version.next();
 
     List<DomainEvent> updatedUncommittedEvents = new ArrayList<>(uncommittedEvents);
