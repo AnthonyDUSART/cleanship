@@ -1,6 +1,10 @@
 package com.cleanship.rating.domain.model;
 
+import com.cleanship.rating.domain.event.DomainEvent;
+import com.cleanship.rating.domain.event.TariffCreated;
 import com.cleanship.rating.domain.model.rate.RateBook;
+import java.time.Instant;
+import java.util.List;
 import java.util.Objects;
 
 public final class Tariff {
@@ -10,7 +14,10 @@ public final class Tariff {
 
   private final Version version;
 
-  private Tariff(TariffId id, RateBook rateBook, Version version) {
+  private final List<DomainEvent> uncommittedEvents;
+
+  private Tariff(
+      TariffId id, RateBook rateBook, Version version, List<DomainEvent> uncommittedEvents) {
     Objects.requireNonNull(id);
     Objects.requireNonNull(rateBook);
     Objects.requireNonNull(version);
@@ -18,14 +25,19 @@ public final class Tariff {
     this.id = id;
     this.rateBook = rateBook;
     this.version = version;
+    this.uncommittedEvents = List.copyOf(uncommittedEvents);
   }
 
-  public static Tariff create(TariffId id, RateBook rateBook) {
-    return new Tariff(id, rateBook, Version.initial());
+  public static Tariff create(TariffId id, RateBook rateBook, Instant now) {
+    Version version = Version.initial();
+
+    List<DomainEvent> uncommittedEvents = List.of(TariffCreated.of(id, rateBook, version, now));
+
+    return new Tariff(id, rateBook, Version.initial(), uncommittedEvents);
   }
 
   public static Tariff reconstitute(TariffId id, RateBook rateBook, Version version) {
-    return new Tariff(id, rateBook, version);
+    return new Tariff(id, rateBook, version, List.of());
   }
 
   public TariffId id() {
@@ -38,6 +50,10 @@ public final class Tariff {
 
   public Version version() {
     return version;
+  }
+
+  public List<DomainEvent> uncommittedEvents() {
+    return uncommittedEvents;
   }
 
   @Override
