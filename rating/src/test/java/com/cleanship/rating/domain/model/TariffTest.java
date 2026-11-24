@@ -78,6 +78,11 @@ final class TariffTest {
   }
 
   @Test
+  void should_throw_exception_when_tenant_id_is_null() {
+    assertThrows(NullPointerException.class, () -> Tariff.create(ID, null, RATE_BOOK, NOW));
+  }
+
+  @Test
   void should_throw_exception_when_rate_book_is_null() {
     assertThrows(NullPointerException.class, () -> Tariff.create(ID, TENANT_ID, null, NOW));
   }
@@ -140,9 +145,9 @@ final class TariffTest {
   void should_have_valid_hashcode() {
     Tariff current = Tariff.create(ID, TENANT_ID, RATE_BOOK, NOW);
 
-    int expected = ID.hashCode();
+    Tariff other = Tariff.reconstitute(ID, TENANT_ID, RATE_BOOK, Version.of(3));
 
-    assertEquals(expected, current.hashCode());
+    assertEquals(current.hashCode(), other.hashCode());
   }
 
   @Test

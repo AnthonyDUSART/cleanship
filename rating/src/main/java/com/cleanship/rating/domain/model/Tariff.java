@@ -30,6 +30,7 @@ public final class Tariff {
       Version version,
       List<DomainEvent> uncommittedEvents) {
     Objects.requireNonNull(id);
+    Objects.requireNonNull(tenantId);
     Objects.requireNonNull(rateBook);
     Objects.requireNonNull(version);
 
@@ -105,6 +106,6 @@ public final class Tariff {
 
   @Override
   public int hashCode() {
-    return id.hashCode();
+    return Objects.hash(id.hashCode(), tenantId.hashCode());
   }
 }
