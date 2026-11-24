@@ -24,4 +24,13 @@ final class VersionTest {
   void should_initial_successfully() {
     assertEquals(1, Version.initial().value());
   }
+
+  @Test
+  void should_next_successfully() {
+    Version version = Version.initial();
+
+    Version expected = Version.of(3);
+
+    assertEquals(expected, version.next().next());
+  }
 }

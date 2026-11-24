@@ -16,4 +16,8 @@ public record Version(long value) {
   public static Version initial() {
     return new Version(1);
   }
+
+  public Version next() {
+    return new Version(Math.addExact(value, 1));
+  }
 }
