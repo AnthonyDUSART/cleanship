@@ -29,4 +29,9 @@ final class TariffNotFoundExceptionTest {
   void should_throw_exception_when_tariff_id_is_null() {
     assertThrows(NullPointerException.class, () -> TariffNotFoundException.of(null, TENANT_ID));
   }
+
+  @Test
+  void should_throw_exception_when_tenant_id_is_null() {
+    assertThrows(NullPointerException.class, () -> TariffNotFoundException.of(TARIFF_ID, null));
+  }
 }

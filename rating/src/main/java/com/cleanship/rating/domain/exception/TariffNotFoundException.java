@@ -7,6 +7,7 @@ import java.util.Objects;
 public final class TariffNotFoundException extends DomainException {
   private TariffNotFoundException(TariffId tariffId, TenantId tenantId) {
     Objects.requireNonNull(tariffId);
+    Objects.requireNonNull(tenantId);
 
     super(
         String.format(
