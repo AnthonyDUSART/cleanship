@@ -2,7 +2,7 @@
 
 - **Status:** Accepted
 - **Date:** 2026-11-25
-- **Deciders:** Anthony DUSART
+- **Deciders:** @anthonizer
 
 ## Context
 
