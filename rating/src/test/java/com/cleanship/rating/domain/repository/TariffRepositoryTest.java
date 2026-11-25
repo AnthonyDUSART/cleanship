@@ -1,7 +1,9 @@
 package com.cleanship.rating.domain.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.cleanship.rating.domain.exception.TariffNotFoundException;
 import com.cleanship.rating.domain.model.Tariff;
 import com.cleanship.rating.domain.model.TariffId;
 import com.cleanship.rating.domain.model.TenantId;
@@ -44,6 +46,17 @@ final class TariffRepositoryTest {
 
     assertEquals(
         expected, tariffRepository(Optional.of(expected)).get(expected.id(), expected.tenantId()));
+  }
+
+  @Test
+  void should_throw_exception_when_tariff_not_found() {
+    assertThrows(
+        TariffNotFoundException.class,
+        () ->
+            tariffRepository(Optional.empty())
+                .get(
+                    TariffId.of(UUID.fromString("01a21484-c27f-7356-9ee7-1fb3ffbbaee0")),
+                    TenantId.of(UUID.fromString("01a21485-0128-730e-a9d9-382b056b4bb6"))));
   }
 
   private static TariffRepository tariffRepository(Optional<Tariff> tariff) {
