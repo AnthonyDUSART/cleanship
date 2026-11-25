@@ -36,6 +36,12 @@ The domain model and core rating engine are being built first, followed by the A
 
 ---
 
+## Architecture Decisions
+
+Significant design choices and their trade-offs are documented as [Architecture Decision Records](docs/adr/README.md).
+
+---
+
 ## License
 
 This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
