@@ -7,7 +7,7 @@ public final class TariffNotFoundException extends DomainException {
   private TariffNotFoundException(TariffId tariffId, TenantId tenantId) {
     super(
         String.format(
-            "Tariff \"%s\" of tenant \"%s\" is not found", tariffId.value(), tenantId.value()));
+            "Tariff \"%s\" for tenant \"%s\" not found", tariffId.value(), tenantId.value()));
   }
 
   public static TariffNotFoundException of(TariffId tariffId, TenantId tenantId) {

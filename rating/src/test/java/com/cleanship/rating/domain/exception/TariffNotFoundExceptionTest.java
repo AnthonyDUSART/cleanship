@@ -16,8 +16,8 @@ final class TariffNotFoundExceptionTest {
             TenantId.of(UUID.fromString("01a21469-72fc-73cc-8401-9b6b786ccbb5")));
 
     assertEquals(
-        "Tariff \"01a21469-3556-728f-9e0a-b50aa7f28ba1\" of tenant"
-            + " \"01a21469-72fc-73cc-8401-9b6b786ccbb5\" is not found",
+        "Tariff \"01a21469-3556-728f-9e0a-b50aa7f28ba1\" for tenant"
+            + " \"01a21469-72fc-73cc-8401-9b6b786ccbb5\" not found",
         exception.getMessage());
   }
 }
