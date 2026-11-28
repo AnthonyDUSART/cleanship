@@ -6,7 +6,7 @@
 
     <groupId>com.cleanship</groupId>
     <artifactId>cleanship-parent</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <packaging>pom</packaging>
     <name>cleanship-parent</name>
 
