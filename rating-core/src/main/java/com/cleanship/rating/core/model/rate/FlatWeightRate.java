@@ -1,0 +1,51 @@
+package com.cleanship.rating.core.model.rate;
+
+import com.cleanship.rating.core.exception.InvalidFlatWeightRateException;
+import com.cleanship.rating.core.model.money.Currency;
+import com.cleanship.rating.core.model.money.Money;
+import com.cleanship.rating.core.model.shipment.Shipment;
+import com.cleanship.rating.core.model.shipment.Weight;
+import java.util.Objects;
+import java.util.Optional;
+
+public record FlatWeightRate(Weight minInclusive, Weight maxInclusive, Money price)
+    implements Rate {
+  public FlatWeightRate {
+    Objects.requireNonNull(minInclusive);
+    Objects.requireNonNull(maxInclusive);
+    Objects.requireNonNull(price);
+
+    if (minInclusive.compareTo(maxInclusive) > 0) {
+      throw InvalidFlatWeightRateException.of(minInclusive, maxInclusive);
+    }
+  }
+
+  public static FlatWeightRate of(Weight minInclusive, Weight maxInclusive, Money price) {
+    return new FlatWeightRate(minInclusive, maxInclusive, price);
+  }
+
+  @Override
+  public Optional<Money> evaluatePrice(Shipment shipment) {
+    Objects.requireNonNull(shipment);
+
+    return shipment.parcel().weight().isWithin(minInclusive, maxInclusive)
+        ? Optional.of(price)
+        : Optional.empty();
+  }
+
+  @Override
+  public boolean overlaps(Rate other) {
+    Objects.requireNonNull(other);
+
+    return switch (other) {
+      case FlatWeightRate o ->
+          minInclusive.compareTo(o.maxInclusive) <= 0
+              && maxInclusive.compareTo(o.minInclusive) >= 0;
+    };
+  }
+
+  @Override
+  public Currency currency() {
+    return price.currency();
+  }
+}
